@@ -24,7 +24,7 @@ export const Login = () => {
           />
         </div>
         <button
-          className="bg-gray-500 text-gray-50 font-semibold  rounded-md p-3 m-2 w-80"
+          className="bg-gray-600 text-gray-50 font-semibold  rounded-md p-3 m-2 w-80"
           onClick={() => navigate('/dashboard')}
         >
           Login
@@ -32,14 +32,14 @@ export const Login = () => {
         <div>
           Dont have an account?
           <button
-            className="bg-gray-500 text-gray-50 font-semibold w-40 rounded-md p-3 m-2"
+            className="bg-gray-600 text-gray-50 font-semibold w-40 rounded-md p-3 m-2"
             onClick={() => navigate('/')}
           >
             Sign up
           </button>
         </div>
       </div>
-      <div className="w-1/2 bg-gray-500 text-white h-screen font-serif text-left pl-40 text-7xl pt-48">
+      <div className="w-1/2 bg-gray-600 text-white h-screen font-serif text-left pl-40 text-7xl pt-48">
         <div>Login </div>
         <div> to the world </div>
         <div> Planning and Productivity</div>

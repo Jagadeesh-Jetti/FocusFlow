@@ -5,7 +5,7 @@ export const Signup = () => {
 
   return (
     <div className="flex">
-      <div className="w-1/2 bg-gray-500 text-white h-screen font-serif text-left pl-40 text-7xl pt-54">
+      <div className="w-1/2 bg-gray-600 text-white h-screen font-serif text-left pl-40 text-7xl pt-54">
         <div>Get</div>
         <div> Into Your</div>
         <div> Focus Flow state</div>
@@ -34,14 +34,14 @@ export const Signup = () => {
           />
         </div>
         <div>
-          <button className="bg-gray-500 text-white font-semibold  rounded-md p-3 m-2 w-80">
+          <button className="bg-gray-600 text-white font-semibold  rounded-md p-3 m-2 w-80">
             Signup
           </button>
         </div>
         <div>
           Already Signed up?
           <button
-            className="bg-gray-500 text-white font-semibold w-40 rounded-md p-3 m-2"
+            className="bg-gray-600 text-white font-semibold w-40 rounded-md p-3 m-2"
             onClick={() => navigate('/login')}
           >
             Login
