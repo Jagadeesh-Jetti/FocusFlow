@@ -16,7 +16,7 @@ export const Sidebar = () => {
           </a>
         </li>
         <li>
-          <a href="/goals" className="hover:text-yellow-400">
+          <a href="/milestones" className="hover:text-yellow-400">
             🎯 Milestones
           </a>
         </li>
