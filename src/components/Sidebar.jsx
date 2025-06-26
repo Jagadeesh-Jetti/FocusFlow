@@ -1,6 +1,6 @@
 export const Sidebar = () => {
   return (
-    <aside className="w-1/5 bg-gray-600 p-6 hidden md:block">
+    <aside className="flex h-screen w-1/5 bg-gray-600 p-6 hidden md:block">
       <h1 className="text-3xl font-serif font-bold text-white mb-8 m-1">
         Goal Deck
       </h1>
