@@ -1,7 +1,6 @@
 export const Sidebar = () => {
   return (
     <aside className="hidden md:flex flex-col justify-between h-screen w-1/5 bg-gray-600 p-6">
-      {/* Top Section */}
       <div>
         <h1 className="text-3xl font-serif font-bold text-white mb-8 m-1">
           Goal Deck
@@ -40,7 +39,6 @@ export const Sidebar = () => {
         </ul>
       </div>
 
-      {/* Bottom Section */}
       <div>
         <ul className="space-y-4 text-white text-2xl font-serif">
           <li>
