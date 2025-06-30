@@ -4,16 +4,27 @@ import {
   deleteGoalByIdAPI,
   getGoalByIdAPI,
   getGoalsAPI,
+  updateGoalByIdAPI,
 } from './goalService';
 
-export const getGoals = createAsyncThunk(
-  'goal/getAll',
-  async (userData, thunkAPI) => {
+export const getGoals = createAsyncThunk('goal/getAll', async (_, thunkAPI) => {
+  try {
+    return await getGoalsAPI();
+  } catch (err) {
+    return thunkAPI.rejectWithValue(
+      err.response.data.message || 'Goals retrieval failed'
+    );
+  }
+});
+
+export const createGoal = createAsyncThunk(
+  'goal/create',
+  async (goalData, thunkAPI) => {
     try {
-      return await getGoalsAPI();
+      return await createGoalAPI(goalData);
     } catch (err) {
       return thunkAPI.rejectWithValue(
-        err.response.data.message || 'Goals retrieval failed'
+        err.response.data.message || 'Goal creation failed'
       );
     }
   }
@@ -21,9 +32,9 @@ export const getGoals = createAsyncThunk(
 
 export const getGoalById = createAsyncThunk(
   'goal/getById',
-  async (userData, thunkAPI) => {
+  async (id, thunkAPI) => {
     try {
-      return await getGoalByIdAPI(userData);
+      return await getGoalByIdAPI(id);
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Goal retrieval by id failed'
@@ -32,26 +43,13 @@ export const getGoalById = createAsyncThunk(
   }
 );
 
-export const createGoal = createAsyncThunk(
-  '/goal/create',
-  async (userData, thunkAPI) => {
-    try {
-      return await createGoalAPI(userData);
-    } catch (err) {
-      return thunkAPI.rejectedWithValue(
-        err.response.data.message || 'Goal creation failed'
-      );
-    }
-  }
-);
-
 export const updateGoalById = createAsyncThunk(
-  '/goal/updatedById',
-  async (userData, thunkAPI) => {
+  'goal/updatedById',
+  async ({ id, updatedData }, thunkAPI) => {
     try {
-      return await updateGoalById(userData);
+      return await updateGoalByIdAPI({ id, updatedData });
     } catch (err) {
-      return thunkAPI.rejectedWithValue(
+      return thunkAPI.rejectWithValue(
         err.response.data.message || 'Goal updation by id is failed'
       );
     }
@@ -59,12 +57,12 @@ export const updateGoalById = createAsyncThunk(
 );
 
 export const deleteGoalById = createAsyncThunk(
-  '/goal/deleteById',
-  async (userData, thunkAPI) => {
+  'goal/deleteById',
+  async (goalData, thunkAPI) => {
     try {
-      return await deleteGoalByIdAPI(userData);
+      return await deleteGoalByIdAPI(goalData);
     } catch (err) {
-      return thunkAPI.rejectedWithValue(
+      return thunkAPI.rejectWithValue(
         err.response.data.message || 'Goal deletion by id is failed'
       );
     }

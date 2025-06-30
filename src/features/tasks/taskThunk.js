@@ -9,7 +9,7 @@ import {
 
 export const getTasks = createAsyncThunk(
   '/task/getAll',
-  async (userData, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       return await getTasksAPI();
     } catch (err) {
@@ -21,10 +21,10 @@ export const getTasks = createAsyncThunk(
 );
 
 export const createTask = createAsyncThunk(
-  '/task/create',
-  async (userData, thunkAPI) => {
+  'task/create',
+  async (taskData, thunkAPI) => {
     try {
-      return await createTaskAPI(userData);
+      return await createTaskAPI(taskData);
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Task creation failed'
@@ -34,10 +34,10 @@ export const createTask = createAsyncThunk(
 );
 
 export const getTaskById = createAsyncThunk(
-  '/task/getById',
-  async (userData, thunkAPI) => {
+  'task/getById',
+  async (id, thunkAPI) => {
     try {
-      return await getTaskByIdAPI(userData);
+      return await getTaskByIdAPI(id);
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Task retrieval by Id is failed'
@@ -47,10 +47,10 @@ export const getTaskById = createAsyncThunk(
 );
 
 export const updateTaskById = createAsyncThunk(
-  '/task/update',
-  async (userData, thunkAPI) => {
+  'task/updateById',
+  async ({ id, updatedData }, thunkAPI) => {
     try {
-      return await updateTaskByIdAPI(userData);
+      return await updateTaskByIdAPI({ id, updatedData });
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Task updation by Id is failed'
@@ -60,10 +60,10 @@ export const updateTaskById = createAsyncThunk(
 );
 
 export const deleteTaskById = createAsyncThunk(
-  '/task/delete',
-  async (userData, thunkAPI) => {
+  'task/deleteById',
+  async (id, thunkAPI) => {
     try {
-      return await deleteTaskByIdAPI(userData);
+      return await deleteTaskByIdAPI(id);
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Task deletion by Id is failed'

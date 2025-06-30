@@ -1,14 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   createMilestoneAPI,
+  deleteMilestoneByIdAPI,
   getMilestoneByIdAPI,
   getMilestonesAPI,
   updateMilestoneByIdAPI,
 } from './milestoneService';
 
 export const getMilestones = createAsyncThunk(
-  '/milestone/create',
-  async (userData, thunkAPI) => {
+  'milestone/getAll',
+  async (_, thunkAPI) => {
     try {
       return await getMilestonesAPI();
     } catch (err) {
@@ -20,10 +21,10 @@ export const getMilestones = createAsyncThunk(
 );
 
 export const createMilestone = createAsyncThunk(
-  '/milestone/create',
-  async (userData, thunkAPI) => {
+  'milestone/create',
+  async (milestoneData, thunkAPI) => {
     try {
-      return await createMilestoneAPI();
+      return await createMilestoneAPI(milestoneData);
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Milestone creation failed'
@@ -33,10 +34,11 @@ export const createMilestone = createAsyncThunk(
 );
 
 export const getMilestoneById = createAsyncThunk(
-  '/milestone/getById',
-  async (userData, thunkAPI) => {
+  'milestone/getById',
+  async (id, thunkAPI) => {
     try {
-      return await getMilestoneByIdAPI();
+      const data = await getMilestoneByIdAPI(id);
+      return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Milestone retrival by Id is failed'
@@ -46,10 +48,11 @@ export const getMilestoneById = createAsyncThunk(
 );
 
 export const updateMilestoneById = createAsyncThunk(
-  '/milestone/updateById',
-  async (userData, thunkAPI) => {
+  'milestone/updateById',
+  async ({ id, updatedData }, thunkAPI) => {
     try {
-      return await updateMilestoneByIdAPI();
+      const updated = await updateMilestoneByIdAPI(id, updatedData);
+      return updated;
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Milestone updation by Id is failed'
@@ -59,10 +62,11 @@ export const updateMilestoneById = createAsyncThunk(
 );
 
 export const deleteMilestoneById = createAsyncThunk(
-  '/milestone/deleteById',
-  async (userData, thunkAPI) => {
+  'milestone/deleteById',
+  async (id, thunkAPI) => {
     try {
-      return await deleteMilestoneById(userData);
+      const deleted = await deleteMilestoneByIdAPI(id);
+      return deleted;
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Goal deletion by Id is failed'
