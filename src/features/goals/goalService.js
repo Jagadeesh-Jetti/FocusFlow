@@ -2,12 +2,13 @@ import axios from '../../utils/api';
 
 export const getGoalsAPI = async () => {
   const response = await axios.get('/goals');
-  return response.data;
+  console.log(response.data);
+  return response.data.goals;
 };
 
 export const createGoalAPI = async (userData) => {
   const response = await axios.post('/goals', userData);
-  return response.data;
+  return response.data.goal;
 };
 
 export const getGoalByIdAPI = async (id) => {
