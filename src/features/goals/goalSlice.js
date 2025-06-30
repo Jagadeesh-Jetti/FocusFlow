@@ -8,6 +8,7 @@ import {
 } from './goalThunk';
 
 const initialState = {
+  goalsList: [],
   goal: null,
   loading: false,
   error: null,
@@ -26,7 +27,7 @@ const goalSlice = createSlice({
       })
       .addCase(getGoals.fulfilled, (state, action) => {
         state.loading = false;
-        state.goal = action.payload;
+        state.goalsList = action.payload;
       })
       .addCase(getGoals.rejected, (state, action) => {
         state.loading = false;

@@ -8,6 +8,7 @@ import {
 } from './milestoneThunk';
 
 const initialState = {
+  milestoneList: [],
   milestone: null,
   loading: false,
   error: null,
@@ -25,8 +26,8 @@ const milestoneSlice = createSlice({
       })
       .addCase(getMilestones.fulfilled, (state, action) => {
         state.loading = false;
-        state.milestone = action.payload.milestone;
-        state.error = action.payload;
+        state.milestoneList = action.payload;
+        state.error = null;
       })
       .addCase(getMilestones.rejected, (state, action) => {
         state.loading = false;
@@ -39,8 +40,8 @@ const milestoneSlice = createSlice({
       })
       .addCase(createMilestone.fulfilled, (state, action) => {
         state.loading = false;
-        state.milestone = action.payload.milestone;
-        state.error = action.payload;
+        state.milestone = action.payload;
+        state.error = null;
       })
       .addCase(createMilestone.rejected, (state, action) => {
         state.loading = false;
@@ -53,41 +54,39 @@ const milestoneSlice = createSlice({
       })
       .addCase(getMilestoneById.fulfilled, (state, action) => {
         state.loading = false;
-        state.milestone = action.payload.milestone;
-        state.error = action.payload;
+        state.milestone = action.payload;
+        state.error = null;
       })
       .addCase(getMilestoneById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
 
-      .addCase(updateMilestoneById.pending, (state, action) => {
+      .addCase(updateMilestoneById.pending, (state) => {
         state.loading = true;
-        state.milestone = action.payload.milestone;
         state.error = null;
       })
       .addCase(updateMilestoneById.fulfilled, (state, action) => {
         state.loading = false;
-        state.milestone = action.payload.milestone;
-        state.error = action.payload;
+        state.milestone = action.payload;
+        state.error = null;
       })
       .addCase(updateMilestoneById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
 
-      .addCase(deleteMilestoneById.pending, (state, action) => {
+      .addCase(deleteMilestoneById.pending, (state) => {
         state.loading = true;
-        state.error = action.payload;
+        state.error = null;
       })
       .addCase(deleteMilestoneById.fulfilled, (state, action) => {
         state.loading = false;
         state.milestone = action.payload;
-        state.error = action.payload;
+        state.error = null;
       })
       .addCase(deleteMilestoneById.rejected, (state, action) => {
         state.loading = false;
-        state.milestone = action.payload;
         state.error = action.payload;
       });
   },

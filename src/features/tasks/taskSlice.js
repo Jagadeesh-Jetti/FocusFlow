@@ -19,72 +19,72 @@ const taskSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addState(getTasks.pending, (state) => {
+      .addCase(getTasks.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addState(getTasks.fulfilled, (state, action) => {
+      .addCase(getTasks.fulfilled, (state, action) => {
         state.loading = false;
         state.task = action.payload.task;
         state.error = action.payload;
       })
-      .addState(getTasks.rejected, (state, action) => {
+      .addCase(getTasks.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
 
-      .addState(createTask.pending, (state) => {
+      .addCase(createTask.pending, (state) => {
         state.loading = true;
         state.error = false;
       })
-      .addState(createTask.fulfilled, (state, action) => {
+      .addCase(createTask.fulfilled, (state, action) => {
         state.loading = false;
         state.task = action.payload.task;
         state.error = action.payload;
       })
-      .addState(createTask.rejected, (state, action) => {
+      .addCase(createTask.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
 
-      .addState(getTaskById.pending, (state) => {
+      .addCase(getTaskById.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addState(getTaskById.fulfilled, (state, action) => {
+      .addCase(getTaskById.fulfilled, (state, action) => {
         state.loading = false;
         state.task = action.payload.task;
         state.error = action.payload;
       })
-      .addState(getTaskById.rejected, (state, action) => {
+      .addCase(getTaskById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
 
-      .addState(updateTaskById.pending, (state) => {
+      .addCase(updateTaskById.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addState(updateTaskById.fulfilled, (state, action) => {
+      .addCase(updateTaskById.fulfilled, (state, action) => {
         state.loading = false;
         state.task = action.payload.task;
         state.error = action.payload;
       })
-      .addState(updateTaskById.rejected, (state, action) => {
+      .addCase(updateTaskById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
 
-      .addState(deleteTaskById.pending, (state) => {
+      .addCase(deleteTaskById.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addState(deleteTaskById.fulfilled, (state, action) => {
+      .addCase(deleteTaskById.fulfilled, (state, action) => {
         state.loading = false;
         state.task = action.payload.task;
         state.error = action.payload;
       })
-      .addState(deleteTaskById.rejected, (state, action) => {
+      .addCase(deleteTaskById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
