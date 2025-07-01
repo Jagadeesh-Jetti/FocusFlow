@@ -8,6 +8,7 @@ import {
 } from './taskThunk';
 
 const initialState = {
+  taskList: [],
   task: null,
   loading: false,
   error: false,
@@ -25,7 +26,7 @@ const taskSlice = createSlice({
       })
       .addCase(getTasks.fulfilled, (state, action) => {
         state.loading = false;
-        state.task = action.payload.task;
+        state.taskList = action.payload;
         state.error = action.payload;
       })
       .addCase(getTasks.rejected, (state, action) => {
@@ -39,7 +40,7 @@ const taskSlice = createSlice({
       })
       .addCase(createTask.fulfilled, (state, action) => {
         state.loading = false;
-        state.task = action.payload.task;
+        state.task = action.payload;
         state.error = action.payload;
       })
       .addCase(createTask.rejected, (state, action) => {
@@ -53,7 +54,7 @@ const taskSlice = createSlice({
       })
       .addCase(getTaskById.fulfilled, (state, action) => {
         state.loading = false;
-        state.task = action.payload.task;
+        state.task = action.payload;
         state.error = action.payload;
       })
       .addCase(getTaskById.rejected, (state, action) => {
@@ -67,7 +68,7 @@ const taskSlice = createSlice({
       })
       .addCase(updateTaskById.fulfilled, (state, action) => {
         state.loading = false;
-        state.task = action.payload.task;
+        state.task = action.payload;
         state.error = action.payload;
       })
       .addCase(updateTaskById.rejected, (state, action) => {
@@ -81,7 +82,7 @@ const taskSlice = createSlice({
       })
       .addCase(deleteTaskById.fulfilled, (state, action) => {
         state.loading = false;
-        state.task = action.payload.task;
+        state.task = action.payload;
         state.error = action.payload;
       })
       .addCase(deleteTaskById.rejected, (state, action) => {
