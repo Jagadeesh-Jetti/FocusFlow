@@ -2,14 +2,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Sidebar } from '../../components/Sidebar';
 import { Modal } from '../../components/Modal';
 import { useEffect, useState } from 'react';
-import { createMilestone, getMilestones } from './milestoneThunk';
+import {
+  createMilestone,
+  deleteMilestoneById,
+  getMilestones,
+  updateMilestoneById,
+} from './milestoneThunk';
 import { getGoals } from '../goals/goalThunk';
 
 export const Milestones = () => {
   const milestones = useSelector((state) => state.milestone.milestoneList);
-  const dispatch = useDispatch();
   const goals = useSelector((state) => state.goal.goalsList);
+  const dispatch = useDispatch();
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useState({
     title: '',
@@ -17,18 +24,34 @@ export const Milestones = () => {
     targetDate: '',
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    await dispatch(createMilestone(form));
-    await dispatch(getMilestones());
-
+  const resetForm = () => {
     setForm({
       title: '',
       description: '',
       targetDate: '',
     });
+    setIsEditing(false);
+    setEditId(null);
     setShowModal(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (isEditing) {
+      await dispatch(updateMilestoneById({ id: editId, updatedData: form }));
+    } else {
+      await dispatch(createMilestone(form));
+    }
+
+    dispatch(getMilestones());
+
+    resetForm();
+  };
+
+  const deleteHandler = async (id) => {
+    await dispatch(deleteMilestoneById(id));
+    await dispatch(getMilestones());
   };
 
   useEffect(() => {
@@ -67,8 +90,8 @@ export const Milestones = () => {
 
           <Modal
             isOpen={showModal}
-            onClose={() => setShowModal(false)}
-            title="Add New Milestone"
+            onClose={resetForm}
+            title={isEditing ? 'Edit Milestone' : 'Add New Milestone'}
           >
             <form onSubmit={handleSubmit} className="space-y-4">
               <input
@@ -142,6 +165,29 @@ export const Milestones = () => {
               <div className="text-right">
                 <div className="text-sm text-gray-500">Due Date</div>
                 <div className="font-semibold">{milestone.dueDate}</div>
+              </div>
+              <div className="flex">
+                <div
+                  className="border bg-gray-200 font-black p-1 m-2 rounded-md cursor-pointer hover:scale-110"
+                  onClick={() => {
+                    setIsEditing(true);
+                    setEditId(milestone._id);
+                    setForm({
+                      title: milestone.title,
+                      description: milestone.description,
+                      targetDate: milestone.targetDate,
+                    });
+                    setShowModal(true);
+                  }}
+                >
+                  Edit
+                </div>
+                <div
+                  className="border bg-gray-200 font-black p-1 m-2 rounded-md cursor-pointer hover:scale-110"
+                  onClick={() => deleteHandler(milestone._id)}
+                >
+                  Delete
+                </div>
               </div>
             </div>
           ))}
