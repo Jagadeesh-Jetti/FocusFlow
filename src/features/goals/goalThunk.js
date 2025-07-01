@@ -47,7 +47,7 @@ export const updateGoalById = createAsyncThunk(
   'goal/updatedById',
   async ({ id, updatedData }, thunkAPI) => {
     try {
-      return await updateGoalByIdAPI({ id, updatedData });
+      return await updateGoalByIdAPI(id, updatedData);
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Goal updation by id is failed'
