@@ -1,31 +1,65 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Sidebar } from '../../components/Sidebar';
 import { useEffect, useState } from 'react';
-import { getGoals, createGoal } from './goalThunk';
+import {
+  getGoals,
+  createGoal,
+  deleteGoalById,
+  updateGoalById,
+} from './goalThunk';
 import { Modal } from '../../components/Modal';
 
 export const Goals = () => {
   const goals = useSelector((state) => state.goal.goalsList);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
-
+  const [isEditing, setIsEditing] = useState(false);
+  const [editId, setEditId] = useState(null);
   const [form, setForm] = useState({
     title: '',
     description: '',
     category: '',
   });
 
-  useEffect(() => {
-    dispatch(getGoals());
-  }, [dispatch]);
+  const resetForm = () => {
+    setForm({ title: '', description: '', category: '' });
+    setIsEditing(false);
+    setEditId(null);
+    setShowModal(false);
+  };
+
+  const editHandler = (goal) => {
+    setShowModal(true);
+    setIsEditing(true);
+    setEditId(goal._id);
+    setForm({
+      title: goal.title,
+      description: goal.description,
+      category: goal.category,
+    });
+  };
+
+  const deleteHandler = async (id) => {
+    await dispatch(deleteGoalById(id));
+    await dispatch(getGoals());
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(createGoal(form));
-    setShowModal(false);
-    setForm({ title: '', description: '', category: '' });
-    dispatch(getGoals()); // Refresh after adding
+
+    if (isEditing) {
+      await dispatch(updateGoalById({ id: editId, updatedData: form }));
+    } else {
+      await dispatch(createGoal(form));
+    }
+
+    await dispatch(getGoals());
+    resetForm();
   };
+
+  useEffect(() => {
+    dispatch(getGoals());
+  }, [dispatch]);
 
   return (
     <div className="flex">
@@ -43,8 +77,12 @@ export const Goals = () => {
 
         <Modal
           isOpen={showModal}
-          onClose={() => setShowModal(false)}
-          title="Add New Goal"
+          onClose={() => {
+            setShowModal(false);
+            setIsEditing(false), setEditId(null);
+            setForm({ title: '', description: '', category: '' });
+          }}
+          title={isEditing ? 'Edit Goal' : 'Add New Goal'}
         >
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
@@ -93,10 +131,16 @@ export const Goals = () => {
                 </div>
                 <div className="text-gray-700">{goal.description}</div>
                 <div>
-                  <button className="bg-gray-600 text-gray-50 font-semibold  rounded-md p-2 m-2 ">
+                  <button
+                    className="bg-gray-600 text-gray-50 font-semibold  rounded-md p-2 m-2"
+                    onClick={() => editHandler(goal)}
+                  >
                     Edit
                   </button>
-                  <button className="bg-gray-600 text-gray-50 font-semibold  rounded-md p-2 m-2 ">
+                  <button
+                    className="bg-gray-600 text-gray-50 font-semibold  rounded-md p-2 m-2"
+                    onClick={() => deleteHandler(goal._id)}
+                  >
                     Delete
                   </button>
                 </div>
