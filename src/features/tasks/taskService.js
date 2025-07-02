@@ -5,6 +5,7 @@ export const getTasksAPI = async () => {
   return response.data.tasks;
 };
 export const createTaskAPI = async (userData) => {
+  console.log(userData);
   const response = await axios.post('/tasks', userData);
   return response.data.task;
 };
