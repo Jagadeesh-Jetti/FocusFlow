@@ -50,7 +50,7 @@ export const updateTaskById = createAsyncThunk(
   'task/updateById',
   async ({ id, updatedData }, thunkAPI) => {
     try {
-      return await updateTaskByIdAPI({ id, updatedData });
+      return await updateTaskByIdAPI(id, updatedData);
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Task updation by Id is failed'
