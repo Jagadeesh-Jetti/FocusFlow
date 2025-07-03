@@ -6,6 +6,8 @@ import { Goals } from './features/goals/Goals';
 import { Milestones } from './features/milestones/Milestones';
 import { Tasks } from './features/tasks/Tasks';
 import { Routes, Route } from 'react-router-dom';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { Profile } from './pages/Profile';
 
 function App() {
   return (
@@ -13,10 +15,39 @@ function App() {
       <Routes>
         <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/goals" element={<Goals />} />
-        <Route path="/milestones" element={<Milestones />} />
-        <Route path="/tasks" element={<Tasks />} />
+        <Route
+          path="/dashboard"
+          element={
+            // <ProtectedRoute>
+            <Dashboard />
+            // </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/goals"
+          element={
+            <ProtectedRoute>
+              <Goals />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/milestones"
+          element={
+            <ProtectedRoute>
+              <Milestones />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/tasks"
+          element={
+            <ProtectedRoute>
+              <Tasks />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
