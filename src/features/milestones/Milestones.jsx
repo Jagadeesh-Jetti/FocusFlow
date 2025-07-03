@@ -22,6 +22,7 @@ export const Milestones = () => {
     title: '',
     description: '',
     targetDate: '',
+    goal: '',
   });
 
   const resetForm = () => {
@@ -29,6 +30,7 @@ export const Milestones = () => {
       title: '',
       description: '',
       targetDate: '',
+      goal: '',
     });
     setIsEditing(false);
     setEditId(null);
@@ -44,7 +46,7 @@ export const Milestones = () => {
       await dispatch(createMilestone(form));
     }
 
-    dispatch(getMilestones());
+    await dispatch(getMilestones());
 
     resetForm();
   };
@@ -113,8 +115,8 @@ export const Milestones = () => {
               />
 
               <select
-                value={form.goalId}
-                onChange={(e) => setForm({ ...form, goalId: e.target.value })}
+                value={form.goal}
+                onChange={(e) => setForm({ ...form, goal: e.target.value })}
                 className="w-full p-2 border rounded"
                 required
               >
@@ -164,7 +166,7 @@ export const Milestones = () => {
               </div>
               <div className="text-right">
                 <div className="text-sm text-gray-500">Due Date</div>
-                <div className="font-semibold">{milestone.dueDate}</div>
+                <div className="font-semibold">{milestone.targetDate}</div>
               </div>
               <div className="flex">
                 <div
