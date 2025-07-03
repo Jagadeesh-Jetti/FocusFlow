@@ -12,13 +12,18 @@ export const Signup = () => {
     password: '',
   });
 
-  const signupHandler = () => {
-    dispatch(registerUser(input));
-    setInput({
-      name: '',
-      email: '',
-      password: '',
-    });
+  const signupHandler = async () => {
+    const result = await dispatch(registerUser(input));
+    if (registerUser.fulfilled.match(result)) {
+      setInput({
+        name: '',
+        email: '',
+        password: '',
+      });
+      navigate('/dashboard');
+    } else {
+      console.error(result.payload);
+    }
   };
 
   return (
@@ -33,6 +38,7 @@ export const Signup = () => {
         <div className="border-none">
           <input
             type="text"
+            value={input.name}
             placeholder="Full Name"
             className="bg-blue-50 p-2 m-2 w-80 border-none rounded-md outline-none"
             onChange={(e) => setInput({ ...input, name: e.target.value })}
@@ -41,6 +47,7 @@ export const Signup = () => {
         <div className="border-none">
           <input
             type="email"
+            value={input.email}
             placeholder="Email"
             className="bg-blue-50 p-2 m-2 w-80 border-none rounded-md outline-none"
             onChange={(e) => setInput({ ...input, email: e.target.value })}
@@ -49,6 +56,7 @@ export const Signup = () => {
         <div className="border-none ">
           <input
             type="password"
+            value={input.password}
             placeholder="Password"
             className="bg-blue-50 p-2 m-2 w-80 border-none rounded-md outline-none"
             onChange={(e) => setInput({ ...input, password: e.target.value })}
@@ -56,7 +64,7 @@ export const Signup = () => {
         </div>
         <div>
           <button
-            className="bg-gray-600 text-white font-semibold  rounded-md p-3 m-2 w-80"
+            className="bg-gray-600 text-white font-semibold  rounded-md p-3 m-2 w-80 cursor-pointer active:bg-amber-400"
             onClick={signupHandler}
           >
             Signup
