@@ -27,7 +27,7 @@ export const Sidebar = () => {
             </a>
           </li>
           <li>
-            <a href="/circles" className="hover:text-yellow-400">
+            <a href="/feed" className="hover:text-yellow-400">
               👥 Circles
             </a>
           </li>

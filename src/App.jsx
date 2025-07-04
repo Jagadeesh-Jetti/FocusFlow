@@ -8,6 +8,7 @@ import { Tasks } from './features/tasks/Tasks';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Profile } from './pages/Profile';
+import { Feed } from './features/community/feed';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/feed" element={<Feed />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
