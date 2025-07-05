@@ -48,23 +48,25 @@ export const Feed = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
-      <div className="p-4 md:p-8 max-w-4xl mx-auto w-full">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Circles</h1>
+      <main className="p-4 md:p-8 max-w-4xl mx-auto w-full">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-extrabold text-gray-800 tracking-tight">
+            ✨ Circles
+          </h1>
           <button
-            className="text-gray-400 hover:text-black font-medium text-sm transition"
             onClick={() => setShowModal(true)}
+            className="text-sm px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-full shadow-md transition-all"
           >
-            Create Post
+            + Create Post
           </button>
         </div>
 
-        <Modal isOpen={showModal} onClose={resetForm} title="Add Post">
+        <Modal isOpen={showModal} onClose={resetForm} title="Share Update">
           <form onSubmit={handleSubmit} className="space-y-4">
             <textarea
-              className="w-full p-3 rounded-md border bg-gray-100 resize-none"
+              className="w-full p-4 rounded-xl border bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
               rows={4}
               placeholder="What's on your mind?"
               value={form.content}
@@ -75,6 +77,7 @@ export const Feed = () => {
             <input
               type="file"
               accept="image/*"
+              className="text-sm"
               onChange={(e) =>
                 setForm({ ...form, image: e.target.files[0] || null })
               }
@@ -83,7 +86,7 @@ export const Feed = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-semibold py-2 px-4 rounded-full w-full"
+              className="bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-semibold py-2 px-4 rounded-full w-full shadow-sm"
             >
               {submitting ? 'Sharing…' : 'Share'}
             </button>
@@ -93,7 +96,7 @@ export const Feed = () => {
         {error ? (
           <p className="text-center text-red-500">{error}</p>
         ) : isLoading && posts.length === 0 ? (
-          <p className="text-center text-gray-500">Loading…</p>
+          <p className="text-center text-gray-500 animate-pulse">Loading…</p>
         ) : posts.length === 0 ? (
           <p className="text-center text-gray-500 mt-10">
             No posts yet. Be the first to share your progress!
@@ -105,7 +108,7 @@ export const Feed = () => {
             ))}
           </div>
         )}
-      </div>
+      </main>
     </div>
   );
 };

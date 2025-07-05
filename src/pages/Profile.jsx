@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Sidebar } from '../components//Sidebar';
+import { Sidebar } from '../components/Sidebar';
 import { formatDistanceToNow } from 'date-fns';
 
 export const Profile = () => {
@@ -8,52 +8,63 @@ export const Profile = () => {
   if (!user) return <div className="text-center mt-20">Loading user...</div>;
 
   return (
-    <div className="flex">
+    <div className="flex bg-gray-100 min-h-screen">
       <Sidebar />
-      <div className="w-full p-10 bg-gray-100 min-h-screen">
-        <div className="max-w-3xl mx-auto bg-white shadow-md rounded-2xl p-8">
-          <div className="flex flex-col items-center text-center">
-            <div className="w-24 h-24 bg-gradient-to-tr from-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-md">
-              {user.name.charAt(0).toUpperCase()}
-            </div>
-            <h2 className="mt-4 text-3xl font-semibold text-gray-800">
-              {user.name}
-            </h2>
-            <p className="text-gray-500">{user.email}</p>
-            <p className="text-sm text-gray-400 mt-1">
-              Joined {formatDistanceToNow(new Date(user.createdAt))} ago
-            </p>
-          </div>
 
-          <div className="mt-10 border-t pt-6">
-            <h3 className="text-xl font-bold mb-4 text-gray-700">
-              Your Details
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-600">
-              <div>
-                <p className="text-sm text-gray-400">Name</p>
-                <p className="text-base font-medium">{user.name}</p>
+      <main className="flex-1 px-6 py-10">
+        <div className="max-w-4xl mx-auto">
+          {/* Profile Header */}
+          <div className="bg-white shadow-lg rounded-2xl p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6">
+            {/* Avatar */}
+            <div className="relative">
+              <div className="w-28 h-28 rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white text-4xl font-bold flex items-center justify-center shadow-lg">
+                {user.name.charAt(0).toUpperCase()}
               </div>
-              <div>
-                <p className="text-sm text-gray-400">Email</p>
-                <p className="text-base font-medium">{user.email}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-400">User ID</p>
-                <p className="text-base font-medium">{user._id}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-400">Account Created</p>
-                <p className="text-base font-medium">
-                  {new Date(user.createdAt).toLocaleDateString()}
-                </p>
-              </div>
+              {/* Future: Edit Avatar */}
+              {/* <button className="absolute bottom-1 right-1 bg-white p-1 rounded-full shadow-md">
+                <Camera className="w-4 h-4 text-gray-600" />
+              </button> */}
+            </div>
+
+            {/* Basic Info */}
+            <div className="text-center sm:text-left">
+              <h1 className="text-3xl font-bold text-gray-800">{user.name}</h1>
+              <p className="text-gray-500">{user.email}</p>
+              <p className="text-sm text-gray-400 mt-1">
+                Member since {formatDistanceToNow(new Date(user.createdAt))} ago
+              </p>
             </div>
           </div>
 
-          {/* Future: Add profile edit, password change, avatar upload, etc. */}
+          {/* User Details */}
+          <div className="mt-8 bg-white shadow-lg rounded-2xl p-8">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-semibold text-gray-700">
+                Your Details
+              </h2>
+              {/* Future: Add Edit Button */}
+              {/* <button className="text-sm text-indigo-600 hover:underline">Edit Profile</button> */}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <Detail label="Name" value={user.name} />
+              <Detail label="Email" value={user.email} />
+              <Detail label="User ID" value={user._id} />
+              <Detail
+                label="Account Created"
+                value={new Date(user.createdAt).toLocaleDateString()}
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
+
+const Detail = ({ label, value }) => (
+  <div>
+    <p className="text-sm text-gray-400">{label}</p>
+    <p className="text-base font-medium text-gray-800">{value}</p>
+  </div>
+);

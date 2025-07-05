@@ -12,37 +12,38 @@ export const PostCard = ({ post }) => {
   } = post;
 
   return (
-    <div className="bg-white shadow-md rounded-2xl p-5 border border-gray-200 transition hover:shadow-lg">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center font-bold text-indigo-700">
+    <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300">
+      <div className="flex items-center gap-4 mb-5">
+        <div className="w-11 h-11 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold shadow-inner">
           {user?.name?.[0]?.toUpperCase()}
         </div>
         <div>
-          <h2 className="font-semibold text-lg text-gray-800">{user?.name}</h2>
+          <h2 className="font-semibold text-base md:text-lg text-gray-800">
+            {user?.name}
+          </h2>
           <p className="text-sm text-gray-500">
-            {relatedGoal?.title && `Goal: ${relatedGoal.title}`}
-            {relatedMilestone?.title &&
-              ` • Milestone: ${relatedMilestone.title}`}
+            {relatedGoal?.title && `🎯 ${relatedGoal.title}`}
+            {relatedMilestone?.title && ` • 🛠️ ${relatedMilestone.title}`}
           </p>
         </div>
       </div>
 
-      <p className="text-gray-700 mb-4">{content}</p>
+      <p className="text-gray-700 leading-relaxed mb-4">{content}</p>
 
       {image && (
         <img
           src={image}
           alt="post"
-          className="w-full h-auto rounded-md object-cover mb-4"
+          className="w-full h-auto rounded-lg object-cover mb-4 border"
         />
       )}
 
-      <div className="flex items-center gap-6 text-gray-600">
-        <button className="flex items-center gap-1 hover:text-red-500 transition">
+      <div className="flex items-center gap-6 text-gray-500 text-sm">
+        <button className="flex items-center gap-1 hover:text-red-500 transition-all">
           <Heart className="w-5 h-5" />
           <span>{likes?.length || 0}</span>
         </button>
-        <button className="flex items-center gap-1 hover:text-blue-500 transition">
+        <button className="flex items-center gap-1 hover:text-blue-500 transition-all">
           <MessageCircle className="w-5 h-5" />
           <span>{comments?.length || 0}</span>
         </button>

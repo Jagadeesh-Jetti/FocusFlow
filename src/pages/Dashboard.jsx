@@ -30,43 +30,47 @@ export const Dashboard = () => {
   const inProgressGoals = goals?.filter((g) => !g.isCompleted);
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-gray-100">
       <Sidebar />
-      <div className="p-6 w-full">
-        <h1 className="text-3xl font-bold mb-6">Welcome, {user?.name} 👋</h1>
+      <main className="flex-1 p-6 md:p-10">
+        <h1 className="text-3xl font-bold text-gray-800 mb-8">
+          👋 Welcome, {user?.name}
+        </h1>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <Card title="Total Tasks" count={totalTasks} />
-          <Card title="Completed" count={completedTasks} />
-          <Card title="Pending" count={totalTasks - completedTasks} />
-          <Card title="Goals In Progress" count={inProgressGoals?.length} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <StatCard title="Total Tasks" count={totalTasks} />
+          <StatCard title="Completed" count={completedTasks} />
+          <StatCard title="Pending" count={totalTasks - completedTasks} />
+          <StatCard title="Goals In Progress" count={inProgressGoals?.length} />
         </div>
 
-        <Section title="Tasks Due Today" items={dueToday} />
-        <Section title="Upcoming Tasks (3 days)" items={upcoming} />
-      </div>
+        <TaskSection title="🗓️ Tasks Due Today" items={dueToday} />
+        <TaskSection title="⏳ Upcoming Tasks (Next 3 Days)" items={upcoming} />
+      </main>
     </div>
   );
 };
 
-const Card = ({ title, count }) => (
-  <div className="bg-white shadow-md rounded-lg p-4 text-center">
-    <h2 className="text-lg font-semibold">{title}</h2>
-    <p className="text-3xl font-bold">{count}</p>
+const StatCard = ({ title, count }) => (
+  <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all duration-300">
+    <h3 className="text-md font-semibold text-gray-500 mb-1">{title}</h3>
+    <p className="text-4xl font-extrabold text-indigo-600">{count}</p>
   </div>
 );
 
-const Section = ({ title, items }) => (
-  <div className="mb-6">
-    <h2 className="text-xl font-semibold mb-2">{title}</h2>
+const TaskSection = ({ title, items }) => (
+  <section className="mb-8 bg-white rounded-2xl p-6 shadow-md">
+    <h2 className="text-xl font-bold text-gray-800 mb-4">{title}</h2>
     {items.length === 0 ? (
-      <p className="text-gray-500">No items to show</p>
+      <p className="text-gray-400 italic">Nothing scheduled 🎉</p>
     ) : (
-      <ul className="list-disc ml-5">
+      <ul className="space-y-2 list-disc list-inside text-gray-700">
         {items.map((item) => (
-          <li key={item._id}>{item.title}</li>
+          <li key={item._id} className="font-medium">
+            {item.title}
+          </li>
         ))}
       </ul>
     )}
-  </div>
+  </section>
 );
