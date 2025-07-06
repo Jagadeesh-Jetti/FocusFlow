@@ -10,7 +10,7 @@ import {
 
 export const Sidebar = () => {
   return (
-    <aside className="hidden md:flex flex-col justify-between h-screen w-64 bg-gray-900 text-white px-6 py-8 shadow-lg">
+    <aside className="hidden md:flex flex-col justify-between h-screen w-64  text-black px-6 py-8 shadow-lg">
       <div>
         <h1 className="text-3xl font-extrabold tracking-tight text-yellow-400 mb-10">
           🎯 GoalDeck
