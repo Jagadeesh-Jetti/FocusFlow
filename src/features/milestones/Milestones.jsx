@@ -15,6 +15,9 @@ export const Milestones = () => {
   const goals = useSelector((state) => state.goal.goalsList);
   const dispatch = useDispatch();
 
+  const [filteredMilestones, setFilteredMilestones] = useState(
+    milestones || []
+  );
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -35,6 +38,19 @@ export const Milestones = () => {
     setIsEditing(false);
     setEditId(null);
     setShowModal(false);
+  };
+
+  const filterMilestonesByGoals = (e) => {
+    const selectedGoalId = e.target.value;
+
+    if (selectedGoalId === 'all') {
+      setFilteredMilestones(milestones);
+    } else {
+      const filtered = milestones.filter(
+        (m) => m.goal && m.goal._id === selectedGoalId
+      );
+      setFilteredMilestones(filtered);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -61,6 +77,10 @@ export const Milestones = () => {
     dispatch(getGoals());
   }, [dispatch]);
 
+  useEffect(() => {
+    setFilteredMilestones(milestones);
+  }, [milestones]);
+
   return (
     <div className="flex">
       <Sidebar />
@@ -69,7 +89,11 @@ export const Milestones = () => {
 
         <div className="flex justify-between px-4 ">
           <div className="text-2xl border m-2">
-            <select name="goals filter" className="rounded-md w-30 m-2">
+            <select
+              name="goals filter"
+              className="rounded-md w-30 m-2"
+              onChange={(e) => filterMilestonesByGoals(e)}
+            >
               <option value="all">All Goals</option>
               {goals?.length > 0 ? (
                 goals?.map((goal) => (
@@ -153,7 +177,7 @@ export const Milestones = () => {
         </div>
 
         <div>
-          {milestones.map((milestone) => (
+          {filteredMilestones.map((milestone) => (
             <div
               key={milestone._id}
               className="border flex justify-between p-3 m-3 rounded-md shadow-sm"
@@ -175,9 +199,10 @@ export const Milestones = () => {
                     setIsEditing(true);
                     setEditId(milestone._id);
                     setForm({
-                      title: milestone.title,
-                      description: milestone.description,
-                      targetDate: milestone.targetDate,
+                      title: milestone?.title,
+                      description: milestone?.description,
+                      targetDate: milestone?.targetDate?.split('T')[0],
+                      goal: milestone.goal?._id || '',
                     });
                     setShowModal(true);
                   }}
