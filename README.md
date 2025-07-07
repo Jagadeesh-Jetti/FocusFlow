@@ -1,12 +1,41 @@
-# React + Vite
+# 🧠 FocusFlow – AI Productivity Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**FocusFlow** is an AI-powered productivity tool designed to help users set goals, break them into actionable milestones, and stay on track. Built with the modern **MERN stack**, FocusFlow offers a clean, responsive UI and intelligent suggestions to make planning effortless.
 
-Currently, two official plugins are available:
+> 🚀 Live Demo → [focusflow.vercel.app](https://focusflow.vercel.app) *(Coming soon)*  
+> 🧑‍💻 Built with: React.js, Node.js, MongoDB, Tailwind CSS, and OpenAI
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ✅ **Set & Track Goals** – Define long-term goals with deadlines & descriptions  
+- 🎯 **Break into Milestones** – Organize goals into manageable steps  
+- 🤖 **AI Assistant** – Smart suggestions for milestone planning *(coming soon)*  
+- 🧩 **Dashboard UI** – Review daily plans & completed tasks  
+- 🔐 **Secure Auth** – Token-based login & signup  
+- 📱 **Responsive Design** – Built with Tailwind CSS for mobile-first performance
+
+---
+
+## 🛠 Tech Stack
+
+**Frontend:**
+- React.js  
+- Redux Toolkit  
+- Tailwind CSS  
+
+**Backend:**
+- Node.js  
+- Express.js  
+- MongoDB (Mongoose)  
+- JWT Authentication  
+- OpenAI API *(optional)*  
+
+---
+
+## 🧑‍💻 For Developers – Run Locally
+
+```bash
+git clone https://github.com/Jagadeesh-Jetti/focusflow.git
+cd focusflow
