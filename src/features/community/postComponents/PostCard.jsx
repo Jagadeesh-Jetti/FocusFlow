@@ -1,7 +1,16 @@
+import { useState, useEffect } from 'react';
 import { Heart, MessageCircle } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleLikePost, commentPost } from '../feedThunk';
+import { getPosts } from '../feedThunk';
 
 export const PostCard = ({ post }) => {
+  const dispatch = useDispatch();
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const [commentText, setCommentText] = useState('');
+
   const {
+    _id,
     user,
     content,
     image,
@@ -10,6 +19,27 @@ export const PostCard = ({ post }) => {
     relatedGoal,
     relatedMilestone,
   } = post;
+
+  const hasLiked = likes.includes(currentUser?._id);
+  const hasCommented = comments.find(
+    (comment) =>
+      comment.user === currentUser._id || comment.user?._id === currentUser._id
+  );
+
+  const likeHandler = () => {
+    dispatch(toggleLikePost(_id));
+  };
+
+  const commentHandler = () => {
+    console.log(commentText);
+    if (!commentText.trim()) return;
+    dispatch(commentPost({ id: _id, comment: commentText }));
+    setCommentText('');
+  };
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
 
   return (
     <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300">
@@ -29,7 +59,6 @@ export const PostCard = ({ post }) => {
       </div>
 
       <p className="text-gray-700 leading-relaxed mb-4">{content}</p>
-
       {image && (
         <img
           src={image}
@@ -38,16 +67,43 @@ export const PostCard = ({ post }) => {
         />
       )}
 
-      <div className="flex items-center gap-6 text-gray-500 text-sm">
-        <button className="flex items-center gap-1 hover:text-red-500 transition-all">
-          <Heart className="w-5 h-5" />
+      <div className="flex items-center gap-6 text-gray-500 text-sm mb-2">
+        <button
+          onClick={likeHandler}
+          className={`flex items-center gap-1 transition-all ${
+            hasLiked ? 'text-red-500' : 'hover:text-red-500'
+          }`}
+        >
+          <Heart className="w-5 h-5" fill={hasLiked ? 'red' : 'none'} />
           <span>{likes?.length || 0}</span>
         </button>
-        <button className="flex items-center gap-1 hover:text-blue-500 transition-all">
+
+        <button
+          onClick={commentHandler}
+          className="flex items-center gap-1 hover:text-blue-500 transition-all"
+        >
           <MessageCircle className="w-5 h-5" />
           <span>{comments?.length || 0}</span>
         </button>
       </div>
+
+      {!hasCommented && (
+        <div className="flex items-center gap-2 mt-2">
+          <input
+            type="text"
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+            placeholder="Comment here..."
+            className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none"
+          />
+          <button
+            onClick={commentHandler}
+            className="bg-blue-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-blue-600 transition-all"
+          >
+            Post
+          </button>
+        </div>
+      )}
     </div>
   );
 };
