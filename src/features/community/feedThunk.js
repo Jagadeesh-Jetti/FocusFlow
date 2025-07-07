@@ -5,6 +5,7 @@ import {
   deletePostAPI,
   getPostByIdAPI,
   getPostsAPI,
+  toggleLikePostAPI,
 } from './feedService';
 
 export const getPosts = createAsyncThunk('post/getAll', async (_, thunkAPI) => {
@@ -47,7 +48,7 @@ export const toggleLikePost = createAsyncThunk(
   'post/toggleLike',
   async (id, thunkAPI) => {
     try {
-      return await toggleLikePost(id);
+      return await toggleLikePostAPI(id);
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response.data.message || 'Toggle like is failed'
