@@ -42,6 +42,11 @@ const postSlice = createSlice({
         state.loading = false;
         state.post = action.payload;
         state.error = null;
+
+        const updatedPost = action.payload;
+        state.postList = state.postList.map((post) =>
+          post._id === updatedPost._id ? updatedPost : post
+        );
       })
       .addCase(createPost.rejected, (state, action) => {
         state.loading = false;

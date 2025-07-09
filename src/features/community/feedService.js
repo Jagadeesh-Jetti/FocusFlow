@@ -6,11 +6,7 @@ export const getPostsAPI = async () => {
 };
 
 export const createPostAPI = async (postData) => {
-  const response = await axios.post('/posts', postData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  const response = await axios.post('/posts', postData);
   return response.data.post;
 };
 
