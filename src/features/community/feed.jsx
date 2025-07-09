@@ -13,7 +13,7 @@ export const Feed = () => {
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     content: '',
-    image: null, // store File object here
+    image: null,
   });
 
   const resetForm = () => {
@@ -24,21 +24,24 @@ export const Feed = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!form.content.trim()) return;
+
     setSubmitting(true);
 
-    // build multipart body
     const data = new FormData();
     data.append('content', form.content);
     if (form.image) data.append('image', form.image);
 
-    // dispatch thunk → returns the created post
-    const res = await dispatch(createPost(data));
-
-    if (createPost.fulfilled.match(res)) {
-      dispatch(getPosts()); // refresh list
-      resetForm();
-    } else {
-      // the slice already stores error; just stop submitting
+    try {
+      const res = await dispatch(createPost(data));
+      if (createPost.fulfilled.match(res)) {
+        dispatch(getPosts());
+        resetForm();
+      } else {
+        setSubmitting(false);
+      }
+    } catch (err) {
+      console.error('Post creation failed:', err);
       setSubmitting(false);
     }
   };
@@ -77,7 +80,7 @@ export const Feed = () => {
             <input
               type="file"
               accept="image/*"
-              className="text-sm"
+              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
               onChange={(e) =>
                 setForm({ ...form, image: e.target.files[0] || null })
               }
