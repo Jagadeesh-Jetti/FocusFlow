@@ -69,7 +69,7 @@ export const Goals = () => {
       const token = localStorage.getItem('token');
       const res = await axios.post(
         'http://localhost:3000/goals/generate-plan',
-        { goal: form.title },
+        { goalTitle: form.title, goalDescription: form.description },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setAiPlan(res.data);
@@ -206,28 +206,7 @@ export const Goals = () => {
                   {goal.category}
                 </div>
                 <div className="text-gray-700">{goal.description}</div>
-                {goal.milestones?.length > 0 && (
-                  <div className="mt-3">
-                    {goal.milestones.map((ms) => (
-                      <div
-                        key={ms._id}
-                        className="ml-2 mt-3 border-l pl-4 border-gray-400"
-                      >
-                        <div className="font-medium text-blue-700">
-                          📌 {ms.title}
-                        </div>
-                        {ms.tasks?.map((task) => (
-                          <div
-                            key={task._id}
-                            className="ml-4 text-sm text-gray-700"
-                          >
-                            ▸ {task.title}
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                )}
+
                 <div className="mt-4">
                   <button
                     className="bg-gray-600 text-white font-semibold rounded-md p-2 m-2"

@@ -2,9 +2,6 @@ import axios from 'axios';
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -16,7 +13,7 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    const status = error?.resposne?.status;
+    const status = error?.response?.status;
     const message = error?.response?.data?.message;
 
     if (
