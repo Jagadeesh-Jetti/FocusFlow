@@ -183,31 +183,66 @@ export const Tasks = () => {
         </Modal>
 
         <div>
-          {tasks?.map((task) => (
-            <div className="flex gap-x-4  border m-2 p-6 w-180 rounded-md">
-              <input
-                type="checkbox"
-                className="w-6 h-6 accent-green-600 cursor-pointer"
-              />
-              <div className="text-2xl">
-                <div> {task.title} </div>
-              </div>
-              <div className="flex">
-                <div
-                  className="border bg-gray-200 font-black p-1 m-2 rounded-md cursor-pointer hover:scale-110"
-                  onClick={() => editHandler(task._id, task)}
-                >
-                  Edit
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 m-4">
+            {tasks?.map((task) => (
+              <div
+                key={task._id}
+                className="bg-white shadow-md rounded-xl p-5 border border-gray-200 hover:shadow-lg transition duration-300"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex gap-3 items-start">
+                    <input
+                      type="checkbox"
+                      checked={task.isCompleted}
+                      className="w-5 h-5 accent-green-600 mt-1"
+                    />
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-800">
+                        {task.title}
+                      </h3>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {task.description}
+                      </p>
+                      <div className="mt-3 text-sm text-gray-600">
+                        <div>
+                          <strong>Due:</strong>{' '}
+                          {new Date(task.dueDate).toLocaleDateString()}
+                        </div>
+                        <div>
+                          <strong>Priority:</strong>{' '}
+                          <span
+                            className={`inline-block px-2 py-0.5 rounded-full text-white text-xs font-bold ${
+                              task.priority === 'high'
+                                ? 'bg-red-500'
+                                : task.priority === 'medium'
+                                ? 'bg-yellow-500'
+                                : 'bg-green-500'
+                            }`}
+                          >
+                            {task.priority}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <button
+                      className="text-sm bg-blue-100 text-blue-800 font-medium px-3 py-1 rounded hover:bg-blue-200"
+                      onClick={() => editHandler(task._id, task)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="text-sm bg-red-100 text-red-800 font-medium px-3 py-1 rounded hover:bg-red-200"
+                      onClick={() => deleteHandler(task._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
-                <div
-                  className="border bg-gray-200  font-black p-1 m-2 rounded-md cursor-pointer hover:scale-110"
-                  onClick={() => deleteHandler(task._id)}
-                >
-                  Delete
-                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
