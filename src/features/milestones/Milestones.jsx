@@ -10,7 +10,7 @@ import {
 } from './milestoneThunk';
 import { getGoals } from '../goals/goalThunk';
 import { AddButton } from '../../components/AddButton';
-import { ActionButton } from '../../components/ActionButton';
+
 import { MilestoneCard } from './milestoneComponents/MilestoneCard';
 import { MilestoneForm } from './milestoneComponents/MilestoneForm';
 import { PageHeader } from '../../components/PageHeader';
@@ -90,15 +90,11 @@ export const Milestones = () => {
     <div className="flex">
       <Sidebar />
       <div className="m-2 w-screen ">
-        <div className="flex justify-between m-2">
-          <div className="text-3xl m-3 font-bold"> MILESTONES</div>
-          <AddButton text="ADD MILESTONE" setShowModal={setShowModal} />
-        </div>
-        {/* <PageHeader
+        <PageHeader
           title="MILESTONES"
           buttonLabel="ADD MILESTONE"
           setShowModal={setShowModal}
-        /> */}
+        />
 
         <div className="flex justify-between px-3 ">
           <div className="text-xl shadow-md m-2 ">

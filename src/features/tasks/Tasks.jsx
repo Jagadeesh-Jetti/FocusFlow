@@ -9,8 +9,8 @@ import {
   updateTaskById,
 } from './taskThunk';
 import { getMilestones } from '../milestones/milestoneThunk';
-import { AddButton } from '../../components/AddButton';
 import { ActionButton } from '../../components/ActionButton';
+import { PageHeader } from '../../components/PageHeader';
 
 export const Tasks = () => {
   const milestones = useSelector((state) => state.milestone.milestoneList);
@@ -95,10 +95,11 @@ export const Tasks = () => {
     <div className="flex">
       <Sidebar />
       <div className="m-2 w-screen ">
-        <div className="flex justify-between m-2  ">
-          <div className="text-3xl m-3 font-bold"> TASKS</div>
-          <AddButton text="ADD TASK" setShowModal={setShowModal} />
-        </div>
+        <PageHeader
+          title="TASKS"
+          buttonLabel="ADD TASK"
+          setShowModal={setShowModal}
+        />
 
         <Modal
           isOpen={showModal}

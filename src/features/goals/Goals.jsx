@@ -9,8 +9,8 @@ import {
 } from './goalThunk';
 import { Modal } from '../../components/Modal';
 import axios from 'axios';
-import { AddButton } from '../../components/AddButton';
 import { ActionButton } from '../../components/ActionButton';
+import { PageHeader } from '../../components/PageHeader';
 
 export const Goals = () => {
   const goals = useSelector((state) => state.goal.goalsList);
@@ -104,10 +104,11 @@ export const Goals = () => {
     <div className="flex">
       <Sidebar />
       <div className="m-4 w-screen">
-        <div className="flex justify-between m-2 ">
-          <div className="text-3xl font-bold m-3">GOALS</div>
-          <AddButton text="ADD GOAL" setShowModal={setShowModal} />
-        </div>
+        <PageHeader
+          title="GOALS"
+          buttonLabel="ADD GOAL"
+          setShowModal={setShowModal}
+        />
 
         <Modal
           isOpen={showModal}
