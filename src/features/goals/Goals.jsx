@@ -9,6 +9,8 @@ import {
 } from './goalThunk';
 import { Modal } from '../../components/Modal';
 import axios from 'axios';
+import { AddButton } from '../../components/AddButton';
+import { ActionButton } from '../../components/ActionButton';
 
 export const Goals = () => {
   const goals = useSelector((state) => state.goal.goalsList);
@@ -101,15 +103,10 @@ export const Goals = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="m-4 w-full">
-        <div className="flex justify-between items-center">
-          <div className="text-4xl font-semibold m-3">Goals</div>
-          <button
-            className="bg-gray-600 text-white font-semibold w-40 rounded-md p-3 m-2"
-            onClick={() => setShowModal(true)}
-          >
-            Add New Goal
-          </button>
+      <div className="m-4 w-screen">
+        <div className="flex justify-between m-2 ">
+          <div className="text-3xl font-bold m-3">GOALS</div>
+          <AddButton text="ADD GOAL" setShowModal={setShowModal} />
         </div>
 
         <Modal
@@ -194,12 +191,12 @@ export const Goals = () => {
           </form>
         </Modal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 m-2">
           {goals?.length > 0 ? (
             goals.map((goal) => (
               <div
                 key={goal._id}
-                className="p-4 border rounded-lg shadow-sm hover:shadow-md transition"
+                className="p-4  rounded-lg shadow-sm hover:shadow-md transition"
               >
                 <div className="text-xl font-semibold mb-1">{goal.title}</div>
                 <div className="text-sm text-gray-600 mb-2">
@@ -207,19 +204,18 @@ export const Goals = () => {
                 </div>
                 <div className="text-gray-700">{goal.description}</div>
 
-                <div className="mt-4">
-                  <button
-                    className="bg-gray-600 text-white font-semibold rounded-md p-2 m-2"
+                <div className="flex mt-4 gap-2">
+                  <ActionButton
+                    title="EDIT"
                     onClick={() => editHandler(goal)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="bg-gray-600 text-white font-semibold rounded-md p-2 m-2"
+                    color="blue"
+                  />
+
+                  <ActionButton
+                    title="DELETE"
                     onClick={() => deleteHandler(goal._id)}
-                  >
-                    Delete
-                  </button>
+                    color="red"
+                  />
                 </div>
               </div>
             ))

@@ -30,7 +30,7 @@ export const Dashboard = () => {
   const inProgressGoals = goals?.filter((g) => !g.isCompleted);
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-whitesmoke">
       <Sidebar />
       <main className="flex-1 p-6 md:p-10">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">
