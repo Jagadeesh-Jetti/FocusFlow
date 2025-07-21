@@ -4,9 +4,8 @@ export const getTasksAPI = async () => {
   const response = await axios.get('/tasks');
   return response.data.tasks;
 };
-export const createTaskAPI = async (userData) => {
-  console.log(userData);
-  const response = await axios.post('/tasks', userData);
+export const createTaskAPI = async (taskData) => {
+  const response = await axios.post('/tasks', taskData);
   return response.data.task;
 };
 
@@ -15,8 +14,8 @@ export const getTaskByIdAPI = async (id) => {
   return response.data.task;
 };
 
-export const updateTaskByIdAPI = async (id, updatedData) => {
-  const response = await axios.put(`/tasks/${id}`, updatedData);
+export const updateTaskByIdAPI = async (id, updatedTask) => {
+  const response = await axios.put(`/tasks/${id}`, updatedTask);
   return response.data.task;
 };
 

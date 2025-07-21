@@ -69,6 +69,10 @@ const taskSlice = createSlice({
       .addCase(updateTaskById.fulfilled, (state, action) => {
         state.loading = false;
         state.task = action.payload;
+        state.taskList = state.taskList.map((task) =>
+          task._id === action.payload._id ? action.payload : task
+        );
+
         state.error = action.payload;
       })
       .addCase(updateTaskById.rejected, (state, action) => {

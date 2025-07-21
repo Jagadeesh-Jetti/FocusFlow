@@ -9,11 +9,12 @@ import {
   updateTaskById,
 } from './taskThunk';
 import { getMilestones } from '../milestones/milestoneThunk';
+import { AddButton } from '../../components/AddButton';
+import { ActionButton } from '../../components/ActionButton';
 
 export const Tasks = () => {
   const milestones = useSelector((state) => state.milestone.milestoneList);
   const tasks = useSelector((state) => state.task.taskList);
-  console.log(milestones);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState(null);
@@ -75,6 +76,16 @@ export const Tasks = () => {
     await dispatch(getTasks());
   };
 
+  const toggleCompleteHandler = async (task) => {
+    const updatedTask = {
+      ...task,
+      isCompleted: true,
+    };
+
+    await dispatch(updateTaskById({ id: task._id, updatedTask }));
+    await dispatch(getTasks());
+  };
+
   useEffect(() => {
     dispatch(getTasks());
     dispatch(getMilestones());
@@ -83,20 +94,16 @@ export const Tasks = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="m-4 w-screen">
-        <div className="flex justify-between m-4">
-          <div className="text-4xl m-3 font-bold"> Tasks</div>
-          <button
-            className="bg-gray-600 text-white font-semibold w-40 rounded-md p-3 m-2"
-            onClick={() => setShowModal(true)}
-          >
-            Add New Task
-          </button>
+      <div className="m-2 w-screen ">
+        <div className="flex justify-between m-2  ">
+          <div className="text-3xl m-3 font-bold"> TASKS</div>
+          <AddButton text="ADD TASK" setShowModal={setShowModal} />
         </div>
+
         <Modal
           isOpen={showModal}
           onClose={() => resetForm()}
-          title="Add New Task"
+          title={isEditing ? 'EDIT TASK' : 'ADD NEW TASK'}
         >
           <form onSubmit={handleSubmit} className="space-y-4 p-4">
             <input
@@ -184,64 +191,66 @@ export const Tasks = () => {
 
         <div>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 m-4">
-            {tasks?.map((task) => (
-              <div
-                key={task._id}
-                className="bg-white shadow-md rounded-xl p-5 border border-gray-200 hover:shadow-lg transition duration-300"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex gap-3 items-start">
-                    <input
-                      type="checkbox"
-                      checked={task.isCompleted}
-                      className="w-5 h-5 accent-green-600 mt-1"
-                    />
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-800">
-                        {task.title}
-                      </h3>
-                      <p className="text-sm text-gray-500 mt-1">
-                        {task.description}
-                      </p>
-                      <div className="mt-3 text-sm text-gray-600">
-                        <div>
-                          <strong>Due:</strong>{' '}
-                          {new Date(task.dueDate).toLocaleDateString()}
-                        </div>
-                        <div>
-                          <strong>Priority:</strong>{' '}
-                          <span
-                            className={`inline-block px-2 py-0.5 rounded-full text-white text-xs font-bold ${
-                              task.priority === 'high'
-                                ? 'bg-red-500'
-                                : task.priority === 'medium'
-                                ? 'bg-yellow-500'
-                                : 'bg-green-500'
-                            }`}
-                          >
-                            {task.priority}
-                          </span>
+            {tasks
+              .filter((task) => !task.isCompleted)
+              .map((task) => (
+                <div
+                  key={task._id}
+                  className="bg-white shadow-md rounded-xl p-5 border border-gray-200 hover:shadow-lg transition duration-300"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex gap-3 items-start">
+                      <input
+                        type="checkbox"
+                        checked={task.isCompleted}
+                        onChange={() => toggleCompleteHandler(task)}
+                        className="w-5 h-5 accent-green-600 mt-1"
+                      />
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-800">
+                          {task.title}
+                        </h3>
+                        <p className="text-sm text-gray-500 mt-1">
+                          {task.description}
+                        </p>
+                        <div className="mt-3 text-sm text-gray-600">
+                          <div>
+                            <strong>Due:</strong>
+                            {new Date(task.dueDate).toLocaleDateString()}
+                          </div>
+                          <div>
+                            <strong>Priority:</strong>
+                            <span
+                              className={`inline-block px-2 py-0.5 rounded-full text-white text-xs font-bold ${
+                                task.priority === 'high'
+                                  ? 'bg-red-500'
+                                  : task.priority === 'medium'
+                                  ? 'bg-yellow-500'
+                                  : 'bg-green-500'
+                              }`}
+                            >
+                              {task.priority}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <button
-                      className="text-sm bg-blue-100 text-blue-800 font-medium px-3 py-1 rounded hover:bg-blue-200"
-                      onClick={() => editHandler(task._id, task)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="text-sm bg-red-100 text-red-800 font-medium px-3 py-1 rounded hover:bg-red-200"
-                      onClick={() => deleteHandler(task._id)}
-                    >
-                      Delete
-                    </button>
+                    <div className="flex flex-col gap-2">
+                      <ActionButton
+                        title="EDIT"
+                        onClick={() => editHandler(task._id, task)}
+                        color="blue"
+                      />
+
+                      <ActionButton
+                        title="DELETE"
+                        onClick={() => deleteHandler(task._id)}
+                        color="red"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
