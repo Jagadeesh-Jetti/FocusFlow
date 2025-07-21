@@ -11,6 +11,8 @@ import { Modal } from '../../components/Modal';
 import axios from 'axios';
 import { ActionButton } from '../../components/ActionButton';
 import { PageHeader } from '../../components/PageHeader';
+import { GoalForm } from './goalComponents/goalForm';
+import { GoalCard } from './goalComponents/GoalCard';
 
 export const Goals = () => {
   const goals = useSelector((state) => state.goal.goalsList);
@@ -115,110 +117,26 @@ export const Goals = () => {
           onClose={resetForm}
           title={isEditing ? 'Edit Goal' : 'Add New Goal'}
         >
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              placeholder="Title"
-              value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="w-full p-2 border rounded"
-              required
-            />
-            <textarea
-              placeholder="Description"
-              value={form.description}
-              onChange={(e) =>
-                setForm({ ...form, description: e.target.value })
-              }
-              className="w-full p-2 border rounded"
-              rows={4}
-            />
-            <input
-              type="text"
-              placeholder="Category"
-              value={form.category}
-              onChange={(e) => setForm({ ...form, category: e.target.value })}
-              className="w-full p-2 border rounded"
-            />
-
-            <div className="flex gap-2">
-              <button
-                type="submit"
-                disabled={loading}
-                className="bg-green-600 text-white px-4 py-2 rounded-md"
-              >
-                Save Goal
-              </button>
-              <button
-                type="button"
-                disabled={!form.title || loading}
-                onClick={generateWithAI}
-                className="bg-blue-600 text-white px-4 py-2 rounded-md"
-              >
-                {loading ? 'Generating...' : 'Generate with AI'}
-              </button>
-            </div>
-
-            {aiPlan && !isSaved && (
-              <div className="mt-6 border-t pt-4">
-                <h4 className="text-lg font-semibold mb-2 text-gray-800">
-                  AI-Generated Plan
-                </h4>
-                <div className="bg-gray-100 p-3 rounded-md">
-                  <h5 className="text-md font-bold">{aiPlan.goal}</h5>
-                  {aiPlan?.milestones?.map((milestone, i) => (
-                    <div key={i} className="mt-2">
-                      <p className="font-medium text-gray-700">
-                        Milestone: {milestone.title}
-                      </p>
-                      <ul className="list-disc list-inside text-sm text-gray-600">
-                        {milestone.tasks.map((task, j) => (
-                          <li key={j}>{task}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  type="button"
-                  onClick={saveAIPlan}
-                  className="mt-4 bg-green-700 text-white px-4 py-2 rounded-md"
-                >
-                  Confirm & Save AI Plan
-                </button>
-              </div>
-            )}
-          </form>
+          <GoalForm
+            handleSubmit={handleSubmit}
+            form={form}
+            setForm={setForm}
+            isSaved={isSaved}
+            loading={loading}
+            generateWithAI={generateWithAI}
+            saveAIPlan={saveAIPlan}
+            aiPlan={aiPlan}
+          />
         </Modal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 m-2">
           {goals?.length > 0 ? (
             goals.map((goal) => (
-              <div
-                key={goal._id}
-                className="p-4  rounded-lg shadow-sm hover:shadow-md transition"
-              >
-                <div className="text-xl font-semibold mb-1">{goal.title}</div>
-                <div className="text-sm text-gray-600 mb-2">
-                  {goal.category}
-                </div>
-                <div className="text-gray-700">{goal.description}</div>
-
-                <div className="flex mt-4 gap-2">
-                  <ActionButton
-                    title="EDIT"
-                    onClick={() => editHandler(goal)}
-                    color="blue"
-                  />
-
-                  <ActionButton
-                    title="DELETE"
-                    onClick={() => deleteHandler(goal._id)}
-                    color="red"
-                  />
-                </div>
-              </div>
+              <GoalCard
+                goal={goal}
+                onEdit={() => editHandler(goal)}
+                onDelete={() => deleteHandler(goal._id)}
+              />
             ))
           ) : (
             <div className="text-gray-500">No goals found.</div>
