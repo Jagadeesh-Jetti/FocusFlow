@@ -9,6 +9,11 @@ import {
   updateMilestoneById,
 } from './milestoneThunk';
 import { getGoals } from '../goals/goalThunk';
+import { AddButton } from '../../components/AddButton';
+import { ActionButton } from '../../components/ActionButton';
+import { MilestoneCard } from './milestoneComponents/MilestoneCard';
+import { MilestoneForm } from './milestoneComponents/MilestoneForm';
+import { PageHeader } from '../../components/PageHeader';
 
 export const Milestones = () => {
   const milestones = useSelector((state) => state.milestone.milestoneList);
@@ -84,14 +89,22 @@ export const Milestones = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="m-4  w-screen ">
-        <div className="text-4xl m-4 font-bold">Milestones</div>
+      <div className="m-2 w-screen ">
+        <div className="flex justify-between m-2">
+          <div className="text-3xl m-3 font-bold"> MILESTONES</div>
+          <AddButton text="ADD MILESTONE" setShowModal={setShowModal} />
+        </div>
+        {/* <PageHeader
+          title="MILESTONES"
+          buttonLabel="ADD MILESTONE"
+          setShowModal={setShowModal}
+        /> */}
 
-        <div className="flex justify-between px-4 ">
-          <div className="text-2xl border m-2">
+        <div className="flex justify-between px-3 ">
+          <div className="text-xl shadow-md m-2 ">
             <select
               name="goals filter"
-              className="rounded-md w-30 m-2"
+              className="rounded-md w-25 m-2 cursor-pointer"
               onChange={(e) => filterMilestonesByGoals(e)}
             >
               <option value="all">All Goals</option>
@@ -107,116 +120,38 @@ export const Milestones = () => {
             </select>
           </div>
 
-          <button
-            className="bg-gray-600 text-white font-semibold w-40 rounded-md p-3 m-2"
-            onClick={() => setShowModal(true)}
-          >
-            Add Milestone
-          </button>
-
           <Modal
             isOpen={showModal}
             onClose={resetForm}
             title={isEditing ? 'Edit Milestone' : 'Add New Milestone'}
           >
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="text"
-                placeholder="Title"
-                value={form.title}
-                onChange={(e) => setForm({ ...form, title: e.target.value })}
-                className="w-full p-2 border rounded"
-                required
-              />
-
-              <textarea
-                placeholder="Description"
-                value={form.description}
-                onChange={(e) =>
-                  setForm({ ...form, description: e.target.value })
-                }
-                className="w-full p-2 border rounded"
-              />
-
-              <select
-                value={form.goal}
-                onChange={(e) => setForm({ ...form, goal: e.target.value })}
-                className="w-full p-2 border rounded"
-                required
-              >
-                <option value="">Select Goal</option>
-                {goals?.length > 0 ? (
-                  goals.map((goal) => (
-                    <option key={goal._id} value={goal._id}>
-                      {goal.title}
-                    </option>
-                  ))
-                ) : (
-                  <option disabled>No goals available</option>
-                )}
-              </select>
-
-              <input
-                type="date"
-                value={form.targetDate}
-                onChange={(e) =>
-                  setForm({ ...form, targetDate: e.target.value })
-                }
-                className="w-full p-2 border rounded"
-                required
-              />
-
-              <button
-                type="submit"
-                className="bg-green-600 text-white px-4 py-2 rounded-md"
-              >
-                Save Milestone
-              </button>
-            </form>
+            <MilestoneForm
+              form={form}
+              setForm={setForm}
+              handleSubmit={handleSubmit}
+              goals={goals}
+            />
           </Modal>
         </div>
 
-        <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 m-2">
           {filteredMilestones.map((milestone) => (
-            <div
+            <MilestoneCard
               key={milestone._id}
-              className="border flex justify-between p-3 m-3 rounded-md shadow-sm"
-            >
-              <div>
-                <div className="font-semibold text-xl">{milestone.title}</div>
-                <div className="text-sm text-gray-600">
-                  Goal: {milestone?.goal?.title}
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="text-sm text-gray-500">Due Date</div>
-                <div className="font-semibold">{milestone.targetDate}</div>
-              </div>
-              <div className="flex">
-                <div
-                  className="border bg-gray-200 font-black p-1 m-2 rounded-md cursor-pointer hover:scale-110"
-                  onClick={() => {
-                    setIsEditing(true);
-                    setEditId(milestone._id);
-                    setForm({
-                      title: milestone?.title,
-                      description: milestone?.description,
-                      targetDate: milestone?.targetDate?.split('T')[0],
-                      goal: milestone.goal?._id || '',
-                    });
-                    setShowModal(true);
-                  }}
-                >
-                  Edit
-                </div>
-                <div
-                  className="border bg-gray-200 font-black p-1 m-2 rounded-md cursor-pointer hover:scale-110"
-                  onClick={() => deleteHandler(milestone._id)}
-                >
-                  Delete
-                </div>
-              </div>
-            </div>
+              milestone={milestone}
+              onEdit={() => {
+                setIsEditing(true);
+                setEditId(milestone._id);
+                setForm({
+                  title: milestone?.title,
+                  description: milestone?.description,
+                  targetDate: milestone?.targetDate?.split('T')[0],
+                  goal: milestone.goal?._id || '',
+                });
+                setShowModal(true);
+              }}
+              onDelete={() => deleteHandler(milestone._id)}
+            />
           ))}
         </div>
       </div>
