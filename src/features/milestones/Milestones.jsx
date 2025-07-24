@@ -9,7 +9,6 @@ import {
   updateMilestoneById,
 } from './milestoneThunk';
 import { getGoals } from '../goals/goalThunk';
-import { AddButton } from '../../components/AddButton';
 
 import { MilestoneCard } from './milestoneComponents/MilestoneCard';
 import { MilestoneForm } from './milestoneComponents/MilestoneForm';

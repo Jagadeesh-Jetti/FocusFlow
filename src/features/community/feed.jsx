@@ -53,8 +53,9 @@ export const Feed = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
-      <main className="p-4 md:p-8 max-w-4xl mx-auto w-full">
+      <main className=" md:p-8 max-w-2xl mx-auto w-full">
         <div className="flex justify-between items-center mb-8">
+          {/* <div></div> */}
           <h1 className="text-3xl font-extrabold text-gray-800 tracking-tight">
             ✨ Circles
           </h1>
@@ -112,6 +113,17 @@ export const Feed = () => {
           </div>
         )}
       </main>
+      <div className="p-10 bg-amber-50">
+        <div className="text-4xl font-bold">Explore People</div>
+        <div className="flex justify-between border m-5">
+          <div className="m-2 "> Logo</div>
+          <div>
+            <div>User name</div>
+            <div>User id</div>
+          </div>
+          <div>follow</div>
+        </div>
+      </div>
     </div>
   );
 };

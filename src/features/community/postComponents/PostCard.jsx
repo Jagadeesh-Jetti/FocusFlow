@@ -3,8 +3,10 @@ import { Heart, MessageCircle } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleLikePost, commentPost } from '../feedThunk';
 import { getPosts } from '../feedThunk';
+import { useNavigate } from 'react-router-dom';
 
 export const PostCard = ({ post }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user: currentUser } = useSelector((state) => state.auth);
   const [commentText, setCommentText] = useState('');
@@ -19,6 +21,8 @@ export const PostCard = ({ post }) => {
     relatedGoal,
     relatedMilestone,
   } = post;
+  // console.log(relatedGoal);
+  // console.log(relatedMilestone);
 
   const hasLiked = likes.includes(currentUser?._id);
   const hasCommented = comments.find(
@@ -42,7 +46,10 @@ export const PostCard = ({ post }) => {
   }, [dispatch]);
 
   return (
-    <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300">
+    <div
+      className=" w-100  rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300"
+      onClick={() => navigate(`/feed/${post._id}`)}
+    >
       <div className="flex items-center gap-4 mb-5">
         <div className="w-11 h-11 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold shadow-inner">
           {user?.name?.[0]?.toUpperCase()}

@@ -7,8 +7,9 @@ import { Milestones } from './features/milestones/Milestones';
 import { Tasks } from './features/tasks/Tasks';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
-import { Profile } from './pages/Profile';
+import { Profile } from './features/profile/Profile';
 import { Feed } from './features/community/feed';
+import { PostDetailPage } from './features/community/PostDetailPage';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           }
         />
         <Route path="/feed" element={<Feed />} />
+        <Route path="/feed/:id" element={<PostDetailPage />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
