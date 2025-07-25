@@ -7,8 +7,11 @@ import {
   User,
   Moon,
 } from 'lucide-react';
+import { useSelector } from 'react-redux';
 
 export const Sidebar = () => {
+  const { user } = useSelector((s) => s.auth);
+
   return (
     <aside className="hidden md:flex  flex-col justify-between h-screen w-64  text-black px-6 py-8 shadow-lg">
       <div>
@@ -31,7 +34,14 @@ export const Sidebar = () => {
       </div>
 
       <div className="space-y-2">
-        <SidebarItem href="/profile" icon={<User />} label="Profile" />
+        {user?._id && (
+          <SidebarItem
+            href={`/profile/${user._id}`}
+            icon={<User />}
+            label="Profile"
+          />
+        )}
+
         <SidebarItem href="/mode" icon={<Moon />} label="Dark Mode" />
       </div>
     </aside>

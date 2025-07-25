@@ -7,27 +7,66 @@ import { getGoals } from '../goals/goalThunk';
 import { GoalCard } from '../goals/goalComponents/GoalCard';
 import { AddButton } from '../../components/AddButton';
 import { EditProfileModal } from './profileComponents/ProfileModal';
+import {
+  followUser,
+  getAllUsers,
+  getUserProfile,
+  unfollowUser,
+  updateUserProfile,
+} from './profileThunk';
+import { useParams } from 'react-router-dom';
+import { ExplorePeople } from '@/components/ExplorePeople';
+import { ProfileMenuBar } from './profileComponents/ProfileMenuBar';
+import { ProfileHeroContent } from './profileComponents/ProfileHeroContent';
 // import { formatDistanceToNow } from 'date-fns';
 
 export const Profile = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
+
   const { postList: posts } = useSelector((s) => s.post);
   const { goalsList: goals } = useSelector((state) => state.goal);
+  const { profile, allUsers } = useSelector((state) => state?.profile);
+  const user = useSelector((state) => state.auth.user);
   const [display, setDisplay] = useState('posts');
   const [open, setOpen] = useState(false);
 
-  console.log(goals);
-  const filteredPosts = posts.filter((post) => post.user._id === user._id);
+  const curentUserId = user._id;
+  let enableEditing = user?._id === profile?._id;
+
+  const filteredPosts = posts.filter((post) => post.user._id === id);
+
+  const filteredUsers = allUsers.filter((u) => u._id !== user._id);
+
+  const handleSave = async (updatedData) => {
+    await dispatch(updateUserProfile({ id: id, updatedProfile: updatedData }));
+    await dispatch(getAllUsers());
+    setOpen(false);
+  };
+
+  const followHandler = async (id) => {
+    await dispatch(followUser(id));
+    await dispatch(getAllUsers());
+    await dispatch(getUserProfile());
+  };
+
+  const unfollowHandler = async (id) => {
+    await dispatch(unfollowUser(id));
+    await dispatch(getAllUsers());
+    await dispatch(getUserProfile());
+  };
 
   useEffect(() => {
-    dispatch(getPosts());
-    dispatch(getGoals());
-  }, [dispatch]);
+    if (id) {
+      dispatch(getPosts());
+      dispatch(getGoals());
+      dispatch(getAllUsers());
+      dispatch(getUserProfile(id));
+    }
+  }, [dispatch, id]);
 
-  if (!user) return <div className="text-center mt-20">Loading user...</div>;
+  if (!profile) return <div className="text-center mt-20">Loading user...</div>;
 
-  console.log(user);
   return (
     <div className="flex bg-gray-100 min-h-screen">
       <Sidebar />
@@ -39,67 +78,22 @@ export const Profile = () => {
           </div>
         </div>
 
-        <div className="flex pl-2 justify-between bg-amber-50">
-          <div>
-            <div className="pt-8  text-2xl font-bold">{user?.name}</div>
-            <div className="flex gap-3 opacity-70">
-              <div> shot bio </div>
-              <div> from vijayawada </div>
-            </div>
-          </div>
-          <div className="mt-5" onClick={() => setOpen(true)}>
-            <AddButton text="Edit Profile" />
-          </div>
-        </div>
-
-        <EditProfileModal
-          user={user}
-          isOpen={open}
-          onClose={() => setOpen(false)}
+        <ProfileHeroContent
+          profile={profile}
+          enableEditing={enableEditing}
+          setOpen={setOpen}
         />
 
-        <div className="flex bg-amber-500 mt-6 gap-3">
-          <div className="flex border justify-around gap-2 ">
-            <div className="p-2">icon</div>
-            <div className="p-2">
-              <div> 25 </div>
-              <div>friends</div>
-            </div>
-          </div>
-          <div className="flex border justify-around gap-2">
-            <div className="p-2">icon</div>
-            <div className="p-2">
-              <div> 25 </div>
-              <div>friends</div>
-            </div>
-          </div>
-          <div className="flex border justify-around gap-2">
-            <div className="p-2">icon</div>
-            <div className="p-2">
-              <div> 25 </div>
-              <div>friends</div>
-            </div>
-          </div>
-        </div>
+        {enableEditing ? (
+          <EditProfileModal
+            user={profile}
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            onSave={handleSave}
+          />
+        ) : null}
 
-        <div className="flex mt-8 bg-red-50 justify-between">
-          <div className="flex ">
-            <div className="p-3" onClick={() => setDisplay('posts')}>
-              Posts
-            </div>
-            <div className="p-3" onClick={() => setDisplay('goals')}>
-              Goals
-            </div>
-          </div>
-
-          <div className="flex justify-center align-middle">
-            Sort by:
-            <select>
-              <option value="">All</option>
-              <option value="">Most Popular</option>
-            </select>
-          </div>
-        </div>
+        <ProfileMenuBar setDisplay={setDisplay} />
 
         <div>
           {display === 'posts' ? (
@@ -115,16 +109,13 @@ export const Profile = () => {
           )}
         </div>
       </main>
-      <div className="w-[30%] p-10 bg-amber-100">
-        <div>Who to follow?</div>
-      </div>
+
+      <ExplorePeople
+        curentUserId={curentUserId}
+        filteredUsers={filteredUsers}
+        followHandler={followHandler}
+        unfollowHandler={unfollowHandler}
+      />
     </div>
   );
 };
-
-const Detail = ({ label, value }) => (
-  <div>
-    <p className="text-sm text-gray-400">{label}</p>
-    <p className="text-base font-medium text-gray-800">{value}</p>
-  </div>
-);

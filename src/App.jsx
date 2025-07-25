@@ -51,7 +51,7 @@ function App() {
         />
         <Route path="/feed" element={<Feed />} />
         <Route path="/feed/:id" element={<PostDetailPage />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:id" element={<Profile />} />
       </Routes>
     </div>
   );

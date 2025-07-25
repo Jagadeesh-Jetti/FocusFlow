@@ -4,6 +4,7 @@ import goalReducer from '../features/goals/goalSlice';
 import milestoneReducer from '../features/milestones/milestoneSlice';
 import taskReducer from '../features/tasks/taskSlice';
 import postReducer from '../features/community/feedSlice';
+import profileReducer from '../features/profile/profileSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     milestone: milestoneReducer,
     task: taskReducer,
     post: postReducer,
+    profile: profileReducer,
   },
 });
 
