@@ -25,7 +25,7 @@ export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave(formData); // send data to backend
+    onSave(formData);
     onClose();
   };
 
