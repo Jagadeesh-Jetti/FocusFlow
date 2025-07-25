@@ -4,9 +4,13 @@ import { Sidebar } from '../../components/Sidebar';
 import { Modal } from '../../components/Modal';
 import { PostCard } from './postComponents/PostCard';
 import { createPost, getPosts } from './feedThunk';
+import { ExplorePeople } from '@/components/ExplorePeople';
+import { getAllUsers } from '../profile/profileThunk';
 
 export const Feed = () => {
   const { postList: posts, error, isLoading } = useSelector((s) => s.post);
+  const { allUsers } = useSelector((s) => s.profile);
+  const { user } = useSelector((s) => s.auth);
   const dispatch = useDispatch();
 
   const [showModal, setShowModal] = useState(false);
@@ -15,6 +19,10 @@ export const Feed = () => {
     content: '',
     image: null,
   });
+
+  const filteredUsers = allUsers.filter((u) => u._id !== user._id);
+  console.log(allUsers);
+  console.log(filteredUsers);
 
   const resetForm = () => {
     setShowModal(false);
@@ -48,6 +56,7 @@ export const Feed = () => {
 
   useEffect(() => {
     dispatch(getPosts());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   return (
@@ -113,17 +122,7 @@ export const Feed = () => {
           </div>
         )}
       </main>
-      <div className="p-10 bg-amber-50">
-        <div className="text-4xl font-bold">Explore People</div>
-        <div className="flex justify-between border m-5">
-          <div className="m-2 "> Logo</div>
-          <div>
-            <div>User name</div>
-            <div>User id</div>
-          </div>
-          <div>follow</div>
-        </div>
-      </div>
+      <ExplorePeople filteredUsers={filteredUsers} />
     </div>
   );
 };
