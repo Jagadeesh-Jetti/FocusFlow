@@ -13,11 +13,16 @@ import { ActionButton } from '../../components/ActionButton';
 import { PageHeader } from '../../components/PageHeader';
 import { TaskForm } from './taskComponents/TaskForm';
 import { TaskCard } from './taskComponents/TaskCard';
+import { getGoals } from '../goals/goalThunk';
 
 export const Tasks = () => {
-  const milestones = useSelector((state) => state.milestone.milestoneList);
   const tasks = useSelector((state) => state.task.taskList);
+  const goals = useSelector((state) => state.goal.goalsList);
+  const milestones = useSelector((state) => state.milestone.milestoneList);
   const dispatch = useDispatch();
+  const [selectedGoal, setSelectedGoal] = useState('all');
+  const [selectedMilestone, setSelectedMilestone] = useState('all');
+  const [selectedPriority, setSelectedPriority] = useState('all');
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -91,6 +96,7 @@ export const Tasks = () => {
   useEffect(() => {
     dispatch(getTasks());
     dispatch(getMilestones());
+    dispatch(getGoals());
   }, [dispatch]);
 
   return (
@@ -102,6 +108,50 @@ export const Tasks = () => {
           buttonLabel="ADD TASK"
           setShowModal={setShowModal}
         />
+
+        <div flex flex-wrap gap-4 bg-blue-200 mb-6 px-2>
+          <select
+            value={selectedGoal}
+            onChange={(e) => setSelectedGoal(e.target.value)}
+            className="px-4 py-2 rounded border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name=""
+            id=""
+          >
+            <option value="all"> All Goals </option>
+            {goals.map((goal) => (
+              <option key={goal._id} value={goal.title}>
+                {goal.title}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={selectedMilestone}
+            onChange={(e) => setSelectedMilestone(e.target.value)}
+            className="px-4 py-2 rounded border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name=""
+            id=""
+          >
+            <option value="all">All Milestones</option>
+            {milestones.map((milestone) => (
+              <option key={milestone._id} value={milestone.title}>
+                {milestone.title}
+              </option>
+            ))}
+          </select>
+          <select
+            value={selectedPriority}
+            onChange={(e) => setSelectedPriority(e.target.value)}
+            className="px-4 py-2 rounded border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name=""
+            id=""
+          >
+            <option value="all"> All Priorities</option>
+            <option value="High"> High </option>
+            <option value="Medium"> Medium </option>
+            <option value="Low"> Low </option>
+          </select>
+        </div>
 
         <Modal
           isOpen={showModal}
