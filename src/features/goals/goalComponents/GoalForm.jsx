@@ -33,6 +33,37 @@ export const GoalForm = ({
         className="w-full p-2 border rounded"
       />
 
+      <select
+        name="status"
+        className="w-full p-2 border rounded"
+        value={form?.status}
+        onChange={(e) => setForm({ ...form, status: e.target.value })}
+      >
+        <option value="Not Started">Not Started </option>
+        <option value="In Progress">In Progress </option>
+        <option value="Completed">Completed </option>
+      </select>
+
+      <select
+        name="priority"
+        id=""
+        className="w-full p-2 border rounded"
+        value={form?.priority}
+        onChange={(e) => setForm({ ...form, priority: e.target.value })}
+      >
+        <option value="Low"> Low </option>
+        <option value="Medium"> Medium </option>
+        <option value="High"> High </option>
+      </select>
+
+      <input
+        type="date"
+        name="dueDate"
+        value={form?.dueDate?.split('T')[0] || ''}
+        className="w-full p-2 border rounded"
+        onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
+      />
+
       <div className="flex gap-2">
         <button
           type="submit"

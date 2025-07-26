@@ -9,7 +9,7 @@ import {
 } from './goalThunk';
 import { Modal } from '../../components/Modal';
 import axios from 'axios';
-import { ActionButton } from '../../components/ActionButton';
+
 import { PageHeader } from '../../components/PageHeader';
 import { GoalForm } from './goalComponents/goalForm';
 import { GoalCard } from './goalComponents/GoalCard';
@@ -29,10 +29,20 @@ export const Goals = () => {
     title: '',
     description: '',
     category: '',
+    status: '',
+    priority: '',
+    dueDate: '',
   });
 
   const resetForm = () => {
-    setForm({ title: '', description: '', category: '' });
+    setForm({
+      title: '',
+      description: '',
+      category: '',
+      status: '',
+      priority: '',
+      dueDate: '',
+    });
     setIsEditing(false);
     setEditId(null);
     setShowModal(false);
@@ -48,6 +58,9 @@ export const Goals = () => {
       title: goal.title,
       description: goal.description,
       category: goal.category,
+      status: goal.status,
+      priority: goal.priority,
+      dueDate: goal.dueDate,
     });
   };
 

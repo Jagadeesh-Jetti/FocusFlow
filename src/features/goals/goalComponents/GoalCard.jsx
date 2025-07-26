@@ -9,7 +9,9 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
       <div className="text-xl font-semibold mb-1">{goal.title}</div>
       <div className="text-sm text-gray-600 mb-2">{goal.category}</div>
       <div className="text-gray-700">{goal.description}</div>
-
+      <div> Status: {goal?.status} </div>
+      <div> Priority: {goal?.priority} </div>
+      <div> DueDate: {new Date(goal.dueDate).toLocaleDateString('en-GB')} </div>
       <div className="flex mt-4 gap-2">
         <ActionButton title="EDIT" onClick={onEdit} color="blue" />
 
