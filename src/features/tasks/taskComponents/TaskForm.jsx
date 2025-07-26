@@ -1,4 +1,10 @@
-export const TaskForm = ({ form, setForm, handleSubmit, milestones }) => {
+export const TaskForm = ({
+  form,
+  setForm,
+  handleSubmit,
+  milestones,
+  goals,
+}) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 p-4">
       <input
@@ -32,6 +38,20 @@ export const TaskForm = ({ form, setForm, handleSubmit, milestones }) => {
         {milestones.map((milestone) => (
           <option key={milestone._id} value={milestone._id}>
             {milestone.title}
+          </option>
+        ))}
+      </select>
+
+      <select
+        name="goal"
+        className="w-full p-2 border rounded"
+        value={form.goal}
+        onChange={(e) => setForm({ ...form, goal: e.target.value })}
+      >
+        <option value=""> Select Goal</option>
+        {goals?.map((goal) => (
+          <option key={goal._id} value={goal._id}>
+            {goal?.title}
           </option>
         ))}
       </select>
