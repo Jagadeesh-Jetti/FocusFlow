@@ -13,6 +13,7 @@ import { getGoals } from '../goals/goalThunk';
 import { MilestoneCard } from './milestoneComponents/MilestoneCard';
 import { MilestoneForm } from './milestoneComponents/MilestoneForm';
 import { PageHeader } from '../../components/PageHeader';
+import { MilestoneFilters } from './milestoneComponents/MilestoneFilters';
 
 export const Milestones = () => {
   const milestones = useSelector((state) => state.milestone.milestoneList);
@@ -95,7 +96,7 @@ export const Milestones = () => {
           setShowModal={setShowModal}
         />
 
-        <div className="flex justify-between px-3 ">
+        <div className="flex  px-3 ">
           <div className="text-xl shadow-md m-2 ">
             <select
               name="goals filter"
@@ -113,6 +114,10 @@ export const Milestones = () => {
                 <option disabled>No goals available</option>
               )}
             </select>
+          </div>
+
+          <div className="m-2 px-2 py-2 bg-amber-100">
+            <MilestoneFilters />
           </div>
 
           <Modal
