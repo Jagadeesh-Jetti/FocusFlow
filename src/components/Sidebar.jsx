@@ -29,7 +29,6 @@ export const Sidebar = () => {
           />
           <SidebarItem href="/tasks" icon={<CheckCircle />} label="Tasks" />
           <SidebarItem href="/feed" icon={<Users />} label="Circles" />
-          <SidebarItem href="/progress" icon={<BarChart />} label="Progress" />
         </nav>
       </div>
 
