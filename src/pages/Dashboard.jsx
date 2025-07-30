@@ -7,7 +7,7 @@ import { getGoals } from '../features/goals/goalThunk';
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.task.taskList);
-  const goals = useSelector((state) => state.goal.goalList);
+  const goals = useSelector((state) => state.goal.goalsList);
   const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
@@ -16,8 +16,11 @@ export const Dashboard = () => {
   }, [dispatch]);
 
   const today = new Date().toISOString().split('T')[0];
+  const totalGoals = goals?.length;
   const totalTasks = tasks.length;
-  const completedTasks = tasks.filter((task) => task.isCompleted).length;
+  const completedTasks = tasks.filter(
+    (task) => task.status === 'completed'
+  ).length;
   const dueToday = tasks.filter(
     (task) => task.dueDate?.split('T')[0] === today
   );
@@ -38,9 +41,9 @@ export const Dashboard = () => {
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <StatCard title="Total Tasks" count={totalTasks} />
-          <StatCard title="Completed" count={completedTasks} />
-          <StatCard title="Pending" count={totalTasks - completedTasks} />
+          <StatCard title="Total Goals" count={totalGoals} />
+          <StatCard title="Tasks Done" count={completedTasks} />
+          <StatCard title="Tasks Pending" count={totalTasks - completedTasks} />
           <StatCard title="Goals In Progress" count={inProgressGoals?.length} />
         </div>
 

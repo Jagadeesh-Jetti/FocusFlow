@@ -5,7 +5,6 @@ import { getPosts } from '../community/feedThunk';
 import { PostCard } from '../community/postComponents/PostCard';
 import { getGoals } from '../goals/goalThunk';
 import { GoalCard } from '../goals/goalComponents/GoalCard';
-import { AddButton } from '../../components/AddButton';
 import { EditProfileModal } from './profileComponents/ProfileModal';
 import {
   followUser,
@@ -18,7 +17,6 @@ import { useParams } from 'react-router-dom';
 import { ExplorePeople } from '@/components/ExplorePeople';
 import { ProfileMenuBar } from './profileComponents/ProfileMenuBar';
 import { ProfileHeroContent } from './profileComponents/ProfileHeroContent';
-// import { formatDistanceToNow } from 'date-fns';
 
 export const Profile = () => {
   const { id } = useParams();
@@ -47,13 +45,13 @@ export const Profile = () => {
   const followHandler = async (id) => {
     await dispatch(followUser(id));
     await dispatch(getAllUsers());
-    await dispatch(getUserProfile());
+    await dispatch(getUserProfile(curentUserId));
   };
 
   const unfollowHandler = async (id) => {
     await dispatch(unfollowUser(id));
     await dispatch(getAllUsers());
-    await dispatch(getUserProfile());
+    await dispatch(getUserProfile(curentUserId));
   };
 
   useEffect(() => {
