@@ -33,7 +33,7 @@ export const Tasks = () => {
     milestone: '',
     priority: 'medium',
     dueDate: '',
-    isCompleted: false,
+    status: '',
   });
 
   const resetForm = () => {
@@ -44,7 +44,7 @@ export const Tasks = () => {
       milestone: '',
       priority: 'medium',
       dueDate: '',
-      isCompleted: false,
+      status: '',
     });
     setEditId(null);
     setIsEditing(false);
@@ -62,7 +62,7 @@ export const Tasks = () => {
       milestone: task.milestone,
       priority: task.priority,
       dueDate: task.dueDate,
-      isCompleted: task.isCompleted,
+      status: task.status,
     });
   };
 
@@ -86,9 +86,11 @@ export const Tasks = () => {
   };
 
   const toggleCompleteHandler = async (task) => {
+    const newStatus = task.status === 'completed' ? 'pending' : 'completed';
+
     const updatedTask = {
       ...task,
-      isCompleted: true,
+      status: newStatus,
     };
 
     await dispatch(updateTaskById({ id: task._id, updatedTask }));
@@ -150,7 +152,7 @@ export const Tasks = () => {
                 task.priority?.toLowerCase() === selectedPriority.toLowerCase();
 
               return (
-                !task.isCompleted &&
+                task.status !== 'completed' &&
                 matchesGoal &&
                 matchesMilestone &&
                 matchesPriority

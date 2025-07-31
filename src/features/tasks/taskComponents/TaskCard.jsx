@@ -10,7 +10,7 @@ export const TaskCard = ({ task, onToggleComplete, onEdit, onDelete }) => {
         <div className="flex gap-3 items-start">
           <input
             type="checkbox"
-            checked={task.isCompleted}
+            checked={task.status === 'completed'}
             onChange={onToggleComplete}
             className="w-5 h-5 accent-green-600 mt-1"
           />
