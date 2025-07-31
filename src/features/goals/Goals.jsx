@@ -13,11 +13,13 @@ import axios from 'axios';
 import { PageHeader } from '../../components/PageHeader';
 import { GoalForm } from './goalComponents/goalForm';
 import { GoalCard } from './goalComponents/GoalCard';
+import { GoalFilters } from './goalComponents/GoalFilters';
 
 export const Goals = () => {
   const goals = useSelector((state) => state.goal.goalsList);
   const dispatch = useDispatch();
-
+  const [selectedPriority, setSelectedPriority] = useState('all');
+  const [selectedStatus, setSelectedStatus] = useState('all');
   const [showModal, setShowModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
@@ -118,13 +120,18 @@ export const Goals = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className=" flex-1 m-4 w-screen">
+      <div className="flex-1 m-2 w-screen">
         <PageHeader
           title="GOALS"
           buttonLabel="ADD GOAL"
           setShowModal={setShowModal}
         />
-
+        <GoalFilters
+          selectedPriority={selectedPriority}
+          setSelectedPriority={setSelectedPriority}
+          selectedStatus={selectedStatus}
+          setSelectedStatus={setSelectedStatus}
+        />
         <Modal
           isOpen={showModal}
           onClose={resetForm}
@@ -144,13 +151,25 @@ export const Goals = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 m-2">
           {goals?.length > 0 ? (
-            goals.map((goal) => (
-              <GoalCard
-                goal={goal}
-                onEdit={() => editHandler(goal)}
-                onDelete={() => deleteHandler(goal._id)}
-              />
-            ))
+            goals
+              .filter((goal) => {
+                const matchesPriority =
+                  selectedPriority === 'all' ||
+                  goal.priority === selectedPriority;
+
+                const matchesStatus =
+                  selectedStatus === 'all' || goal.status === selectedStatus;
+
+                return matchesPriority && matchesStatus;
+              })
+              .map((goal) => (
+                <GoalCard
+                  key={goal._id}
+                  goal={goal}
+                  onEdit={() => editHandler(goal)}
+                  onDelete={() => deleteHandler(goal._id)}
+                />
+              ))
           ) : (
             <div className="text-gray-500">No goals found.</div>
           )}

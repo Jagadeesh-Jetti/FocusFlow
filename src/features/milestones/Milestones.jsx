@@ -96,29 +96,11 @@ export const Milestones = () => {
           setShowModal={setShowModal}
         />
 
-        <div className="flex  px-3 ">
-          <div className="text-xl shadow-md m-2 ">
-            <select
-              name="goals filter"
-              className="rounded-md w-25 m-2 cursor-pointer"
-              onChange={(e) => filterMilestonesByGoals(e)}
-            >
-              <option value="all">All Goals</option>
-              {goals?.length > 0 ? (
-                goals?.map((goal) => (
-                  <option key={goal._id} value={goal._id}>
-                    {goal.title}
-                  </option>
-                ))
-              ) : (
-                <option disabled>No goals available</option>
-              )}
-            </select>
-          </div>
-
-          <div className="m-2 px-2 py-2 bg-amber-100">
-            <MilestoneFilters />
-          </div>
+        <div className="flex px-3 justify-center">
+          <MilestoneFilters
+            goals={goals}
+            filterMilestonesByGoals={filterMilestonesByGoals}
+          />
 
           <Modal
             isOpen={showModal}
