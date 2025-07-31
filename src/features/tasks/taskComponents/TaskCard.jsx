@@ -14,7 +14,7 @@ export const TaskCard = ({ task, onToggleComplete, onEdit, onDelete }) => {
             onChange={onToggleComplete}
             className="w-5 h-5 accent-green-600 mt-1"
           />
-          <div>
+          <div className="flex-1">
             <h3 className="text-xl font-semibold text-gray-800">
               {task.title}
             </h3>

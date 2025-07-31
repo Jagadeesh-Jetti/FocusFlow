@@ -21,8 +21,8 @@ export const Feed = () => {
   });
 
   const filteredUsers = allUsers.filter((u) => u._id !== user._id);
-  console.log(allUsers);
-  console.log(filteredUsers);
+  // console.log(allUsers);
+  // console.log(filteredUsers);
 
   const resetForm = () => {
     setShowModal(false);

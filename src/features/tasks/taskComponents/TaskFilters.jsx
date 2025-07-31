@@ -15,7 +15,7 @@ export const TaskFilters = ({
         onChange={(e) => {
           console.log(e.target.value), setSelectedGoal(e.target.value);
         }}
-        className="px-4 py-2 rounded border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="px-4 py-2 rounded border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200"
         name=""
         id=""
       >
