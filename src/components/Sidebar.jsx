@@ -3,14 +3,33 @@ import {
   Target,
   CheckCircle,
   Users,
-  BarChart,
   User,
   Moon,
+  MapPin,
 } from 'lucide-react';
 import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Sidebar = () => {
   const { user } = useSelector((s) => s.auth);
+  const { pathname } = useLocation();
+
+  const menuItems = [
+    { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
+    { href: '/goals', icon: <Target />, label: 'Goals' },
+    { href: '/milestones', icon: <MapPin />, label: 'Milestones' },
+    { href: '/tasks', icon: <CheckCircle />, label: 'Tasks' },
+    { href: '/feed', icon: <Users />, label: 'Community' },
+  ];
+
+  const bottomItems = [
+    user?._id && {
+      href: `/profile/${user._id}`,
+      icon: <User />,
+      label: 'Profile',
+    },
+    { href: '/mode', icon: <Moon />, label: 'Change Mood' },
+  ].filter(Boolean);
 
   return (
     <aside className="hidden md:flex  flex-col justify-between h-screen w-64  text-black px-6 py-8 shadow-lg">
@@ -20,41 +39,45 @@ export const Sidebar = () => {
         </h1>
 
         <nav className="space-y-2 text-base font-medium">
-          <SidebarItem href="/dashboard" icon={<Home />} label="Dashboard" />
-          <SidebarItem href="/goals" icon={<Target />} label="Goals" />
-          <SidebarItem
-            href="/milestones"
-            icon={<Target />}
-            label="Milestones"
-          />
-          <SidebarItem href="/tasks" icon={<CheckCircle />} label="Tasks" />
-          <SidebarItem href="/feed" icon={<Users />} label="Circles" />
+          {menuItems.map((item) => (
+            <SidebarItem
+              key={item.href}
+              href={item.href}
+              icon={item.icon}
+              label={item.label}
+              active={pathname === item.href}
+            />
+          ))}
         </nav>
       </div>
 
       <div className="space-y-2">
-        {user?._id && (
+        {bottomItems.map((item) => (
           <SidebarItem
-            href={`/profile/${user._id}`}
-            icon={<User />}
-            label="Profile"
+            key={item.href}
+            href={item.href}
+            icon={item.icon}
+            label={item.label}
+            active={pathname === item.href}
           />
-        )}
-
-        <SidebarItem href="/mode" icon={<Moon />} label="Dark Mode" />
+        ))}
       </div>
     </aside>
   );
 };
 
-const SidebarItem = ({ href, icon, label }) => {
+const SidebarItem = ({ href, icon, label, active }) => {
   return (
-    <a
-      href={href}
-      className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 hover:text-yellow-400 transition-all duration-200"
+    <Link
+      to={href}
+      className={`flex items-center gap-3 px-4 py-2 rounded-lg  transition-all duration-200  ${
+        active
+          ? 'bg-gray-800 text-yellow-400'
+          : 'hover:bg-gray-800 hover:text-yellow-400'
+      }`}
     >
       <span className="w-5 h-5">{icon}</span>
       <span>{label}</span>
-    </a>
+    </Link>
   );
 };
