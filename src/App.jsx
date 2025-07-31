@@ -1,5 +1,5 @@
 import './App.css';
-import { Dashboard } from './pages/Dashboard';
+import { Dashboard } from './features/Dashboard/Dashboard';
 import { Signup } from './features/auth/Signup';
 import { Login } from './features/auth/Login';
 import { Goals } from './features/goals/Goals';
