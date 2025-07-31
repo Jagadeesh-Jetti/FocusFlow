@@ -60,7 +60,7 @@ export const Feed = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen">
       <Sidebar />
       <main className=" md:p-8 max-w-2xl mx-auto w-full">
         <div className="flex justify-between items-center mb-8">

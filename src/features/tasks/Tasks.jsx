@@ -106,7 +106,7 @@ export const Tasks = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="m-2 w-screen ">
+      <div className="flex-1 m-2 w-screen ">
         <PageHeader
           title="TASKS"
           buttonLabel="ADD TASK"
@@ -137,9 +137,6 @@ export const Tasks = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 m-4">
           {tasks
             .filter((task) => {
-              // console.log('Task:', task);
-              // console.log('Task Goal:', task.goal);
-              // console.log('Selected Goal:', selectedGoal);
               const matchesGoal =
                 selectedGoal === 'all' || task.goal?.title === selectedGoal;
 

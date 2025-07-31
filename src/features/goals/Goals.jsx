@@ -118,7 +118,7 @@ export const Goals = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="m-4 w-screen">
+      <div className=" flex-1 m-4 w-screen">
         <PageHeader
           title="GOALS"
           buttonLabel="ADD GOAL"

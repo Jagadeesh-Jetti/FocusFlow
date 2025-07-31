@@ -89,7 +89,7 @@ export const Milestones = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="m-2 w-screen ">
+      <div className="flex-1 m-2 w-screen ">
         <PageHeader
           title="MILESTONES"
           buttonLabel="ADD MILESTONE"
