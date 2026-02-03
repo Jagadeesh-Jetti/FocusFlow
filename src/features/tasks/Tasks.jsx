@@ -106,7 +106,7 @@ export const Tasks = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1 m-2 w-screen ">
+      <div className="flex-1  w-full m-auto">
         <PageHeader
           title="TASKS"
           buttonLabel="ADD TASK"

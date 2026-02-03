@@ -11,7 +11,7 @@ import { Modal } from '../../components/Modal';
 import axios from 'axios';
 
 import { PageHeader } from '../../components/PageHeader';
-import { GoalForm } from './goalComponents/goalForm';
+import { GoalForm } from './goalComponents/GoalForm';
 import { GoalCard } from './goalComponents/GoalCard';
 import { GoalFilters } from './goalComponents/GoalFilters';
 

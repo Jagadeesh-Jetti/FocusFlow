@@ -4,7 +4,7 @@ export const TaskCard = ({ task, onToggleComplete, onEdit, onDelete }) => {
   return (
     <div
       key={task._id}
-      className="bg-white shadow-md rounded-xl p-5 border border-gray-200 hover:shadow-lg transition duration-300"
+      className="bg-white shadow-md rounded-xl p-5 md:p-7 border border-gray-200 hover:shadow-lg transition duration-300"
     >
       <div className="flex items-start justify-between">
         <div className="flex gap-3 items-start">
