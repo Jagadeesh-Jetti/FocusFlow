@@ -29,7 +29,7 @@ export const Profile = () => {
   const [display, setDisplay] = useState('posts');
   const [open, setOpen] = useState(false);
 
-  const curentUserId = user._id;
+  const currentUserId = user._id;
   let enableEditing = user?._id === profile?._id;
 
   const filteredPosts = posts.filter((post) => post.user._id === id);
@@ -45,13 +45,13 @@ export const Profile = () => {
   const followHandler = async (id) => {
     await dispatch(followUser(id));
     await dispatch(getAllUsers());
-    await dispatch(getUserProfile(curentUserId));
+    await dispatch(getUserProfile(currentUserId));
   };
 
   const unfollowHandler = async (id) => {
     await dispatch(unfollowUser(id));
     await dispatch(getAllUsers());
-    await dispatch(getUserProfile(curentUserId));
+    await dispatch(getUserProfile(currentUserId));
   };
 
   useEffect(() => {
@@ -109,7 +109,7 @@ export const Profile = () => {
       </main>
 
       <ExplorePeople
-        curentUserId={curentUserId}
+        currentUserId={currentUserId}
         filteredUsers={filteredUsers}
         followHandler={followHandler}
         unfollowHandler={unfollowHandler}

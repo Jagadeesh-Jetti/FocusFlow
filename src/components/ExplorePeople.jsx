@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const ExplorePeople = ({
   filteredUsers,
-  curentUserId,
+  currentUserId,
   followHandler,
   unfollowHandler,
 }) => {
@@ -11,7 +11,7 @@ export const ExplorePeople = ({
     <div className="w-[30%] p-10 ">
       <div className="text-2xl font-bold m-2">Who to follow?</div>
       {filteredUsers.map((user) => {
-        const isFollowing = user.followers.includes(curentUserId);
+        const isFollowing = user.followers.includes(currentUserId);
 
         return (
           <div className="flex gap-4 p-2 justify-between  border">
@@ -37,7 +37,7 @@ export const ExplorePeople = ({
               }}
               className="bg-gray-600 text-white flex content-center justify-center w-18 h-8 p-1 m-1 text-sm font-bold  mr-3 rounded-sm hover:cursor-pointer "
             >
-              {user.followers.includes(curentUserId) ? 'UnFollow' : 'Follow'}
+              {user.followers.includes(currentUserId) ? 'UnFollow' : 'Follow'}
             </div>
           </div>
         );

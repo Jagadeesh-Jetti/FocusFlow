@@ -15,7 +15,7 @@ const initialState = {
   error: null,
 };
 const postSlice = createSlice({
-  name: 'goal',
+  name: 'post',
   initialState,
 
   extraReducers: (builder) => {
