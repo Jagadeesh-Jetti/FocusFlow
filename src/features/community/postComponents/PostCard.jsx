@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Heart, MessageCircle } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleLikePost, commentPost } from '../feedThunk';
-import { getPosts } from '../feedThunk';
 import { useNavigate } from 'react-router-dom';
 
 export const PostCard = ({ post }) => {
@@ -16,38 +15,36 @@ export const PostCard = ({ post }) => {
     user,
     content,
     image,
-    likes,
-    comments,
+    likes = [],
+    comments = [],
     relatedGoal,
     relatedMilestone,
   } = post;
-  // console.log(relatedGoal);
-  // console.log(relatedMilestone);
 
-  const hasLiked = likes.includes(currentUser?._id);
-  const hasCommented = comments.find(
-    (comment) =>
-      comment.user === currentUser._id || comment.user?._id === currentUser._id
-  );
+  const hasLiked = currentUser?._id ? likes.includes(currentUser._id) : false;
+  const hasCommented = currentUser?._id
+    ? comments.some(
+        (comment) =>
+          comment.user === currentUser._id ||
+          comment.user?._id === currentUser._id
+      )
+    : false;
 
-  const likeHandler = () => {
+  const likeHandler = (e) => {
+    e.stopPropagation();
     dispatch(toggleLikePost(_id));
   };
 
-  const commentHandler = () => {
-    console.log(commentText);
+  const commentHandler = (e) => {
+    e?.stopPropagation();
     if (!commentText.trim()) return;
     dispatch(commentPost({ id: _id, comment: commentText }));
     setCommentText('');
   };
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
-
   return (
     <div
-      className=" w-100  rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300"
+      className=" w-100  rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
       onClick={() => navigate(`/feed/${post._id}`)}
     >
       <div className="flex items-center gap-4 mb-5">
@@ -85,17 +82,21 @@ export const PostCard = ({ post }) => {
           <span>{likes?.length || 0}</span>
         </button>
 
-        <button
-          onClick={commentHandler}
-          className="flex items-center gap-1 hover:text-blue-500 transition-all"
-        >
+        <div className="flex items-center gap-1 text-gray-500">
           <MessageCircle className="w-5 h-5" />
           <span>{comments?.length || 0}</span>
-        </button>
+        </div>
       </div>
 
       {!hasCommented && (
-        <div className="flex items-center gap-2 mt-2">
+        <form
+          className="flex items-center gap-2 mt-2"
+          onClick={(e) => e.stopPropagation()}
+          onSubmit={(e) => {
+            e.preventDefault();
+            commentHandler(e);
+          }}
+        >
           <input
             type="text"
             value={commentText}
@@ -104,12 +105,13 @@ export const PostCard = ({ post }) => {
             className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none"
           />
           <button
-            onClick={commentHandler}
-            className="bg-blue-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-blue-600 transition-all"
+            type="submit"
+            disabled={!commentText.trim()}
+            className="bg-blue-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
           >
             Post
           </button>
-        </div>
+        </form>
       )}
     </div>
   );
