@@ -4,15 +4,18 @@ import {
   CheckCircle,
   Users,
   User,
-  Moon,
   MapPin,
+  LogOut,
 } from 'lucide-react';
-import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { logout } from '../features/auth/authSlice';
 
 export const Sidebar = () => {
   const { user } = useSelector((s) => s.auth);
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const menuItems = [
     { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
@@ -28,8 +31,12 @@ export const Sidebar = () => {
       icon: <User />,
       label: 'Profile',
     },
-    { href: '/mode', icon: <Moon />, label: 'Change Mood' },
   ].filter(Boolean);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login', { replace: true });
+  };
 
   return (
     <aside className="hidden md:flex  flex-col justify-between h-screen w-64  text-black px-6 py-8 shadow-lg">
@@ -61,6 +68,17 @@ export const Sidebar = () => {
             active={pathname === item.href}
           />
         ))}
+        {user && (
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-left text-gray-700 hover:bg-gray-800 hover:text-yellow-400 transition-all duration-200"
+          >
+            <span className="w-5 h-5">
+              <LogOut />
+            </span>
+            <span>Logout</span>
+          </button>
+        )}
       </div>
     </aside>
   );
