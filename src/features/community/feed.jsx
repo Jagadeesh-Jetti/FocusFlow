@@ -8,7 +8,7 @@ import { ExplorePeople } from '@/components/ExplorePeople';
 import { getAllUsers } from '../profile/profileThunk';
 
 export const Feed = () => {
-  const { postList: posts, error, isLoading } = useSelector((s) => s.post);
+  const { postList: posts, error, loading } = useSelector((s) => s.post);
   const { allUsers } = useSelector((s) => s.profile);
   const { user } = useSelector((s) => s.auth);
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ export const Feed = () => {
     try {
       const res = await dispatch(createPost(data));
       if (createPost.fulfilled.match(res)) {
-        dispatch(getPosts());
+        await dispatch(getPosts());
         resetForm();
       } else {
         setSubmitting(false);
@@ -108,7 +108,7 @@ export const Feed = () => {
 
         {error ? (
           <p className="text-center text-red-500">{error}</p>
-        ) : isLoading && posts.length === 0 ? (
+        ) : loading && posts.length === 0 ? (
           <p className="text-center text-gray-500 animate-pulse">Loading…</p>
         ) : posts.length === 0 ? (
           <p className="text-center text-gray-500 mt-10">
