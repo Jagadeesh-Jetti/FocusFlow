@@ -5,6 +5,7 @@ import milestoneReducer from '../features/milestones/milestoneSlice';
 import taskReducer from '../features/tasks/taskSlice';
 import postReducer from '../features/community/feedSlice';
 import profileReducer from '../features/profile/profileSlice';
+import { toastMiddleware } from '../utils/toastMiddleware';
 
 const store = configureStore({
   reducer: {
@@ -15,6 +16,8 @@ const store = configureStore({
     post: postReducer,
     profile: profileReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(toastMiddleware),
 });
 
 export default store;
