@@ -1,32 +1,61 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Sidebar } from '../../components/Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
-import { commentPost, toggleLikePost } from './feedThunk';
+import { commentPost, getPosts, toggleLikePost } from './feedThunk';
 import { Heart, MessageCircle } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const PostDetailPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { postList: posts } = useSelector((s) => s.post);
+  const { postList: posts, loading } = useSelector((s) => s.post);
   const { user: currentUser } = useSelector((state) => state.auth);
   const [commentText, setCommentText] = useState('');
 
+  useEffect(() => {
+    if (!posts?.length) {
+      dispatch(getPosts());
+    }
+  }, [dispatch, posts?.length]);
+
   const filteredPost = posts.find((post) => post._id === id);
 
-  const hasLiked = filteredPost.likes.includes(currentUser?._id);
-  //   const hasCommented = filteredPost.comments.find(
-  //     (comment) =>
-  //       comment.user === currentUser._id || comment.user?._id === currentUser._id
-  //   );
+  if (loading && !filteredPost) {
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="m-10 text-gray-500">Loading post…</div>
+      </div>
+    );
+  }
+
+  if (!filteredPost) {
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="m-10">
+          <button
+            className="bg-blue-200 p-1 mb-4"
+            onClick={() => navigate('/feed')}
+          >
+            Back
+          </button>
+          <div className="text-gray-600">
+            Post not found. It may have been deleted.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const hasLiked = filteredPost.likes?.includes(currentUser?._id);
 
   const likeHandler = () => {
     dispatch(toggleLikePost(filteredPost._id));
   };
 
   const commentHandler = () => {
-    console.log(commentText);
     if (!commentText.trim()) return;
     dispatch(commentPost({ id: filteredPost._id, comment: commentText }));
     setCommentText('');
@@ -83,26 +112,37 @@ export const PostDetailPage = () => {
               <span>{filteredPost.likes?.length || 0}</span>
             </button>
 
-            <button
-              onClick={commentHandler}
-              className="flex items-center gap-1 hover:text-blue-500 transition-all"
-            >
+            <div className="flex items-center gap-1">
               <MessageCircle className="w-5 h-5" />
               <span>{filteredPost.comments?.length || 0}</span>
-            </button>
+            </div>
           </div>
 
-          <div className="flex gap-3">
+          <form
+            className="flex gap-3 items-center"
+            onSubmit={(e) => {
+              e.preventDefault();
+              commentHandler();
+            }}
+          >
             <div className="w-11 h-11 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold shadow-inner">
               {currentUser?.name?.[0]?.toUpperCase()}
             </div>
             <input
               type="text"
-              placeholder="comment your thoughts"
-              className="border-none"
+              placeholder="Comment your thoughts"
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              className="flex-1 border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
             />
-            <button>Post</button>
-          </div>
+            <button
+              type="submit"
+              disabled={!commentText.trim()}
+              className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+            >
+              Post
+            </button>
+          </form>
         </div>
       </div>
     </div>
