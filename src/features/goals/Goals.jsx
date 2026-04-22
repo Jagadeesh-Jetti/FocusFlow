@@ -8,7 +8,7 @@ import {
   updateGoalById,
 } from './goalThunk';
 import { Modal } from '../../components/Modal';
-import axios from 'axios';
+import axiosInstance from '../../utils/api';
 
 import { PageHeader } from '../../components/PageHeader';
 import { GoalForm } from './goalComponents/GoalForm';
@@ -85,12 +85,10 @@ export const Goals = () => {
   const generateWithAI = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('token');
-      const res = await axios.post(
-        'http://localhost:3000/goals/generate-plan',
-        { goalTitle: form.title, goalDescription: form.description },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await axiosInstance.post('/goals/generate-plan', {
+        goalTitle: form.title,
+        goalDescription: form.description,
+      });
       setAiPlan(res.data);
     } catch (err) {
       console.error('AI generation failed', err);
@@ -101,15 +99,12 @@ export const Goals = () => {
 
   const saveAIPlan = async () => {
     try {
-      const token = localStorage.getItem('token');
-      await axios.post('http://localhost:3000/goals/save-ai-plan', aiPlan, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axiosInstance.post('/goals/save-ai-plan', aiPlan);
       setIsSaved(true);
       await dispatch(getGoals());
       resetForm();
     } catch (err) {
-      console.error('❌ Error saving AI Plan:', err);
+      console.error('Error saving AI Plan:', err);
     }
   };
 
