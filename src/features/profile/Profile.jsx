@@ -3,7 +3,6 @@ import { Sidebar } from '../../components/Sidebar';
 import { useEffect, useState } from 'react';
 import { getPosts } from '../community/feedThunk';
 import { PostCard } from '../community/postComponents/PostCard';
-import { getGoals } from '../goals/goalThunk';
 import { GoalCard } from '../goals/goalComponents/GoalCard';
 import { EditProfileModal } from './profileComponents/ProfileModal';
 import {
@@ -24,18 +23,18 @@ export const Profile = () => {
   const dispatch = useDispatch();
 
   const { postList: posts } = useSelector((s) => s.post);
-  const { goalsList: goals } = useSelector((state) => state.goal);
   const { profile, allUsers } = useSelector((state) => state?.profile);
   const user = useSelector((state) => state.auth.user);
   const [display, setDisplay] = useState('posts');
   const [open, setOpen] = useState(false);
 
-  const currentUserId = user._id;
-  let enableEditing = user?._id === profile?._id;
+  const currentUserId = user?._id;
+  const enableEditing = user?._id && profile?._id && user._id === profile._id;
 
-  const filteredPosts = posts.filter((post) => post.user._id === id);
+  const filteredPosts = posts.filter((post) => post.user?._id === id);
+  const profileGoals = profile?.goals || [];
 
-  const filteredUsers = allUsers.filter((u) => u._id !== user._id);
+  const filteredUsers = (allUsers || []).filter((u) => u._id !== user?._id);
 
   const handleSave = async (updatedData) => {
     await dispatch(updateUserProfile({ id: id, updatedProfile: updatedData }));
@@ -58,7 +57,6 @@ export const Profile = () => {
   useEffect(() => {
     if (id) {
       dispatch(getPosts());
-      dispatch(getGoals());
       dispatch(getAllUsers());
       dispatch(getUserProfile(id));
     }
@@ -120,9 +118,9 @@ export const Profile = () => {
               <div className="text-sm text-gray-400 italic">No posts yet.</div>
             )
           ) : display === 'goals' ? (
-            goals.length > 0 ? (
+            profileGoals.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {goals.map((goal) => (
+                {profileGoals.map((goal) => (
                   <GoalCard key={goal._id} goal={goal} />
                 ))}
               </div>
