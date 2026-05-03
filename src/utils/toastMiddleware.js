@@ -22,11 +22,25 @@ const SUCCESS_MESSAGES = {
 };
 
 const DEFAULT_ERROR = 'Something went wrong';
+const NETWORK_ERROR = 'Server unreachable. Is the backend running?';
 
-const stringify = (payload) => {
-  if (!payload) return DEFAULT_ERROR;
-  if (typeof payload === 'string') return payload;
-  return payload.message || DEFAULT_ERROR;
+const NETWORK_HINTS = ['Network Error', 'ERR_NETWORK', 'Failed to fetch'];
+
+const isNetworkError = (action) => {
+  const errMsg = action.error?.message || '';
+  const payloadStr = typeof action.payload === 'string' ? action.payload : '';
+  return NETWORK_HINTS.some(
+    (hint) => errMsg.includes(hint) || payloadStr.includes(hint)
+  );
+};
+
+const messageFor = (action) => {
+  if (isNetworkError(action)) return NETWORK_ERROR;
+  const { payload, error } = action;
+  if (typeof payload === 'string' && payload) return payload;
+  if (payload?.message) return payload.message;
+  if (error?.message) return error.message;
+  return DEFAULT_ERROR;
 };
 
 export const toastMiddleware = () => (next) => (action) => {
@@ -39,7 +53,7 @@ export const toastMiddleware = () => (next) => (action) => {
       if (msg) toast.success(msg);
     }
   } else if (type.endsWith('/rejected')) {
-    toast.error(stringify(action.payload));
+    toast.error(messageFor(action));
   }
 
   return next(action);
