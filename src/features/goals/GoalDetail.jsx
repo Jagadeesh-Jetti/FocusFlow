@@ -14,6 +14,7 @@ import { clearGoalDetail, patchDetailTask } from './goalSlice';
 import { GoalForm } from './goalComponents/GoalForm';
 import { MilestoneSection } from './goalComponents/MilestoneSection';
 import { TaskRow } from './goalComponents/TaskRow';
+import { celebrate } from '../../utils/celebrate';
 import {
   createMilestone,
   deleteMilestoneById,
@@ -237,6 +238,25 @@ export const GoalDetail = () => {
           completedAt: task.completedAt,
         })
       );
+      return;
+    }
+
+    if (nextStatus === 'completed') {
+      // Did this tick push us to 100%?
+      const milestoneTasks = (goalDetail?.milestones || []).flatMap(
+        (m) => m.tasks || []
+      );
+      const allTasks = [...milestoneTasks, ...unassignedTasks];
+      const total = allTasks.length;
+      const completedAfter =
+        allTasks.filter(
+          (t) => t._id === task._id || t.status === 'completed'
+        ).length;
+      if (total > 0 && completedAfter === total) {
+        celebrate('goal');
+      } else {
+        celebrate('task');
+      }
     }
   };
 
@@ -304,10 +324,10 @@ export const GoalDetail = () => {
           <ArrowLeft className="w-4 h-4" /> Back to goals
         </button>
 
-        <div className="card-depth bg-white rounded-2xl border border-slate-200/80 p-6 mb-6">
+        <div className="card-depth bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-6 mb-6">
           <div className="flex items-start justify-between gap-4 mb-3">
             <div className="flex-1 min-w-0">
-              <h1 className="text-2xl md:text-3xl font-bold text-slate-900 break-words tracking-tight">
+              <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 break-words tracking-tight">
                 {goalDetail.title}
               </h1>
               {goalDetail.category && (
@@ -368,15 +388,19 @@ export const GoalDetail = () => {
           </div>
 
           <div>
-            <div className="flex justify-between text-sm text-slate-600 mb-1.5 tnum">
+            <div className="flex justify-between text-sm text-slate-600 dark:text-slate-400 mb-1.5 tnum">
               <span>Progress</span>
-              <span className="font-medium text-slate-700">
+              <span className="font-medium text-slate-700 dark:text-slate-300">
                 {progress.completed} / {progress.total} tasks · {progress.pct}%
               </span>
             </div>
             <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
               <div
-                className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-[width] duration-500 ease-out"
+                className={`bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-[width] duration-500 ease-out ${
+                  progress.pct > 0 && progress.pct < 100
+                    ? 'progress-shimmer'
+                    : ''
+                }`}
                 style={{ width: `${progress.pct}%` }}
               />
             </div>

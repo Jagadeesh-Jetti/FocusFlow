@@ -30,6 +30,42 @@ body {
   color: #0f172a;
 }
 
+.dark body {
+  background-color: #020617;
+  color: #f1f5f9;
+}
+
+/* Layered card depth in dark mode */
+.dark .card-depth {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 8px 20px rgba(0, 0, 0, 0.35);
+}
+.dark .card-depth:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 4px 8px rgba(16, 185, 129, 0.18),
+    0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+.dark .dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(241, 245, 249, 0.07) 1px,
+    transparent 0
+  );
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(241, 245, 249, 0.12);
+  background-clip: content-box;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(241, 245, 249, 0.2);
+  background-clip: content-box;
+}
+
 code, kbd, pre, samp {
   font-family: var(--font-mono);
 }
@@ -106,6 +142,15 @@ code, kbd, pre, samp {
 }
 .fade-up {
   animation: ff-fade-up 240ms ease-out both;
+}
+
+/* Soft pulse for "ready" AI button */
+@keyframes ff-sparkle-pulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50%      { transform: scale(1.18) rotate(8deg); opacity: 0.85; }
+}
+.sparkle-pulse {
+  animation: ff-sparkle-pulse 1.6s ease-in-out infinite;
 }
 
 @theme inline {

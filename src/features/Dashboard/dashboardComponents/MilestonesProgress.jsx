@@ -18,9 +18,13 @@ export const MilestonesProgress = ({ milestones }) => {
                   {m.progress}%
                 </span>
               </div>
-              <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-emerald-600 rounded-full transition-all"
+                  className={`h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-[width] duration-500 ease-out ${
+                    m.progress > 0 && m.progress < 100
+                      ? 'progress-shimmer'
+                      : ''
+                  }`}
                   style={{ width: `${m.progress}%` }}
                 />
               </div>

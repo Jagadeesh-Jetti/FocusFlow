@@ -123,9 +123,13 @@ export const GoalForm = ({
             type="button"
             disabled={!form.title || loading}
             onClick={generateWithAI}
-            className="flex items-center justify-center gap-1.5 sm:flex-1 border border-emerald-200 text-emerald-700 hover:bg-emerald-50 disabled:opacity-50 disabled:cursor-not-allowed font-medium py-2.5 rounded-lg transition-colors"
+            className="flex items-center justify-center gap-1.5 sm:flex-1 border border-emerald-200 text-emerald-700 hover:bg-emerald-50 disabled:opacity-50 disabled:cursor-not-allowed font-medium py-2.5 rounded-lg transition-colors active:scale-[0.97]"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles
+              className={`w-4 h-4 ${
+                form.title && !loading ? 'sparkle-pulse' : ''
+              }`}
+            />
             {loading ? 'Generating…' : 'Generate with AI'}
           </button>
         )}
@@ -136,7 +140,7 @@ export const GoalForm = ({
           <h4 className="text-base font-semibold text-gray-900 mb-2">
             AI-generated plan
           </h4>
-          <div className="bg-gray-50 border border-gray-200 p-4 rounded-lg space-y-3">
+          <div className="bg-gray-50 dark:bg-slate-950 border border-gray-200 p-4 rounded-lg space-y-3">
             <div>
               <div className="text-xs text-gray-500 uppercase tracking-wide">
                 Goal

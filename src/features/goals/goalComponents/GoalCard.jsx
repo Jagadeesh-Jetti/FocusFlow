@@ -36,7 +36,7 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
     <div
       key={goal._id}
       onClick={() => navigate(`/goals/${goal._id}`)}
-      className="card-depth group p-5 rounded-2xl cursor-pointer bg-white border border-slate-200/80 hover:border-emerald-200 hover:-translate-y-0.5"
+      className="card-depth group p-5 rounded-2xl cursor-pointer bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-200 hover:-translate-y-0.5"
     >
       <div className="text-xl font-semibold mb-1">{goal.title}</div>
       {goal.category && (
@@ -76,15 +76,17 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
 
       {total > 0 && (
         <div className="mb-3">
-          <div className="flex justify-between text-xs text-slate-600 mb-1.5 tnum">
+          <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400 mb-1.5 tnum">
             <span>
               {completed} / {total} tasks
             </span>
-            <span className="font-medium text-slate-700">{pct}%</span>
+            <span className="font-medium text-slate-700 dark:text-slate-300">{pct}%</span>
           </div>
           <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-[width] duration-500 ease-out"
+              className={`bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-[width] duration-500 ease-out ${
+                pct > 0 && pct < 100 ? 'progress-shimmer' : ''
+              }`}
               style={{ width: `${pct}%` }}
             />
           </div>

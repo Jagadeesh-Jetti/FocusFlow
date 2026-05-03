@@ -15,6 +15,7 @@ import { TaskForm } from './taskComponents/TaskForm';
 import { TaskCard } from './taskComponents/TaskCard';
 import { getGoals } from '../goals/goalThunk';
 import { TaskFilters } from './taskComponents/TaskFilters';
+import { celebrate } from '../../utils/celebrate';
 
 export const Tasks = () => {
   const tasks = useSelector((state) => state.task.taskList);
@@ -103,7 +104,10 @@ export const Tasks = () => {
       status: newStatus,
     };
 
-    await dispatch(updateTaskById({ id: task._id, updatedTask }));
+    const res = await dispatch(updateTaskById({ id: task._id, updatedTask }));
+    if (updateTaskById.fulfilled.match(res) && newStatus === 'completed') {
+      celebrate('task');
+    }
     await dispatch(getTasks());
   };
 
@@ -114,7 +118,7 @@ export const Tasks = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-slate-950">
       <Sidebar />
       <div className="flex-1 p-4 md:p-10 max-w-7xl w-full">
         <PageHeader
