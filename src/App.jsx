@@ -13,6 +13,7 @@ import { Feed } from './features/community/feed';
 import { PostDetailPage } from './features/community/PostDetailPage';
 import { NotFound } from './components/NotFound';
 import { Landing } from './features/landing/Landing';
+import { Coach } from './features/coach/Coach';
 
 function App() {
   return (
@@ -58,6 +59,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Tasks />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/coach"
+          element={
+            <ProtectedRoute>
+              <Coach />
             </ProtectedRoute>
           }
         />

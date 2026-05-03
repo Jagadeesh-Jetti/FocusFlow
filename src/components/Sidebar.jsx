@@ -8,6 +8,7 @@ import {
   LogOut,
   Menu,
   X,
+  Sparkles,
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,6 +54,12 @@ export const Sidebar = () => {
       href: '/tasks',
       icon: <CheckCircle className="w-5 h-5" />,
       label: 'Tasks',
+    },
+    {
+      href: '/coach',
+      icon: <Sparkles className="w-5 h-5" />,
+      label: 'Coach',
+      badge: 'AI',
     },
     {
       href: '/feed',
@@ -111,6 +118,7 @@ export const Sidebar = () => {
               href={item.href}
               icon={item.icon}
               label={item.label}
+              badge={item.badge}
               active={isActive(item.href)}
             />
           ))}
@@ -194,7 +202,7 @@ export const Sidebar = () => {
   );
 };
 
-const SidebarItem = ({ href, icon, label, active }) => {
+const SidebarItem = ({ href, icon, label, badge, active }) => {
   return (
     <Link
       to={href}
@@ -205,7 +213,18 @@ const SidebarItem = ({ href, icon, label, active }) => {
       }`}
     >
       {icon}
-      <span>{label}</span>
+      <span className="flex-1">{label}</span>
+      {badge && (
+        <span
+          className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+            active
+              ? 'bg-emerald-600 text-white'
+              : 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white'
+          }`}
+        >
+          {badge}
+        </span>
+      )}
     </Link>
   );
 };
