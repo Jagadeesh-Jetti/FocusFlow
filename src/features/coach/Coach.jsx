@@ -136,7 +136,7 @@ export const Coach = () => {
   const isEmpty = messages.length === 0;
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-slate-950">
       <Sidebar />
       <main className="flex-1 flex flex-col h-screen">
         <header className="flex items-center justify-between px-4 md:px-8 py-4 border-b border-gray-200 bg-white shrink-0">
@@ -192,7 +192,7 @@ export const Coach = () => {
 
         <div className="border-t border-gray-200 bg-white px-4 md:px-8 py-4 shrink-0">
           <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
-            <div className="flex items-end gap-2 bg-gray-50 border border-gray-200 rounded-2xl p-2 focus-within:border-emerald-400 focus-within:ring-2 focus-within:ring-emerald-100 transition">
+            <div className="flex items-end gap-2 bg-gray-50 dark:bg-slate-950 border border-gray-200 rounded-2xl p-2 focus-within:border-emerald-400 focus-within:ring-2 focus-within:ring-emerald-100 transition">
               <textarea
                 ref={inputRef}
                 value={draft}

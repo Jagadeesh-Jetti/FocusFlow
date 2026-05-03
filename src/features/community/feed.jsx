@@ -72,7 +72,7 @@ export const Feed = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-slate-950">
       <Sidebar />
       <main className="flex-1 p-4 md:p-10 max-w-3xl mx-auto w-full">
         <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">

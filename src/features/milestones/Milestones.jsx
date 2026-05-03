@@ -96,7 +96,7 @@ export const Milestones = () => {
   }, [milestones]);
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-slate-950">
       <Sidebar />
       <div className="flex-1 p-4 md:p-10 max-w-7xl w-full">
         <PageHeader

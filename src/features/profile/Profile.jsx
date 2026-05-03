@@ -65,7 +65,7 @@ export const Profile = () => {
   if (!profile) return <div className="text-center mt-20">Loading user...</div>;
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-slate-950">
       <Sidebar />
 
       <main className="flex-1">

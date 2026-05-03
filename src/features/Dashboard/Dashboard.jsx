@@ -52,11 +52,11 @@ export const Dashboard = () => {
   const firstName = user?.name?.split(' ')[0] || user?.name || '';
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-slate-950">
       <Sidebar />
       <main className="flex-1 p-4 md:p-10 max-w-7xl w-full">
         <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
             Welcome back{firstName ? `, ${firstName}` : ''}
           </h1>
           <p className="text-sm text-slate-500 mt-1.5">
@@ -97,19 +97,19 @@ export const Dashboard = () => {
 };
 
 const StatCard = ({ title, count }) => (
-  <div className="card-depth bg-white rounded-2xl border border-slate-200/80 p-5 hover:-translate-y-0.5 hover:border-emerald-200">
+  <div className="card-depth bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 hover:-translate-y-0.5 hover:border-emerald-200">
     <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.08em]">
       {title}
     </div>
-    <div className="text-3xl md:text-4xl font-bold text-slate-900 mt-1.5 tnum tracking-tight">
+    <div className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mt-1.5 tnum tracking-tight">
       {count}
     </div>
   </div>
 );
 
 const DashboardCard = ({ title, children }) => (
-  <div className="card-depth bg-white p-6 rounded-2xl border border-slate-200/80">
-    <h2 className="text-base font-semibold text-slate-900 mb-4 tracking-tight">
+  <div className="card-depth bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80">
+    <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100 mb-4 tracking-tight">
       {title}
     </h2>
     {children}

@@ -23,7 +23,7 @@ export const ExplorePeople = ({
           return (
             <div
               key={user._id}
-              className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50"
+              className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:bg-slate-950"
             >
               <div
                 className="flex items-center gap-3 cursor-pointer flex-1 min-w-0"

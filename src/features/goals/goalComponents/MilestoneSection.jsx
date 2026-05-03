@@ -56,7 +56,7 @@ export const MilestoneSection = ({
 
   return (
     <div className="border border-gray-200 rounded-xl overflow-hidden bg-white">
-      <div className="flex items-center gap-3 p-4 bg-gray-50">
+      <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-slate-950">
         <button
           onClick={() => setIsExpanded((v) => !v)}
           aria-label={isExpanded ? 'Collapse' : 'Expand'}

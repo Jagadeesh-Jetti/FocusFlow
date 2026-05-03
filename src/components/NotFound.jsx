@@ -3,7 +3,7 @@ import { Target } from 'lucide-react';
 
 export const NotFound = () => {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex flex-col items-center justify-center p-6">
       <div className="flex items-center gap-2 mb-8">
         <span className="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
           <Target className="w-5 h-5" />
@@ -30,7 +30,7 @@ export const NotFound = () => {
           </Link>
           <Link
             to="/login"
-            className="inline-flex items-center justify-center border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium px-5 py-2.5 rounded-lg transition-colors"
+            className="inline-flex items-center justify-center border border-gray-300 bg-white hover:bg-gray-50 dark:bg-slate-950 text-gray-700 font-medium px-5 py-2.5 rounded-lg transition-colors"
           >
             Sign in
           </Link>

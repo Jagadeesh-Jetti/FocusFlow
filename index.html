@@ -14,6 +14,17 @@
     />
 
     <title>FocusFlow</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('focusflow.theme');
+          var prefers = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (saved !== 'light' && prefers)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

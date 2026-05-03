@@ -46,20 +46,20 @@ export const Modal = ({ isOpen, onClose, title, children }) => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
-        className="fade-up bg-white rounded-2xl shadow-2xl shadow-slate-900/10 ring-1 ring-slate-200/60 p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto"
+        className="fade-up bg-white dark:bg-slate-900 rounded-2xl shadow-2xl shadow-slate-900/10 dark:shadow-black/40 ring-1 ring-slate-200/60 dark:ring-slate-800/60 p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-start mb-5">
           <h2
             id="modal-title"
-            className="text-lg font-semibold text-slate-900 tracking-tight"
+            className="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight"
           >
             {title}
           </h2>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md p-1 -mr-1 -mt-1 transition-colors active:scale-95"
+            className="text-slate-400 hover:text-slate-700 dark:text-slate-300 hover:bg-slate-100 rounded-md p-1 -mr-1 -mt-1 transition-colors active:scale-95"
           >
             <X className="w-5 h-5" />
           </button>

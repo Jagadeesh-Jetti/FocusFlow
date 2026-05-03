@@ -80,7 +80,7 @@ export const TaskRow = ({ task, onToggle, onDelete, onUpdate }) => {
   }
 
   return (
-    <div className="flex items-start gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 group">
+    <div className="flex items-start gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 dark:bg-slate-950 group">
       <button
         onClick={() => onToggle(task)}
         aria-label={isCompleted ? 'Mark incomplete' : 'Mark complete'}
