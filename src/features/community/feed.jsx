@@ -5,7 +5,11 @@ import { Modal } from '../../components/Modal';
 import { PostCard } from './postComponents/PostCard';
 import { createPost, getPosts } from './feedThunk';
 import { ExplorePeople } from '@/components/ExplorePeople';
-import { getAllUsers } from '../profile/profileThunk';
+import {
+  followUser,
+  getAllUsers,
+  unfollowUser,
+} from '../profile/profileThunk';
 
 export const Feed = () => {
   const { postList: posts, error, loading } = useSelector((s) => s.post);
@@ -20,9 +24,17 @@ export const Feed = () => {
     image: null,
   });
 
-  const filteredUsers = allUsers.filter((u) => u._id !== user._id);
-  // console.log(allUsers);
-  // console.log(filteredUsers);
+  const filteredUsers = (allUsers || []).filter((u) => u._id !== user?._id);
+
+  const followHandler = async (targetId) => {
+    await dispatch(followUser(targetId));
+    await dispatch(getAllUsers());
+  };
+
+  const unfollowHandler = async (targetId) => {
+    await dispatch(unfollowUser(targetId));
+    await dispatch(getAllUsers());
+  };
 
   const resetForm = () => {
     setShowModal(false);
@@ -172,7 +184,12 @@ export const Feed = () => {
           </div>
         )}
       </main>
-      <ExplorePeople filteredUsers={filteredUsers} />
+      <ExplorePeople
+        filteredUsers={filteredUsers}
+        currentUserId={user?._id}
+        followHandler={followHandler}
+        unfollowHandler={unfollowHandler}
+      />
     </div>
   );
 };
