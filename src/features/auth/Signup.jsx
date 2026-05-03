@@ -47,8 +47,8 @@ export const Signup = () => {
       <main className="flex w-full md:w-1/2 items-center justify-center p-6 md:p-12 bg-white">
         <form onSubmit={signupHandler} className="w-full max-w-sm space-y-5">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">Create account</h2>
-            <p className="text-sm text-gray-500 mt-1">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100">Create account</h2>
+            <p className="text-sm text-gray-500 dark:text-slate-500 mt-1">
               Start planning in under a minute.
             </p>
           </div>
@@ -56,7 +56,7 @@ export const Signup = () => {
           <div className="space-y-1.5">
             <label
               htmlFor="signup-name"
-              className="text-sm font-medium text-gray-700"
+              className="text-sm font-medium text-gray-700 dark:text-slate-300"
             >
               Full name
             </label>
@@ -67,7 +67,7 @@ export const Signup = () => {
               required
               value={input.name}
               onChange={(e) => setInput({ ...input, name: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="Your name"
             />
           </div>
@@ -75,7 +75,7 @@ export const Signup = () => {
           <div className="space-y-1.5">
             <label
               htmlFor="signup-email"
-              className="text-sm font-medium text-gray-700"
+              className="text-sm font-medium text-gray-700 dark:text-slate-300"
             >
               Email
             </label>
@@ -86,7 +86,7 @@ export const Signup = () => {
               required
               value={input.email}
               onChange={(e) => setInput({ ...input, email: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="you@example.com"
             />
           </div>
@@ -94,7 +94,7 @@ export const Signup = () => {
           <div className="space-y-1.5">
             <label
               htmlFor="signup-password"
-              className="text-sm font-medium text-gray-700"
+              className="text-sm font-medium text-gray-700 dark:text-slate-300"
             >
               Password
             </label>
@@ -106,7 +106,7 @@ export const Signup = () => {
               minLength={6}
               value={input.password}
               onChange={(e) => setInput({ ...input, password: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="At least 6 characters"
             />
           </div>
@@ -119,7 +119,7 @@ export const Signup = () => {
             {loading ? 'Creating account…' : 'Create account'}
           </button>
 
-          <p className="text-sm text-gray-600 text-center">
+          <p className="text-sm text-gray-600 dark:text-slate-400 text-center">
             Already have an account?{' '}
             <Link
               to="/login"

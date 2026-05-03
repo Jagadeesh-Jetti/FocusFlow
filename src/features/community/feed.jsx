@@ -77,10 +77,10 @@ export const Feed = () => {
       <main className="flex-1 p-4 md:p-10 max-w-3xl mx-auto w-full">
         <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-100 tracking-tight">
               Community
             </h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-gray-500 dark:text-slate-500 mt-1">
               Share progress. Cheer each other on.
             </p>
           </div>
@@ -97,13 +97,13 @@ export const Feed = () => {
             <div>
               <label
                 htmlFor="post-content"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1"
               >
                 What's on your mind?
               </label>
               <textarea
                 id="post-content"
-                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none text-sm"
+                className="w-full p-3 rounded-lg border border-gray-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none text-sm"
                 rows={4}
                 placeholder="Share progress, an insight, or a question…"
                 value={form.content}
@@ -114,15 +114,15 @@ export const Feed = () => {
             <div>
               <label
                 htmlFor="post-image"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1"
               >
-                Image <span className="font-normal text-gray-400">(optional)</span>
+                Image <span className="font-normal text-gray-400 dark:text-slate-600">(optional)</span>
               </label>
               <input
                 id="post-image"
                 type="file"
                 accept="image/*"
-                className="block w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"
+                className="block w-full text-sm text-gray-500 dark:text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"
                 onChange={(e) =>
                   setForm({ ...form, image: e.target.files[0] || null })
                 }
@@ -147,26 +147,26 @@ export const Feed = () => {
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="bg-white rounded-2xl border border-gray-200 p-5 animate-pulse"
+                className="bg-white rounded-2xl border border-gray-200 dark:border-slate-700 p-5 animate-pulse"
               >
                 <div className="flex gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-gray-200" />
+                  <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-slate-700" />
                   <div className="flex-1 space-y-2">
-                    <div className="h-3 bg-gray-200 rounded w-1/3" />
-                    <div className="h-2 bg-gray-100 rounded w-1/4" />
+                    <div className="h-3 bg-gray-200 dark:bg-slate-700 rounded w-1/3" />
+                    <div className="h-2 bg-gray-100 dark:bg-slate-800 rounded w-1/4" />
                   </div>
                 </div>
-                <div className="h-3 bg-gray-100 rounded mb-2" />
-                <div className="h-3 bg-gray-100 rounded w-5/6" />
+                <div className="h-3 bg-gray-100 dark:bg-slate-800 rounded mb-2" />
+                <div className="h-3 bg-gray-100 dark:bg-slate-800 rounded w-5/6" />
               </div>
             ))}
           </div>
         ) : posts.length === 0 ? (
-          <div className="border border-dashed border-gray-300 rounded-2xl p-10 text-center">
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+          <div className="border border-dashed border-gray-300 dark:border-slate-600 rounded-2xl p-10 text-center">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-slate-200 mb-2">
               The feed is quiet
             </h3>
-            <p className="text-sm text-gray-500 mb-4">
+            <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">
               Be the first to share progress on your goals.
             </p>
             <button

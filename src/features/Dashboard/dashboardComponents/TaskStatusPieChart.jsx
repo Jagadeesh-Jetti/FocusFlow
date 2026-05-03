@@ -8,7 +8,7 @@ export const TaskStatusPieChart = ({ completed, pending, overdue }) => {
 
   if (total === 0) {
     return (
-      <div className="h-56 flex items-center justify-center text-sm text-gray-400 italic">
+      <div className="h-56 flex items-center justify-center text-sm text-gray-400 dark:text-slate-600 italic">
         No tasks yet.
       </div>
     );

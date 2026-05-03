@@ -64,7 +64,7 @@ const STEPS = [
 
 export const Landing = () => {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-white text-gray-900 dark:text-slate-100">
       {/* Top nav */}
       <header className="sticky top-0 z-30 backdrop-blur-xl bg-white/70 border-b border-slate-200/60">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
@@ -134,7 +134,7 @@ export const Landing = () => {
             .
           </h1>
 
-          <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="mt-6 text-lg md:text-xl text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
             Set goals, get AI-generated plans, and chat with your personal coach
             when you&apos;re stuck. FocusFlow keeps you moving.
           </p>
@@ -169,13 +169,13 @@ export const Landing = () => {
       </section>
 
       {/* Features */}
-      <section className="bg-gray-50 dark:bg-slate-950 border-y border-gray-100">
+      <section className="bg-gray-50 dark:bg-slate-950 border-y border-gray-100 dark:border-slate-800">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-20 md:py-28">
           <div className="max-w-2xl mb-12">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
               Everything you need to actually finish things.
             </h2>
-            <p className="mt-3 text-gray-600 text-lg">
+            <p className="mt-3 text-gray-600 dark:text-slate-400 text-lg">
               Stop managing yet another to-do list. FocusFlow connects the dots
               from goal to milestone to task to done.
             </p>
@@ -187,15 +187,15 @@ export const Landing = () => {
               return (
                 <div
                   key={f.title}
-                  className="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-md hover:border-emerald-200 transition"
+                  className="bg-white rounded-2xl border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md hover:border-emerald-200 transition"
                 >
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="font-semibold text-gray-900 mb-1.5">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-1.5">
                     {f.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-sm text-gray-600 dark:text-slate-400 leading-relaxed">
                     {f.body}
                   </p>
                 </div>
@@ -211,7 +211,7 @@ export const Landing = () => {
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
             How it works
           </h2>
-          <p className="mt-3 text-gray-600 text-lg">
+          <p className="mt-3 text-gray-600 dark:text-slate-400 text-lg">
             Three steps from foggy ambition to a plan you can actually follow.
           </p>
         </div>
@@ -222,10 +222,10 @@ export const Landing = () => {
               <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-4">
                 {s.n}
               </div>
-              <h3 className="font-semibold text-lg text-gray-900 mb-2">
+              <h3 className="font-semibold text-lg text-gray-900 dark:text-slate-100 mb-2">
                 {s.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">{s.body}</p>
+              <p className="text-gray-600 dark:text-slate-400 leading-relaxed">{s.body}</p>
             </div>
           ))}
         </div>
@@ -261,20 +261,20 @@ export const Landing = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+      <footer className="border-t border-gray-100 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500 dark:text-slate-500">
           <Link to="/" className="flex items-center gap-2">
             <span className="w-7 h-7 rounded-md bg-emerald-600 text-white flex items-center justify-center">
               <Target className="w-3.5 h-3.5" />
             </span>
-            <span className="font-semibold text-gray-900">FocusFlow</span>
+            <span className="font-semibold text-gray-900 dark:text-slate-100">FocusFlow</span>
           </Link>
           <div className="flex items-center gap-5">
             <a
               href="https://github.com/Jagadeesh-Jetti/FocusFlow"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 hover:text-gray-900"
+              className="inline-flex items-center gap-1.5 hover:text-gray-900 dark:hover:text-slate-100"
             >
               <Github className="w-4 h-4" />
               GitHub
@@ -289,16 +289,16 @@ export const Landing = () => {
 
 const ProductMockup = () => {
   return (
-    <div className="rounded-2xl bg-white border border-gray-200 shadow-2xl shadow-emerald-900/10 overflow-hidden">
+    <div className="rounded-2xl bg-white border border-gray-200 dark:border-slate-700 shadow-2xl shadow-emerald-900/10 overflow-hidden">
       {/* Browser chrome */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-100 bg-gray-50 dark:bg-slate-950">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-slate-950">
         <div className="flex gap-1.5">
           <span className="w-3 h-3 rounded-full bg-red-300" />
           <span className="w-3 h-3 rounded-full bg-yellow-300" />
           <span className="w-3 h-3 rounded-full bg-emerald-300" />
         </div>
         <div className="flex-1 flex justify-center">
-          <span className="text-xs text-gray-400 bg-white border border-gray-200 rounded-md px-3 py-1">
+          <span className="text-xs text-gray-400 dark:text-slate-600 bg-white border border-gray-200 dark:border-slate-700 rounded-md px-3 py-1">
             focusflow.app/goals/run-marathon
           </span>
         </div>
@@ -308,8 +308,8 @@ const ProductMockup = () => {
       <div className="p-5 md:p-7">
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="min-w-0">
-            <div className="text-xs text-gray-500 mb-1">Fitness</div>
-            <div className="text-xl md:text-2xl font-bold text-gray-900">
+            <div className="text-xs text-gray-500 dark:text-slate-500 mb-1">Fitness</div>
+            <div className="text-xl md:text-2xl font-bold text-gray-900 dark:text-slate-100">
               Run a half marathon
             </div>
           </div>
@@ -318,16 +318,16 @@ const ProductMockup = () => {
           </span>
         </div>
 
-        <p className="text-sm text-gray-600 mb-5">
+        <p className="text-sm text-gray-600 dark:text-slate-400 mb-5">
           21k in 6 months. Slow but consistent.
         </p>
 
         <div className="mb-6">
-          <div className="flex justify-between text-xs text-gray-600 mb-1.5">
+          <div className="flex justify-between text-xs text-gray-600 dark:text-slate-400 mb-1.5">
             <span>Progress</span>
             <span>4 / 9 tasks · 44%</span>
           </div>
-          <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-gray-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
             <div className="h-full w-[44%] bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full" />
           </div>
         </div>
@@ -361,10 +361,10 @@ const MilestoneMock = ({ title, tasks }) => {
   const pct = Math.round((completed / tasks.length) * 100);
 
   return (
-    <div className="border border-gray-200 rounded-xl">
+    <div className="border border-gray-200 dark:border-slate-700 rounded-xl">
       <div className="flex items-center justify-between px-4 py-3 bg-gray-50 dark:bg-slate-950">
-        <div className="font-medium text-gray-900 text-sm">{title}</div>
-        <div className="text-xs text-gray-500">
+        <div className="font-medium text-gray-900 dark:text-slate-100 text-sm">{title}</div>
+        <div className="text-xs text-gray-500 dark:text-slate-500">
           {completed}/{tasks.length} · {pct}%
         </div>
       </div>
@@ -378,14 +378,14 @@ const MilestoneMock = ({ title, tasks }) => {
               className={`w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 ${
                 t.done
                   ? 'bg-emerald-600 border-emerald-600 text-white'
-                  : 'border-gray-300'
+                  : 'border-gray-300 dark:border-slate-600'
               }`}
             >
               {t.done && <Check className="w-2.5 h-2.5" strokeWidth={3} />}
             </span>
             <span
               className={`text-sm ${
-                t.done ? 'line-through text-gray-400' : 'text-gray-700'
+                t.done ? 'line-through text-gray-400 dark:text-slate-600' : 'text-gray-700 dark:text-slate-300'
               }`}
             >
               {t.title}

@@ -13,12 +13,12 @@ export const ConfirmDialog = ({
   return (
     <Modal isOpen={isOpen} onClose={onCancel} title={title}>
       {message && (
-        <p className="text-sm text-gray-600 mb-5 leading-relaxed">{message}</p>
+        <p className="text-sm text-gray-600 dark:text-slate-400 mb-5 leading-relaxed">{message}</p>
       )}
       <div className="flex gap-2 justify-end">
         <button
           onClick={onCancel}
-          className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+          className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800 transition-colors"
         >
           {cancelLabel}
         </button>

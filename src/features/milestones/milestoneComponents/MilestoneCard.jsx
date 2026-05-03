@@ -6,11 +6,11 @@ export const MilestoneCard = ({ milestone, onEdit, onDelete }) => {
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="min-w-0">
           {milestone?.goal?.title && (
-            <div className="text-xs text-gray-500 mb-1 truncate">
+            <div className="text-xs text-gray-500 dark:text-slate-500 mb-1 truncate">
               {milestone.goal.title}
             </div>
           )}
-          <h3 className="font-semibold text-gray-900 break-words">
+          <h3 className="font-semibold text-gray-900 dark:text-slate-100 break-words">
             {milestone.title}
           </h3>
         </div>
@@ -18,14 +18,14 @@ export const MilestoneCard = ({ milestone, onEdit, onDelete }) => {
           <button
             onClick={onEdit}
             aria-label="Edit milestone"
-            className="p-1.5 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md"
+            className="p-1.5 text-gray-500 dark:text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md"
           >
             <Pencil className="w-4 h-4" />
           </button>
           <button
             onClick={onDelete}
             aria-label="Delete milestone"
-            className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md"
+            className="p-1.5 text-gray-500 dark:text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md"
           >
             <Trash2 className="w-4 h-4" />
           </button>
@@ -33,14 +33,14 @@ export const MilestoneCard = ({ milestone, onEdit, onDelete }) => {
       </div>
 
       {milestone?.description && (
-        <p className="text-sm text-gray-500 mb-3 break-words">
+        <p className="text-sm text-gray-500 dark:text-slate-500 mb-3 break-words">
           {milestone.description}
         </p>
       )}
 
       {milestone?.targetDate && (
         <div className="flex items-center gap-2 text-xs">
-          <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700">
+          <span className="px-2 py-0.5 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300">
             Target{' '}
             {new Date(milestone.targetDate).toLocaleDateString('en-GB')}
           </span>

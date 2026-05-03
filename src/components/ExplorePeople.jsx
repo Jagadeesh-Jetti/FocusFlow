@@ -12,8 +12,8 @@ export const ExplorePeople = ({
   if (!filteredUsers?.length) return null;
 
   return (
-    <aside className="hidden lg:block w-72 p-6 border-l border-gray-200 bg-white shrink-0">
-      <h2 className="text-base font-semibold text-gray-900 mb-4">
+    <aside className="hidden lg:block w-72 p-6 border-l border-gray-200 dark:border-slate-700 bg-white shrink-0">
+      <h2 className="text-base font-semibold text-gray-900 dark:text-slate-100 mb-4">
         Who to follow
       </h2>
       <div className="space-y-2">
@@ -30,7 +30,7 @@ export const ExplorePeople = ({
                 onClick={() => navigate(`/profile/${user._id}`)}
               >
                 <Avatar user={user} size="sm" />
-                <span className="text-sm font-medium text-gray-800 truncate">
+                <span className="text-sm font-medium text-gray-800 dark:text-slate-200 truncate">
                   {user?.name}
                 </span>
               </div>
@@ -44,7 +44,7 @@ export const ExplorePeople = ({
                   }
                   className={`text-xs font-medium px-3 py-1 rounded-md transition-colors ${
                     isFollowing
-                      ? 'border border-gray-300 text-gray-700 hover:bg-gray-100'
+                      ? 'border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800'
                       : 'bg-emerald-600 text-white hover:bg-emerald-700'
                   }`}
                 >

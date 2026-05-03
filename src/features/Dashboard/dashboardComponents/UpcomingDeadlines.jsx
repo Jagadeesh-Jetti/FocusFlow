@@ -4,12 +4,12 @@ export const UpcomingDeadlines = ({ deadlines }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6">
-      <h2 className="text-base font-semibold text-gray-900 mb-4">
+    <div className="bg-white rounded-2xl border border-gray-200 dark:border-slate-700 p-6">
+      <h2 className="text-base font-semibold text-gray-900 dark:text-slate-100 mb-4">
         Upcoming deadlines
       </h2>
       {deadlines.length === 0 ? (
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-gray-500 dark:text-slate-500">
           <p className="mb-2">Nothing due in the next few days.</p>
           <Link
             to="/tasks"
@@ -34,8 +34,8 @@ export const UpcomingDeadlines = ({ deadlines }) => {
                     : ''
                 }`}
               >
-                <span className="text-gray-700 truncate">{d.title}</span>
-                <span className="text-xs text-gray-500 shrink-0 ml-2">
+                <span className="text-gray-700 dark:text-slate-300 truncate">{d.title}</span>
+                <span className="text-xs text-gray-500 dark:text-slate-500 shrink-0 ml-2">
                   {d.date}
                 </span>
               </li>

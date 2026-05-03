@@ -137,7 +137,7 @@ export const Tasks = () => {
             setSelectedMilestone={setSelectedMilestone}
             setSelectedPriority={setSelectedPriority}
           />
-          <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer select-none px-3 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">
+          <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300 cursor-pointer select-none px-3 py-2 bg-white border border-gray-200 dark:border-slate-700 rounded-lg shadow-sm">
             <input
               type="checkbox"
               checked={showCompleted}
@@ -182,11 +182,11 @@ export const Tasks = () => {
           });
           if (visible.length === 0) {
             return (
-              <div className="border border-dashed border-gray-300 rounded-2xl p-10 text-center">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              <div className="border border-dashed border-gray-300 dark:border-slate-600 rounded-2xl p-10 text-center">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-slate-200 mb-2">
                   {showCompleted ? 'No tasks match' : 'No open tasks'}
                 </h3>
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-sm text-gray-500 dark:text-slate-500 mb-4">
                   {showCompleted
                     ? 'Try clearing the filters above.'
                     : "Either everything's done, or you haven't added any tasks matching the current filters yet."}

@@ -18,16 +18,16 @@ const MARKDOWN_COMPONENTS = {
   ),
   li: (props) => <li className="leading-snug" {...props} />,
   h1: (props) => (
-    <h1 className="text-base font-semibold text-gray-900 mt-3 mb-1" {...props} />
+    <h1 className="text-base font-semibold text-gray-900 dark:text-slate-100 mt-3 mb-1" {...props} />
   ),
   h2: (props) => (
-    <h2 className="text-base font-semibold text-gray-900 mt-3 mb-1" {...props} />
+    <h2 className="text-base font-semibold text-gray-900 dark:text-slate-100 mt-3 mb-1" {...props} />
   ),
   h3: (props) => (
-    <h3 className="text-sm font-semibold text-gray-900 mt-2 mb-1" {...props} />
+    <h3 className="text-sm font-semibold text-gray-900 dark:text-slate-100 mt-2 mb-1" {...props} />
   ),
   strong: (props) => (
-    <strong className="font-semibold text-gray-900" {...props} />
+    <strong className="font-semibold text-gray-900 dark:text-slate-100" {...props} />
   ),
   em: (props) => <em className="italic" {...props} />,
   a: (props) => (
@@ -41,7 +41,7 @@ const MARKDOWN_COMPONENTS = {
   code: ({ inline, ...props }) =>
     inline ? (
       <code
-        className="bg-gray-100 text-emerald-700 rounded px-1 py-0.5 text-[0.85em]"
+        className="bg-gray-100 dark:bg-slate-800 text-emerald-700 rounded px-1 py-0.5 text-[0.85em]"
         {...props}
       />
     ) : (
@@ -53,11 +53,11 @@ const MARKDOWN_COMPONENTS = {
   pre: (props) => <pre className="my-2" {...props} />,
   blockquote: (props) => (
     <blockquote
-      className="border-l-2 border-emerald-300 pl-3 my-2 text-gray-600"
+      className="border-l-2 border-emerald-300 pl-3 my-2 text-gray-600 dark:text-slate-400"
       {...props}
     />
   ),
-  hr: () => <hr className="my-3 border-gray-200" />,
+  hr: () => <hr className="my-3 border-gray-200 dark:border-slate-700" />,
 };
 
 const SUGGESTED_PROMPTS = [
@@ -139,16 +139,16 @@ export const Coach = () => {
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-slate-950">
       <Sidebar />
       <main className="flex-1 flex flex-col h-screen">
-        <header className="flex items-center justify-between px-4 md:px-8 py-4 border-b border-gray-200 bg-white shrink-0">
+        <header className="flex items-center justify-between px-4 md:px-8 py-4 border-b border-gray-200 dark:border-slate-700 bg-white shrink-0">
           <div className="flex items-center gap-3">
             <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center shadow-sm shadow-emerald-500/30">
               <Sparkles className="w-5 h-5" />
             </span>
             <div>
-              <h1 className="text-lg md:text-xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-lg md:text-xl font-bold text-gray-900 dark:text-slate-100 leading-tight">
                 Coach
               </h1>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-gray-500 dark:text-slate-500">
                 Your AI productivity coach
               </p>
             </div>
@@ -156,7 +156,7 @@ export const Coach = () => {
           {!isEmpty && (
             <button
               onClick={handleClear}
-              className="inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-3 py-1.5 rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800 px-3 py-1.5 rounded-lg transition-colors"
             >
               <RotateCcw className="w-4 h-4" />
               <span className="hidden sm:inline">New conversation</span>
@@ -190,9 +190,9 @@ export const Coach = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-200 bg-white px-4 md:px-8 py-4 shrink-0">
+        <div className="border-t border-gray-200 dark:border-slate-700 bg-white px-4 md:px-8 py-4 shrink-0">
           <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
-            <div className="flex items-end gap-2 bg-gray-50 dark:bg-slate-950 border border-gray-200 rounded-2xl p-2 focus-within:border-emerald-400 focus-within:ring-2 focus-within:ring-emerald-100 transition">
+            <div className="flex items-end gap-2 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 rounded-2xl p-2 focus-within:border-emerald-400 focus-within:ring-2 focus-within:ring-emerald-100 transition">
               <textarea
                 ref={inputRef}
                 value={draft}
@@ -200,7 +200,7 @@ export const Coach = () => {
                 onKeyDown={handleKeyDown}
                 rows={1}
                 placeholder="Ask anything about your goals, tasks, or progress…"
-                className="flex-1 bg-transparent resize-none px-2 py-2 text-sm focus:outline-none placeholder:text-gray-400 max-h-40"
+                className="flex-1 bg-transparent resize-none px-2 py-2 text-sm focus:outline-none placeholder:text-gray-400 dark:text-slate-600 max-h-40"
                 style={{ minHeight: '2.25rem' }}
                 disabled={loading}
                 autoFocus
@@ -209,7 +209,7 @@ export const Coach = () => {
                 type="submit"
                 disabled={!draft.trim() || loading}
                 aria-label="Send message"
-                className="bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white p-2 rounded-xl transition-colors shrink-0"
+                className="bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 dark:bg-slate-600 disabled:cursor-not-allowed text-white p-2 rounded-xl transition-colors shrink-0"
               >
                 {loading ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
@@ -218,7 +218,7 @@ export const Coach = () => {
                 )}
               </button>
             </div>
-            <p className="text-xs text-gray-400 mt-2 text-center">
+            <p className="text-xs text-gray-400 dark:text-slate-600 mt-2 text-center">
               Coach has read-only access to your goals and tasks. It can&apos;t
               change anything for you (yet).
             </p>
@@ -234,10 +234,10 @@ const EmptyState = ({ userName, onPick }) => (
     <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white mb-5 shadow-lg shadow-emerald-500/30">
       <Wand2 className="w-7 h-7" />
     </div>
-    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-100 mb-2">
       {userName ? `Hi, ${userName}.` : 'Hello there.'} What's on your mind?
     </h2>
-    <p className="text-gray-600 mb-8 max-w-md mx-auto">
+    <p className="text-gray-600 dark:text-slate-400 mb-8 max-w-md mx-auto">
       Ask anything about your goals, tasks, or how this week is going. I see
       everything you do in FocusFlow.
     </p>
@@ -247,10 +247,10 @@ const EmptyState = ({ userName, onPick }) => (
         <button
           key={s.title}
           onClick={() => onPick(s.prompt)}
-          className="bg-white border border-gray-200 rounded-xl p-4 hover:border-emerald-300 hover:shadow-sm transition group"
+          className="bg-white border border-gray-200 dark:border-slate-700 rounded-xl p-4 hover:border-emerald-300 hover:shadow-sm transition group"
         >
           <div className="text-2xl mb-2">{s.icon}</div>
-          <div className="font-medium text-gray-900 group-hover:text-emerald-700 transition-colors">
+          <div className="font-medium text-gray-900 dark:text-slate-100 group-hover:text-emerald-700 transition-colors">
             {s.title}
           </div>
         </button>
@@ -276,7 +276,7 @@ const Message = ({ message, user }) => {
       <span className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center shrink-0">
         <Bot className="w-4 h-4" />
       </span>
-      <div className="bg-white border border-gray-200 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%] text-gray-800 leading-relaxed text-sm">
+      <div className="bg-white border border-gray-200 dark:border-slate-700 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%] text-gray-800 dark:text-slate-200 leading-relaxed text-sm">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={MARKDOWN_COMPONENTS}
@@ -293,7 +293,7 @@ const ThinkingBubble = () => (
     <span className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center shrink-0">
       <Bot className="w-4 h-4" />
     </span>
-    <div className="bg-white border border-gray-200 rounded-2xl rounded-tl-md px-4 py-3">
+    <div className="bg-white border border-gray-200 dark:border-slate-700 rounded-2xl rounded-tl-md px-4 py-3">
       <div className="flex items-center gap-1.5">
         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-bounce" />
         <span

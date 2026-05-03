@@ -27,7 +27,7 @@ import {
 } from '../tasks/taskThunk';
 
 const statusColor = {
-  'Not Started': 'bg-gray-100 text-gray-700',
+  'Not Started': 'bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300',
   'In Progress': 'bg-blue-100 text-blue-700',
   Completed: 'bg-green-100 text-green-700',
 };
@@ -286,7 +286,7 @@ export const GoalDetail = () => {
       <div className="flex flex-col md:flex-row min-h-screen">
         <Sidebar />
         <main className="flex-1 p-8">
-          <div className="text-gray-500">Loading goal…</div>
+          <div className="text-gray-500 dark:text-slate-500">Loading goal…</div>
         </main>
       </div>
     );
@@ -299,11 +299,11 @@ export const GoalDetail = () => {
         <main className="flex-1 p-8">
           <button
             onClick={() => navigate('/goals')}
-            className="flex items-center gap-2 text-gray-600 hover:text-emerald-600 mb-4"
+            className="flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-emerald-600 mb-4"
           >
             <ArrowLeft className="w-4 h-4" /> Back to goals
           </button>
-          <div className="text-gray-600">
+          <div className="text-gray-600 dark:text-slate-400">
             {error
               ? `Couldn't load this goal: ${error}`
               : 'Goal not found. It may have been deleted.'}
@@ -319,7 +319,7 @@ export const GoalDetail = () => {
       <main className="flex-1 p-4 md:p-8 max-w-4xl mx-auto w-full">
         <button
           onClick={() => navigate('/goals')}
-          className="flex items-center gap-2 text-gray-600 hover:text-emerald-600 mb-4"
+          className="flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-emerald-600 mb-4"
         >
           <ArrowLeft className="w-4 h-4" /> Back to goals
         </button>
@@ -331,7 +331,7 @@ export const GoalDetail = () => {
                 {goalDetail.title}
               </h1>
               {goalDetail.category && (
-                <div className="text-sm text-gray-500 mt-1">
+                <div className="text-sm text-gray-500 dark:text-slate-500 mt-1">
                   {goalDetail.category}
                 </div>
               )}
@@ -340,14 +340,14 @@ export const GoalDetail = () => {
               <button
                 onClick={openEdit}
                 aria-label="Edit goal"
-                className="p-2 text-gray-600 hover:text-emerald-600 rounded-lg hover:bg-gray-100"
+                className="p-2 text-gray-600 dark:text-slate-400 hover:text-emerald-600 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800"
               >
                 <Pencil className="w-4 h-4" />
               </button>
               <button
                 onClick={handleDeleteGoal}
                 aria-label="Delete goal"
-                className="p-2 text-gray-600 hover:text-red-600 rounded-lg hover:bg-gray-100"
+                className="p-2 text-gray-600 dark:text-slate-400 hover:text-red-600 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -355,7 +355,7 @@ export const GoalDetail = () => {
           </div>
 
           {goalDetail.description && (
-            <p className="text-gray-700 mb-4 whitespace-pre-wrap">
+            <p className="text-gray-700 dark:text-slate-300 mb-4 whitespace-pre-wrap">
               {goalDetail.description}
             </p>
           )}
@@ -364,7 +364,7 @@ export const GoalDetail = () => {
             {goalDetail.status && (
               <span
                 className={`px-2 py-1 rounded-full font-medium ${
-                  statusColor[goalDetail.status] || 'bg-gray-100 text-gray-700'
+                  statusColor[goalDetail.status] || 'bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300'
                 }`}
               >
                 {goalDetail.status}
@@ -374,14 +374,14 @@ export const GoalDetail = () => {
               <span
                 className={`px-2 py-1 rounded-full font-medium ${
                   priorityColor[goalDetail.priority] ||
-                  'bg-gray-100 text-gray-700'
+                  'bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300'
                 }`}
               >
                 {goalDetail.priority} priority
               </span>
             )}
             {goalDetail.dueDate && (
-              <span className="px-2 py-1 rounded-full bg-gray-100 text-gray-700">
+              <span className="px-2 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300">
                 Due {new Date(goalDetail.dueDate).toLocaleDateString('en-GB')}
               </span>
             )}
@@ -409,7 +409,7 @@ export const GoalDetail = () => {
 
         <section className="mb-6">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold text-gray-800">Milestones</h2>
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-slate-200">Milestones</h2>
             <button
               onClick={() => setShowAddMilestone((v) => !v)}
               className="flex items-center gap-1 text-sm text-emerald-600 hover:text-emerald-700"
@@ -468,7 +468,7 @@ export const GoalDetail = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddMilestone(false)}
-                  className="bg-gray-200 px-3 py-1 rounded text-sm"
+                  className="bg-gray-200 dark:bg-slate-700 px-3 py-1 rounded text-sm"
                 >
                   Cancel
                 </button>
@@ -492,7 +492,7 @@ export const GoalDetail = () => {
               ))}
             </div>
           ) : (
-            <div className="border border-dashed border-gray-300 rounded-xl p-6 text-center text-gray-500 text-sm">
+            <div className="border border-dashed border-gray-300 dark:border-slate-600 rounded-xl p-6 text-center text-gray-500 dark:text-slate-500 text-sm">
               No milestones yet. Break your goal into steps above.
             </div>
           )}
@@ -500,7 +500,7 @@ export const GoalDetail = () => {
 
         <section>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold text-gray-800">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-slate-200">
               Unassigned tasks
             </h2>
             <button
@@ -578,7 +578,7 @@ export const GoalDetail = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddOrphanTask(false)}
-                  className="bg-gray-200 px-3 py-1 rounded text-sm"
+                  className="bg-gray-200 dark:bg-slate-700 px-3 py-1 rounded text-sm"
                 >
                   Cancel
                 </button>
@@ -587,7 +587,7 @@ export const GoalDetail = () => {
           )}
 
           {unassignedTasks.length ? (
-            <div className="bg-white rounded-xl border border-gray-200 p-3 space-y-1">
+            <div className="bg-white rounded-xl border border-gray-200 dark:border-slate-700 p-3 space-y-1">
               {unassignedTasks.map((task) => (
                 <TaskRow
                   key={task._id}
@@ -599,7 +599,7 @@ export const GoalDetail = () => {
               ))}
             </div>
           ) : (
-            <div className="text-sm text-gray-400 italic px-3 py-2">
+            <div className="text-sm text-gray-400 dark:text-slate-600 italic px-3 py-2">
               No unassigned tasks.
             </div>
           )}

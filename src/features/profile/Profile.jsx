@@ -115,7 +115,7 @@ export const Profile = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-sm text-gray-400 italic">No posts yet.</div>
+              <div className="text-sm text-gray-400 dark:text-slate-600 italic">No posts yet.</div>
             )
           ) : display === 'goals' ? (
             profileGoals.length > 0 ? (
@@ -125,7 +125,7 @@ export const Profile = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-sm text-gray-400 italic">No goals yet.</div>
+              <div className="text-sm text-gray-400 dark:text-slate-600 italic">No goals yet.</div>
             )
           ) : null}
         </div>

@@ -8,7 +8,7 @@ const priorityColor = {
 };
 
 const statusColor = {
-  'Not Started': 'bg-gray-100 text-gray-700',
+  'Not Started': 'bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300',
   'In Progress': 'bg-blue-100 text-blue-700',
   Completed: 'bg-green-100 text-green-700',
 };
@@ -40,10 +40,10 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
     >
       <div className="text-xl font-semibold mb-1">{goal.title}</div>
       {goal.category && (
-        <div className="text-sm text-gray-600 mb-2">{goal.category}</div>
+        <div className="text-sm text-gray-600 dark:text-slate-400 mb-2">{goal.category}</div>
       )}
       {goal.description && (
-        <div className="text-gray-700 line-clamp-2 mb-3">
+        <div className="text-gray-700 dark:text-slate-300 line-clamp-2 mb-3">
           {goal.description}
         </div>
       )}
@@ -52,7 +52,7 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
         {goal.status && (
           <span
             className={`px-2 py-0.5 rounded-full font-medium ${
-              statusColor[goal.status] || 'bg-gray-100 text-gray-700'
+              statusColor[goal.status] || 'bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300'
             }`}
           >
             {goal.status}
@@ -61,14 +61,14 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
         {goal.priority && (
           <span
             className={`px-2 py-0.5 rounded-full font-medium ${
-              priorityColor[goal.priority] || 'bg-gray-100 text-gray-700'
+              priorityColor[goal.priority] || 'bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300'
             }`}
           >
             {goal.priority}
           </span>
         )}
         {goal.dueDate && (
-          <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700">
+          <span className="px-2 py-0.5 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300">
             Due {new Date(goal.dueDate).toLocaleDateString('en-GB')}
           </span>
         )}

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Modal } from '@/components/Modal';
 
 const INPUT_CLASS =
-  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500';
-const LABEL_CLASS = 'block text-sm font-medium text-gray-700 mb-1';
+  'w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500';
+const LABEL_CLASS = 'block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1';
 
 export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
   const [formData, setFormData] = useState({
@@ -90,7 +90,7 @@ export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
             <img
               src={formData.profilePic}
               alt=""
-              className="w-16 h-16 rounded-full mt-2 object-cover border border-gray-200"
+              className="w-16 h-16 rounded-full mt-2 object-cover border border-gray-200 dark:border-slate-700"
             />
           )}
         </div>
@@ -112,7 +112,7 @@ export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
             <img
               src={formData.bannerPic}
               alt=""
-              className="w-full h-24 object-cover rounded-lg mt-2 border border-gray-200"
+              className="w-full h-24 object-cover rounded-lg mt-2 border border-gray-200 dark:border-slate-700"
             />
           )}
         </div>
@@ -121,7 +121,7 @@ export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800 transition-colors"
           >
             Cancel
           </button>

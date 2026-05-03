@@ -15,7 +15,7 @@ export const ProfileMenuBar = ({ setDisplay }) => {
 
   return (
     <nav
-      className="flex border-b border-gray-200 mt-6"
+      className="flex border-b border-gray-200 dark:border-slate-700 mt-6"
       role="tablist"
       aria-label="Profile content"
     >
@@ -28,7 +28,7 @@ export const ProfileMenuBar = ({ setDisplay }) => {
           className={`px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
             active === t.key
               ? 'border-emerald-600 text-emerald-700'
-              : 'border-transparent text-gray-600 hover:text-gray-900'
+              : 'border-transparent text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100'
           }`}
         >
           {t.label}

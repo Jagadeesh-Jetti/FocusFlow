@@ -26,7 +26,7 @@ export const PostDetailPage = () => {
     return (
       <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-slate-950">
         <Sidebar />
-        <div className="m-10 text-gray-500">Loading post…</div>
+        <div className="m-10 text-gray-500 dark:text-slate-500">Loading post…</div>
       </div>
     );
   }
@@ -42,7 +42,7 @@ export const PostDetailPage = () => {
           >
             Back
           </button>
-          <div className="text-gray-600">
+          <div className="text-gray-600 dark:text-slate-400">
             Post not found. It may have been deleted.
           </div>
         </div>
@@ -77,10 +77,10 @@ export const PostDetailPage = () => {
           <div className="flex items-center gap-4 mb-5">
             <Avatar user={filteredPost.user} size="lg" />
             <div>
-              <h2 className="font-semibold text-base md:text-lg text-gray-800">
+              <h2 className="font-semibold text-base md:text-lg text-gray-800 dark:text-slate-200">
                 {filteredPost.user?.name}
               </h2>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-slate-500">
                 {filteredPost.relatedGoal?.title &&
                   `🎯 ${filteredPost.relatedGoal.title}`}
                 {filteredPost.relatedMilestone?.title &&
@@ -89,7 +89,7 @@ export const PostDetailPage = () => {
             </div>
           </div>
 
-          <p className="text-gray-700 leading-relaxed mb-4">
+          <p className="text-gray-700 dark:text-slate-300 leading-relaxed mb-4">
             {filteredPost.content}
           </p>
           {filteredPost.image && (
@@ -100,7 +100,7 @@ export const PostDetailPage = () => {
             />
           )}
 
-          <div className="flex items-center gap-6 text-gray-500 text-sm mb-2">
+          <div className="flex items-center gap-6 text-gray-500 dark:text-slate-500 text-sm mb-2">
             <button
               onClick={likeHandler}
               className={`flex items-center gap-1 transition-all ${
@@ -135,7 +135,7 @@ export const PostDetailPage = () => {
             <button
               type="submit"
               disabled={!commentText.trim()}
-              className="bg-emerald-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+              className="bg-emerald-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-emerald-700 disabled:bg-gray-300 dark:bg-slate-600 disabled:cursor-not-allowed"
             >
               Post
             </button>
