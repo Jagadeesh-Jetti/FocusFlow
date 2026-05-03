@@ -11,6 +11,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { Profile } from './features/profile/Profile';
 import { Feed } from './features/community/feed';
 import { PostDetailPage } from './features/community/PostDetailPage';
+import { NotFound } from './components/NotFound';
 
 function App() {
   return (
@@ -58,9 +59,31 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/feed" element={<Feed />} />
-        <Route path="/feed/:id" element={<PostDetailPage />} />
-        <Route path="/profile/:id" element={<Profile />} />
+        <Route
+          path="/feed"
+          element={
+            <ProtectedRoute>
+              <Feed />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/feed/:id"
+          element={
+            <ProtectedRoute>
+              <PostDetailPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile/:id"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
