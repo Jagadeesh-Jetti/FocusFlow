@@ -3,6 +3,7 @@ import {
   createGoalAPI,
   deleteGoalByIdAPI,
   getGoalByIdAPI,
+  getGoalFullAPI,
   getGoalsAPI,
   updateGoalByIdAPI,
 } from './goalService';
@@ -16,6 +17,19 @@ export const getGoals = createAsyncThunk('goal/getAll', async (_, thunkAPI) => {
     );
   }
 });
+
+export const getGoalFull = createAsyncThunk(
+  'goal/getFull',
+  async (id, thunkAPI) => {
+    try {
+      return await getGoalFullAPI(id);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || 'Goal retrieval failed'
+      );
+    }
+  }
+);
 
 export const createGoal = createAsyncThunk(
   'goal/create',

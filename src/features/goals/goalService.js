@@ -5,6 +5,14 @@ export const getGoalsAPI = async () => {
   return response.data.goals;
 };
 
+export const getGoalFullAPI = async (id) => {
+  const response = await axios.get(`/goals/${id}/full`);
+  return {
+    goal: response.data.goal,
+    unassignedTasks: response.data.unassignedTasks || [],
+  };
+};
+
 export const createGoalAPI = async (userData) => {
   const response = await axios.post('/goals', userData);
   return response.data.goal;

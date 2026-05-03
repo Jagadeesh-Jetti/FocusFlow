@@ -3,6 +3,7 @@ import { Dashboard } from './features/Dashboard/Dashboard';
 import { Signup } from './features/auth/Signup';
 import { Login } from './features/auth/Login';
 import { Goals } from './features/goals/Goals';
+import { GoalDetail } from './features/goals/GoalDetail';
 import { Milestones } from './features/milestones/Milestones';
 import { Tasks } from './features/tasks/Tasks';
 import { Routes, Route } from 'react-router-dom';
@@ -30,6 +31,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Goals />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/goals/:id"
+          element={
+            <ProtectedRoute>
+              <GoalDetail />
             </ProtectedRoute>
           }
         />

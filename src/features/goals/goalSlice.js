@@ -3,6 +3,7 @@ import {
   createGoal,
   deleteGoalById,
   getGoalById,
+  getGoalFull,
   getGoals,
   updateGoalById,
 } from './goalThunk';
@@ -10,13 +11,39 @@ import {
 const initialState = {
   goalsList: [],
   goal: null,
+  goalDetail: null,
+  unassignedTasks: [],
+  detailLoading: false,
   loading: false,
   error: null,
 };
 
+const applyTaskUpdate = (task, updates) =>
+  task && task._id === updates._id ? { ...task, ...updates } : task;
+
 const goalSlice = createSlice({
   name: 'goal',
   initialState,
+
+  reducers: {
+    clearGoalDetail: (state) => {
+      state.goalDetail = null;
+      state.unassignedTasks = [];
+      state.detailLoading = false;
+    },
+    patchDetailTask: (state, action) => {
+      const updates = action.payload;
+      if (!updates || !updates._id || !state.goalDetail) return;
+
+      state.goalDetail.milestones = state.goalDetail.milestones.map((m) => ({
+        ...m,
+        tasks: m.tasks.map((t) => applyTaskUpdate(t, updates)),
+      }));
+      state.unassignedTasks = state.unassignedTasks.map((t) =>
+        applyTaskUpdate(t, updates)
+      );
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -60,6 +87,22 @@ const goalSlice = createSlice({
         state.error = action.payload;
       })
 
+      .addCase(getGoalFull.pending, (state) => {
+        state.detailLoading = true;
+        state.error = null;
+      })
+      .addCase(getGoalFull.fulfilled, (state, action) => {
+        state.detailLoading = false;
+        state.goalDetail = action.payload.goal;
+        state.unassignedTasks = action.payload.unassignedTasks;
+      })
+      .addCase(getGoalFull.rejected, (state, action) => {
+        state.detailLoading = false;
+        state.error = action.payload;
+        state.goalDetail = null;
+        state.unassignedTasks = [];
+      })
+
       .addCase(updateGoalById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -79,7 +122,7 @@ const goalSlice = createSlice({
       })
       .addCase(deleteGoalById.fulfilled, (state) => {
         state.loading = false;
-        state.goal = null; // goal is deleted
+        state.goal = null;
       })
       .addCase(deleteGoalById.rejected, (state, action) => {
         state.loading = false;
@@ -88,4 +131,5 @@ const goalSlice = createSlice({
   },
 });
 
+export const { clearGoalDetail, patchDetailTask } = goalSlice.actions;
 export default goalSlice.reducer;
