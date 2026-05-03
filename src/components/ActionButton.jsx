@@ -1,5 +1,5 @@
 const TONE = {
-  blue: 'text-gray-600 hover:text-indigo-700 hover:bg-indigo-50',
+  blue: 'text-gray-600 hover:text-emerald-700 hover:bg-emerald-50',
   red: 'text-gray-600 hover:text-red-600 hover:bg-red-50',
   gray: 'text-gray-600 hover:text-gray-900 hover:bg-gray-100',
 };

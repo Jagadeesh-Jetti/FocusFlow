@@ -15,6 +15,7 @@ import {
 } from './profileThunk';
 import { useParams } from 'react-router-dom';
 import { ExplorePeople } from '@/components/ExplorePeople';
+import { Avatar } from '@/components/Avatar';
 import { ProfileMenuBar } from './profileComponents/ProfileMenuBar';
 import { ProfileHeroContent } from './profileComponents/ProfileHeroContent';
 
@@ -78,20 +79,14 @@ export const Profile = () => {
               className="h-44 w-full object-cover"
             />
           ) : (
-            <div className="h-44 w-full bg-gradient-to-r from-indigo-500 via-indigo-600 to-purple-600" />
+            <div className="h-44 w-full bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600" />
           )}
           <div className="absolute -bottom-12 left-6 md:left-10">
-            {profile?.profilePic ? (
-              <img
-                src={profile.profilePic}
-                alt={profile.name}
-                className="w-24 h-24 rounded-full border-4 border-white shadow-md object-cover bg-white"
-              />
-            ) : (
-              <div className="w-24 h-24 rounded-full border-4 border-white shadow-md bg-indigo-100 text-indigo-700 flex items-center justify-center text-3xl font-bold">
-                {profile?.name?.[0]?.toUpperCase()}
-              </div>
-            )}
+            <Avatar
+              user={profile}
+              size="xl"
+              className="border-4 border-white shadow-md"
+            />
           </div>
         </div>
 

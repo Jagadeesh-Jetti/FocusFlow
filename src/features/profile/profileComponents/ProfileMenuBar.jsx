@@ -27,7 +27,7 @@ export const ProfileMenuBar = ({ setDisplay }) => {
           onClick={() => select(t.key)}
           className={`px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
             active === t.key
-              ? 'border-indigo-600 text-indigo-700'
+              ? 'border-emerald-600 text-emerald-700'
               : 'border-transparent text-gray-600 hover:text-gray-900'
           }`}
         >

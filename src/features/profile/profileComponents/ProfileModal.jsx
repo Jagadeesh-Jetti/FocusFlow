@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Modal } from '@/components/Modal';
 
 const INPUT_CLASS =
-  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500';
+  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500';
 const LABEL_CLASS = 'block text-sm font-medium text-gray-700 mb-1';
 
 export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
@@ -127,7 +127,7 @@ export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
           </button>
           <button
             type="submit"
-            className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
+            className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 transition-colors"
           >
             Save changes
           </button>

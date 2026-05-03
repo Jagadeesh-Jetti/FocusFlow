@@ -74,7 +74,7 @@ export const Feed = () => {
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-sm transition-colors"
+            className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-sm transition-colors"
           >
             <span className="text-lg leading-none">+</span> New post
           </button>
@@ -91,7 +91,7 @@ export const Feed = () => {
               </label>
               <textarea
                 id="post-content"
-                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none text-sm"
+                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none text-sm"
                 rows={4}
                 placeholder="Share progress, an insight, or a question…"
                 value={form.content}
@@ -110,7 +110,7 @@ export const Feed = () => {
                 id="post-image"
                 type="file"
                 accept="image/*"
-                className="block w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                className="block w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"
                 onChange={(e) =>
                   setForm({ ...form, image: e.target.files[0] || null })
                 }
@@ -119,7 +119,7 @@ export const Feed = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold py-2.5 rounded-lg transition-colors"
+              className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-semibold py-2.5 rounded-lg transition-colors"
             >
               {submitting ? 'Sharing…' : 'Share'}
             </button>
@@ -159,7 +159,7 @@ export const Feed = () => {
             </p>
             <button
               onClick={() => setShowModal(true)}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2 rounded-lg"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-5 py-2 rounded-lg"
             >
               + Share your first post
             </button>

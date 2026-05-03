@@ -20,7 +20,7 @@ export const MilestonesProgress = ({ milestones }) => {
               </div>
               <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-indigo-600 rounded-full transition-all"
+                  className="h-full bg-emerald-600 rounded-full transition-all"
                   style={{ width: `${m.progress}%` }}
                 />
               </div>

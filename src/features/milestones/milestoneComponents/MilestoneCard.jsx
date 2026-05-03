@@ -18,7 +18,7 @@ export const MilestoneCard = ({ milestone, onEdit, onDelete }) => {
           <button
             onClick={onEdit}
             aria-label="Edit milestone"
-            className="p-1.5 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-md"
+            className="p-1.5 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md"
           >
             <Pencil className="w-4 h-4" />
           </button>

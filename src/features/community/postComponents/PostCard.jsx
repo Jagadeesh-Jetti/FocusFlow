@@ -3,6 +3,7 @@ import { Heart, MessageCircle, Target, Flag } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleLikePost, commentPost } from '../feedThunk';
 import { useNavigate } from 'react-router-dom';
+import { Avatar } from '../../../components/Avatar';
 
 const formatTime = (iso) => {
   if (!iso) return '';
@@ -62,9 +63,7 @@ export const PostCard = ({ post }) => {
       className="bg-white rounded-2xl border border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition cursor-pointer"
     >
       <header className="flex items-center gap-3 mb-3">
-        <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-semibold shrink-0">
-          {user?.name?.[0]?.toUpperCase()}
-        </div>
+        <Avatar user={user} size="md" />
         <div className="flex-1 min-w-0">
           <div className="font-semibold text-gray-900 truncate">
             {user?.name}
@@ -78,7 +77,7 @@ export const PostCard = ({ post }) => {
       {(relatedGoal?.title || relatedMilestone?.title) && (
         <div className="flex flex-wrap items-center gap-2 mb-3 text-xs">
           {relatedGoal?.title && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">
               <Target className="w-3 h-3" />
               {relatedGoal.title}
             </span>
@@ -137,12 +136,12 @@ export const PostCard = ({ post }) => {
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
             placeholder="Add a comment…"
-            className="flex-1 text-sm px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="flex-1 text-sm px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
           />
           <button
             type="submit"
             disabled={!commentText.trim()}
-            className="text-sm bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium px-4 py-2 rounded-lg"
+            className="text-sm bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium px-4 py-2 rounded-lg"
           >
             Post
           </button>

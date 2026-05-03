@@ -1,5 +1,5 @@
 const INPUT_CLASS =
-  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500';
+  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500';
 const LABEL_CLASS = 'block text-sm font-medium text-gray-700 mb-1';
 
 export const TaskForm = ({
@@ -124,7 +124,7 @@ export const TaskForm = ({
           type="checkbox"
           name="isCompleted"
           checked={form.isCompleted}
-          className="w-4 h-4 accent-indigo-600"
+          className="w-4 h-4 accent-emerald-600"
           onChange={(e) => setForm({ ...form, isCompleted: e.target.checked })}
         />
         <span>Mark as completed</span>
@@ -132,7 +132,7 @@ export const TaskForm = ({
 
       <button
         type="submit"
-        className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-lg transition-colors"
+        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-lg transition-colors"
       >
         Save task
       </button>

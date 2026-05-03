@@ -1,5 +1,5 @@
 const INPUT_CLASS =
-  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500';
+  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500';
 const LABEL_CLASS = 'block text-sm font-medium text-gray-700 mb-1';
 
 export const MilestoneForm = ({ form, setForm, goals, handleSubmit }) => {
@@ -74,7 +74,7 @@ export const MilestoneForm = ({ form, setForm, goals, handleSubmit }) => {
 
       <button
         type="submit"
-        className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-lg transition-colors"
+        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-lg transition-colors"
       >
         Save milestone
       </button>

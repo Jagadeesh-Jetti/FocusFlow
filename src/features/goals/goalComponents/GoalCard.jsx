@@ -84,7 +84,7 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
           </div>
           <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
             <div
-              className="bg-indigo-600 h-full rounded-full transition-all"
+              className="bg-emerald-600 h-full rounded-full transition-all"
               style={{ width: `${pct}%` }}
             />
           </div>

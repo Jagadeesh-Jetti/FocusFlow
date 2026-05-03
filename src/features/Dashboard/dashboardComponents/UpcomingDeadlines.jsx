@@ -13,7 +13,7 @@ export const UpcomingDeadlines = ({ deadlines }) => {
           <p className="mb-2">Nothing due in the next few days.</p>
           <Link
             to="/tasks"
-            className="text-indigo-600 hover:underline font-medium"
+            className="text-emerald-600 hover:underline font-medium"
           >
             Add a task →
           </Link>
@@ -30,7 +30,7 @@ export const UpcomingDeadlines = ({ deadlines }) => {
                 }
                 className={`flex justify-between items-center text-sm py-1.5 ${
                   canNavigate
-                    ? 'cursor-pointer hover:text-indigo-700 transition-colors'
+                    ? 'cursor-pointer hover:text-emerald-700 transition-colors'
                     : ''
                 }`}
               >

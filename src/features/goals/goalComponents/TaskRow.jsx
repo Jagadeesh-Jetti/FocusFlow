@@ -26,7 +26,7 @@ export const TaskRow = ({ task, onToggle, onDelete, onUpdate }) => {
 
   if (isEditing) {
     return (
-      <div className="border border-indigo-200 bg-indigo-50/50 rounded-lg p-3 space-y-2">
+      <div className="border border-emerald-200 bg-emerald-50/50 rounded-lg p-3 space-y-2">
         <input
           className="w-full px-2 py-1 border rounded text-sm"
           value={editForm.title}
@@ -64,7 +64,7 @@ export const TaskRow = ({ task, onToggle, onDelete, onUpdate }) => {
           </select>
           <button
             onClick={saveEdit}
-            className="ml-auto bg-indigo-600 text-white px-3 py-1 rounded text-sm hover:bg-indigo-700"
+            className="ml-auto bg-emerald-600 text-white px-3 py-1 rounded text-sm hover:bg-emerald-700"
           >
             Save
           </button>
@@ -86,8 +86,8 @@ export const TaskRow = ({ task, onToggle, onDelete, onUpdate }) => {
         aria-label={isCompleted ? 'Mark incomplete' : 'Mark complete'}
         className={`mt-1 w-5 h-5 rounded border-2 flex items-center justify-center transition ${
           isCompleted
-            ? 'bg-indigo-600 border-indigo-600 text-white'
-            : 'border-gray-300 hover:border-indigo-500'
+            ? 'bg-emerald-600 border-emerald-600 text-white'
+            : 'border-gray-300 hover:border-emerald-500'
         }`}
       >
         {isCompleted && <Check className="w-3 h-3" />}
@@ -124,7 +124,7 @@ export const TaskRow = ({ task, onToggle, onDelete, onUpdate }) => {
         <button
           onClick={() => setIsEditing(true)}
           aria-label="Edit task"
-          className="p-1 text-gray-500 hover:text-indigo-600"
+          className="p-1 text-gray-500 hover:text-emerald-600"
         >
           <Pencil className="w-4 h-4" />
         </button>

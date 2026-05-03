@@ -155,7 +155,7 @@ export const Milestones = () => {
             </p>
             <button
               onClick={() => setShowModal(true)}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2 rounded-lg"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-5 py-2 rounded-lg"
             >
               + Add a milestone
             </button>

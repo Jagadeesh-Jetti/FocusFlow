@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { Avatar } from './Avatar';
 
 export const ExplorePeople = ({
   filteredUsers,
@@ -28,9 +29,7 @@ export const ExplorePeople = ({
                 className="flex items-center gap-3 cursor-pointer flex-1 min-w-0"
                 onClick={() => navigate(`/profile/${user._id}`)}
               >
-                <div className="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-semibold shrink-0">
-                  {user?.name?.[0]?.toUpperCase()}
-                </div>
+                <Avatar user={user} size="sm" />
                 <span className="text-sm font-medium text-gray-800 truncate">
                   {user?.name}
                 </span>
@@ -46,7 +45,7 @@ export const ExplorePeople = ({
                   className={`text-xs font-medium px-3 py-1 rounded-md transition-colors ${
                     isFollowing
                       ? 'border border-gray-300 text-gray-700 hover:bg-gray-100'
-                      : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                      : 'bg-emerald-600 text-white hover:bg-emerald-700'
                   }`}
                 >
                   {isFollowing ? 'Following' : 'Follow'}

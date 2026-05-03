@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { logout } from '../features/auth/authSlice';
+import { Avatar } from './Avatar';
 
 export const Sidebar = () => {
   const { user } = useSelector((s) => s.auth);
@@ -87,7 +88,7 @@ export const Sidebar = () => {
             className="flex items-center gap-2 px-2"
             aria-label="FocusFlow home"
           >
-            <span className="w-9 h-9 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
+            <span className="w-9 h-9 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
               <Target className="w-5 h-5" />
             </span>
             <span className="text-xl font-bold tracking-tight text-gray-900">
@@ -119,9 +120,7 @@ export const Sidebar = () => {
       <div className="space-y-1 border-t border-gray-100 pt-4">
         {user && (
           <div className="flex items-center gap-3 px-3 py-2 mb-2">
-            <div className="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-semibold shrink-0">
-              {user.name?.[0]?.toUpperCase()}
-            </div>
+            <Avatar user={user} size="sm" />
             <div className="min-w-0 flex-1">
               <div className="text-sm font-medium text-gray-900 truncate">
                 {user.name}
@@ -164,7 +163,7 @@ export const Sidebar = () => {
           className="flex items-center gap-2"
           aria-label="FocusFlow home"
         >
-          <span className="w-7 h-7 rounded-md bg-indigo-600 text-white flex items-center justify-center">
+          <span className="w-7 h-7 rounded-md bg-emerald-600 text-white flex items-center justify-center">
             <Target className="w-4 h-4" />
           </span>
           <span className="text-base font-bold tracking-tight text-gray-900">
@@ -201,7 +200,7 @@ const SidebarItem = ({ href, icon, label, active }) => {
       to={href}
       className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
         active
-          ? 'bg-indigo-50 text-indigo-700'
+          ? 'bg-emerald-50 text-emerald-700'
           : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
       }`}
     >

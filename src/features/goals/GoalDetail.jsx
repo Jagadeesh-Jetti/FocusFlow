@@ -289,7 +289,7 @@ export const GoalDetail = () => {
         <main className="flex-1 p-8">
           <button
             onClick={() => navigate('/goals')}
-            className="flex items-center gap-2 text-gray-600 hover:text-indigo-600 mb-4"
+            className="flex items-center gap-2 text-gray-600 hover:text-emerald-600 mb-4"
           >
             <ArrowLeft className="w-4 h-4" /> Back to goals
           </button>
@@ -309,7 +309,7 @@ export const GoalDetail = () => {
       <main className="flex-1 p-4 md:p-8 max-w-4xl mx-auto w-full">
         <button
           onClick={() => navigate('/goals')}
-          className="flex items-center gap-2 text-gray-600 hover:text-indigo-600 mb-4"
+          className="flex items-center gap-2 text-gray-600 hover:text-emerald-600 mb-4"
         >
           <ArrowLeft className="w-4 h-4" /> Back to goals
         </button>
@@ -330,7 +330,7 @@ export const GoalDetail = () => {
               <button
                 onClick={openEdit}
                 aria-label="Edit goal"
-                className="p-2 text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-gray-100"
+                className="p-2 text-gray-600 hover:text-emerald-600 rounded-lg hover:bg-gray-100"
               >
                 <Pencil className="w-4 h-4" />
               </button>
@@ -386,7 +386,7 @@ export const GoalDetail = () => {
             </div>
             <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
               <div
-                className="bg-indigo-600 h-full rounded-full transition-all"
+                className="bg-emerald-600 h-full rounded-full transition-all"
                 style={{ width: `${progress.pct}%` }}
               />
             </div>
@@ -398,7 +398,7 @@ export const GoalDetail = () => {
             <h2 className="text-lg font-semibold text-gray-800">Milestones</h2>
             <button
               onClick={() => setShowAddMilestone((v) => !v)}
-              className="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700"
+              className="flex items-center gap-1 text-sm text-emerald-600 hover:text-emerald-700"
             >
               <Plus className="w-4 h-4" /> Add milestone
             </button>
@@ -407,7 +407,7 @@ export const GoalDetail = () => {
           {showAddMilestone && (
             <form
               onSubmit={handleAddMilestone}
-              className="mb-3 border border-indigo-200 bg-indigo-50/50 rounded-xl p-4 space-y-2"
+              className="mb-3 border border-emerald-200 bg-emerald-50/50 rounded-xl p-4 space-y-2"
             >
               <input
                 autoFocus
@@ -447,7 +447,7 @@ export const GoalDetail = () => {
                 />
                 <button
                   type="submit"
-                  className="ml-auto bg-indigo-600 text-white px-3 py-1 rounded text-sm"
+                  className="ml-auto bg-emerald-600 text-white px-3 py-1 rounded text-sm"
                 >
                   Add
                 </button>
@@ -491,7 +491,7 @@ export const GoalDetail = () => {
             </h2>
             <button
               onClick={() => setShowAddOrphanTask((v) => !v)}
-              className="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700"
+              className="flex items-center gap-1 text-sm text-emerald-600 hover:text-emerald-700"
             >
               <Plus className="w-4 h-4" /> Add task
             </button>
@@ -500,7 +500,7 @@ export const GoalDetail = () => {
           {showAddOrphanTask && (
             <form
               onSubmit={handleAddOrphanTask}
-              className="mb-3 border border-indigo-200 bg-indigo-50/50 rounded-xl p-4 space-y-2"
+              className="mb-3 border border-emerald-200 bg-emerald-50/50 rounded-xl p-4 space-y-2"
             >
               <input
                 autoFocus
@@ -557,7 +557,7 @@ export const GoalDetail = () => {
                 </select>
                 <button
                   type="submit"
-                  className="ml-auto bg-indigo-600 text-white px-3 py-1 rounded text-sm"
+                  className="ml-auto bg-emerald-600 text-white px-3 py-1 rounded text-sm"
                 >
                   Add
                 </button>

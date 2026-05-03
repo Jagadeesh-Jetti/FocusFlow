@@ -4,7 +4,7 @@ export const MilestoneFilters = ({ goals, filterMilestonesByGoals }) => {
       <select
         name="goals filter"
         onChange={(e) => filterMilestonesByGoals(e)}
-        className="px-3 py-2 rounded-lg border border-gray-200 bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+        className="px-3 py-2 rounded-lg border border-gray-200 bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
         aria-label="Filter by goal"
       >
         <option value="all">All goals</option>

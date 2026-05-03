@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Sidebar } from '../../components/Sidebar';
+import { Avatar } from '../../components/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { commentPost, getPosts, toggleLikePost } from './feedThunk';
 import { Heart, MessageCircle } from 'lucide-react';
@@ -74,9 +75,7 @@ export const PostDetailPage = () => {
 
         <div className="m-10">
           <div className="flex items-center gap-4 mb-5">
-            <div className="w-11 h-11 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold shadow-inner">
-              {filteredPost.user?.name?.[0]?.toUpperCase()}
-            </div>
+            <Avatar user={filteredPost.user} size="lg" />
             <div>
               <h2 className="font-semibold text-base md:text-lg text-gray-800">
                 {filteredPost.user?.name}
@@ -125,20 +124,18 @@ export const PostDetailPage = () => {
               commentHandler();
             }}
           >
-            <div className="w-11 h-11 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold shadow-inner">
-              {currentUser?.name?.[0]?.toUpperCase()}
-            </div>
+            <Avatar user={currentUser} size="lg" />
             <input
               type="text"
               placeholder="Comment your thoughts"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              className="flex-1 border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
+              className="flex-1 border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-200"
             />
             <button
               type="submit"
               disabled={!commentText.trim()}
-              className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+              className="bg-emerald-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
               Post
             </button>

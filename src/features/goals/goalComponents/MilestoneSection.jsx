@@ -88,7 +88,7 @@ export const MilestoneSection = ({
             />
             <button
               onClick={saveEdit}
-              className="bg-indigo-600 text-white px-3 py-1 rounded text-sm"
+              className="bg-emerald-600 text-white px-3 py-1 rounded text-sm"
             >
               Save
             </button>
@@ -125,7 +125,7 @@ export const MilestoneSection = ({
             <button
               onClick={() => setIsEditing(true)}
               aria-label="Edit milestone"
-              className="p-1 text-gray-500 hover:text-indigo-600"
+              className="p-1 text-gray-500 hover:text-emerald-600"
             >
               <Pencil className="w-4 h-4" />
             </button>
@@ -160,7 +160,7 @@ export const MilestoneSection = ({
           {showAddTask ? (
             <form
               onSubmit={submitNewTask}
-              className="border border-indigo-200 bg-indigo-50/50 rounded-lg p-3 space-y-2 mt-2"
+              className="border border-emerald-200 bg-emerald-50/50 rounded-lg p-3 space-y-2 mt-2"
             >
               <input
                 autoFocus
@@ -205,7 +205,7 @@ export const MilestoneSection = ({
                 </select>
                 <button
                   type="submit"
-                  className="ml-auto bg-indigo-600 text-white px-3 py-1 rounded text-sm"
+                  className="ml-auto bg-emerald-600 text-white px-3 py-1 rounded text-sm"
                 >
                   Add
                 </button>
@@ -221,7 +221,7 @@ export const MilestoneSection = ({
           ) : (
             <button
               onClick={() => setShowAddTask(true)}
-              className="w-full flex items-center justify-center gap-1 mt-2 py-2 text-sm text-indigo-600 hover:bg-indigo-50 rounded-lg border border-dashed border-indigo-200"
+              className="w-full flex items-center justify-center gap-1 mt-2 py-2 text-sm text-emerald-600 hover:bg-emerald-50 rounded-lg border border-dashed border-emerald-200"
             >
               <Plus className="w-4 h-4" /> Add task
             </button>

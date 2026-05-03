@@ -1,7 +1,7 @@
 import { Sparkles } from 'lucide-react';
 
 const INPUT_CLASS =
-  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500';
+  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500';
 const LABEL_CLASS = 'block text-sm font-medium text-gray-700 mb-1';
 
 export const GoalForm = ({
@@ -114,7 +114,7 @@ export const GoalForm = ({
         <button
           type="submit"
           disabled={loading}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold py-2.5 rounded-lg transition-colors"
+          className="flex-1 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-semibold py-2.5 rounded-lg transition-colors"
         >
           Save goal
         </button>
@@ -123,7 +123,7 @@ export const GoalForm = ({
             type="button"
             disabled={!form.title || loading}
             onClick={generateWithAI}
-            className="flex items-center justify-center gap-1.5 sm:flex-1 border border-indigo-200 text-indigo-700 hover:bg-indigo-50 disabled:opacity-50 disabled:cursor-not-allowed font-medium py-2.5 rounded-lg transition-colors"
+            className="flex items-center justify-center gap-1.5 sm:flex-1 border border-emerald-200 text-emerald-700 hover:bg-emerald-50 disabled:opacity-50 disabled:cursor-not-allowed font-medium py-2.5 rounded-lg transition-colors"
           >
             <Sparkles className="w-4 h-4" />
             {loading ? 'Generating…' : 'Generate with AI'}
@@ -162,7 +162,7 @@ export const GoalForm = ({
           <button
             type="button"
             onClick={saveAIPlan}
-            className="mt-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-lg"
+            className="mt-3 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-lg"
           >
             Confirm & save AI plan
           </button>

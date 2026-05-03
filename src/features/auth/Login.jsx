@@ -22,7 +22,7 @@ export const Login = () => {
 
   return (
     <div className="flex min-h-screen">
-      <aside className="hidden md:flex w-1/2 bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-700 text-white p-12 flex-col justify-between">
+      <aside className="hidden md:flex w-1/2 bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-700 text-white p-12 flex-col justify-between">
         <div className="flex items-center gap-2">
           <span className="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center">
             <Target className="w-6 h-6" />
@@ -33,12 +33,12 @@ export const Login = () => {
           <h1 className="text-5xl font-extrabold leading-tight mb-4">
             Welcome back.
           </h1>
-          <p className="text-lg text-indigo-100/90 max-w-md">
+          <p className="text-lg text-emerald-100/90 max-w-md">
             Pick up where you left off. Your goals, milestones and daily focus —
             all in one place.
           </p>
         </div>
-        <div className="text-sm text-indigo-100/70">
+        <div className="text-sm text-emerald-100/70">
           Plan it. Break it down. Ship it.
         </div>
       </aside>
@@ -66,7 +66,7 @@ export const Login = () => {
               required
               value={input.email}
               onChange={(e) => setInput({ ...input, email: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="you@example.com"
             />
           </div>
@@ -85,7 +85,7 @@ export const Login = () => {
               required
               value={input.password}
               onChange={(e) => setInput({ ...input, password: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="••••••••"
             />
           </div>
@@ -93,7 +93,7 @@ export const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold py-2.5 rounded-lg transition-colors"
+            className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-semibold py-2.5 rounded-lg transition-colors"
           >
             {loading ? 'Signing in…' : 'Sign in'}
           </button>
@@ -102,7 +102,7 @@ export const Login = () => {
             Don't have an account?{' '}
             <Link
               to="/"
-              className="text-indigo-600 font-medium hover:underline"
+              className="text-emerald-600 font-medium hover:underline"
             >
               Sign up
             </Link>
