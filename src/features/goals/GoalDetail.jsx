@@ -145,16 +145,6 @@ export const GoalDetail = () => {
       createMilestone({ ...milestoneForm, goal: id })
     );
     if (createMilestone.fulfilled.match(res)) {
-      const newMilestoneId = res.payload.milestone?._id;
-      if (newMilestoneId && goalDetail) {
-        const nextIds = [
-          ...(goalDetail.milestones || []).map((m) => m._id),
-          newMilestoneId,
-        ];
-        await dispatch(
-          updateGoalById({ id, updatedData: { milestones: nextIds } })
-        );
-      }
       setMilestoneForm({ title: '', description: '', targetDate: '' });
       setShowAddMilestone(false);
       refresh();
