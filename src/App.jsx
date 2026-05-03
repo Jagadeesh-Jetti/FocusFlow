@@ -12,12 +12,14 @@ import { Profile } from './features/profile/Profile';
 import { Feed } from './features/community/feed';
 import { PostDetailPage } from './features/community/PostDetailPage';
 import { NotFound } from './components/NotFound';
+import { Landing } from './features/landing/Landing';
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Signup />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/dashboard"

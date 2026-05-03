@@ -101,7 +101,7 @@ export const Login = () => {
           <p className="text-sm text-gray-600 text-center">
             Don't have an account?{' '}
             <Link
-              to="/"
+              to="/signup"
               className="text-emerald-600 font-medium hover:underline"
             >
               Sign up
