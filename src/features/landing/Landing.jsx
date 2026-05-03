@@ -66,24 +66,26 @@ export const Landing = () => {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Top nav */}
-      <header className="sticky top-0 z-30 backdrop-blur bg-white/80 border-b border-gray-100">
+      <header className="sticky top-0 z-30 backdrop-blur-xl bg-white/70 border-b border-slate-200/60">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2" aria-label="FocusFlow home">
-            <span className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
-              <Target className="w-4 h-4" />
+            <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 text-white flex items-center justify-center shadow-sm shadow-emerald-600/30 ring-1 ring-inset ring-white/20">
+              <Target className="w-4 h-4" strokeWidth={2.25} />
             </span>
-            <span className="text-lg font-bold tracking-tight">FocusFlow</span>
+            <span className="text-lg font-bold tracking-tight text-slate-900">
+              FocusFlow
+            </span>
           </Link>
           <nav className="flex items-center gap-2 sm:gap-3">
             <Link
               to="/login"
-              className="text-sm font-medium text-gray-700 hover:text-gray-900 px-3 py-2"
+              className="text-sm font-medium text-slate-700 hover:text-slate-900 px-3 py-2 transition-colors"
             >
               Sign in
             </Link>
             <Link
               to="/signup"
-              className="text-sm font-medium bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg shadow-sm transition-colors"
+              className="text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 active:scale-[0.97] text-white px-4 py-2 rounded-lg shadow-sm shadow-emerald-600/20 hover:shadow-emerald-600/30 transition-all duration-150 ring-1 ring-inset ring-white/10"
             >
               Get started
             </Link>
@@ -93,18 +95,23 @@ export const Landing = () => {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
+        {/* Subtle dot grid */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 dot-grid"
+        />
         {/* Gradient blobs */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-24 -left-24 w-[28rem] h-[28rem] rounded-full bg-emerald-300/40 blur-3xl"
+          className="pointer-events-none absolute -top-24 -left-24 w-[32rem] h-[32rem] rounded-full bg-emerald-300/40 blur-3xl"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute top-20 -right-24 w-[26rem] h-[26rem] rounded-full bg-teal-300/40 blur-3xl"
+          className="pointer-events-none absolute top-20 -right-24 w-[28rem] h-[28rem] rounded-full bg-teal-300/40 blur-3xl"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute bottom-0 left-1/3 w-[22rem] h-[22rem] rounded-full bg-emerald-200/50 blur-3xl"
+          className="pointer-events-none absolute bottom-0 left-1/3 w-[22rem] h-[22rem] rounded-full bg-amber-200/40 blur-3xl"
         />
 
         <div className="relative max-w-5xl mx-auto px-4 md:px-8 py-20 md:py-32 text-center">
@@ -135,20 +142,20 @@ export const Landing = () => {
           <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               to="/signup"
-              className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md shadow-emerald-600/20 transition-colors"
+              className="group inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.97] text-white font-semibold px-6 py-3 rounded-xl shadow-lg shadow-emerald-600/30 hover:shadow-emerald-600/40 transition-all duration-200 ring-1 ring-inset ring-white/15"
             >
               Start free
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
             <Link
               to="/login"
-              className="inline-flex items-center gap-1 text-gray-700 hover:text-gray-900 font-medium px-6 py-3"
+              className="inline-flex items-center gap-1 text-slate-700 hover:text-slate-900 font-medium px-6 py-3 transition-colors"
             >
               Sign in
             </Link>
           </div>
 
-          <p className="mt-6 text-sm text-gray-500">
+          <p className="mt-6 text-sm text-slate-500">
             No credit card · Free for personal use
           </p>
         </div>

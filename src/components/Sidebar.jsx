@@ -95,10 +95,10 @@ export const Sidebar = () => {
             className="flex items-center gap-2 px-2"
             aria-label="FocusFlow home"
           >
-            <span className="w-9 h-9 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
-              <Target className="w-5 h-5" />
+            <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 text-white flex items-center justify-center shadow-md shadow-emerald-600/25 ring-1 ring-inset ring-white/20">
+              <Target className="w-5 h-5" strokeWidth={2.25} />
             </span>
-            <span className="text-xl font-bold tracking-tight text-gray-900">
+            <span className="text-xl font-bold tracking-tight text-slate-900">
               FocusFlow
             </span>
           </Link>
@@ -161,27 +161,27 @@ export const Sidebar = () => {
 
   return (
     <>
-      <aside className="hidden md:flex flex-col justify-between h-screen sticky top-0 w-64 bg-white border-r border-gray-200 px-4 py-6">
+      <aside className="hidden md:flex flex-col justify-between h-screen sticky top-0 w-64 bg-white/70 backdrop-blur-xl border-r border-slate-200/80 px-4 py-6">
         {SidebarContent}
       </aside>
 
-      <div className="md:hidden sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-white border-b border-gray-200">
+      <div className="md:hidden sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-white/85 backdrop-blur-xl border-b border-slate-200/80">
         <Link
           to="/dashboard"
           className="flex items-center gap-2"
           aria-label="FocusFlow home"
         >
-          <span className="w-7 h-7 rounded-md bg-emerald-600 text-white flex items-center justify-center">
-            <Target className="w-4 h-4" />
+          <span className="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 text-white flex items-center justify-center shadow-sm ring-1 ring-inset ring-white/20">
+            <Target className="w-4 h-4" strokeWidth={2.25} />
           </span>
-          <span className="text-base font-bold tracking-tight text-gray-900">
+          <span className="text-base font-bold tracking-tight text-slate-900">
             FocusFlow
           </span>
         </Link>
         <button
           onClick={() => setOpen(true)}
           aria-label="Open menu"
-          className="p-2 text-gray-700 hover:bg-gray-100 rounded-md"
+          className="p-2 text-slate-700 hover:bg-slate-100 rounded-md transition-colors active:scale-95"
         >
           <Menu className="w-5 h-5" />
         </button>
@@ -206,13 +206,25 @@ const SidebarItem = ({ href, icon, label, badge, active }) => {
   return (
     <Link
       to={href}
-      className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+      className={`group relative flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-150 ${
         active
           ? 'bg-emerald-50 text-emerald-700'
-          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+          : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
       }`}
     >
-      {icon}
+      {active && (
+        <span
+          aria-hidden
+          className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-r bg-gradient-to-b from-emerald-500 to-teal-600"
+        />
+      )}
+      <span
+        className={`transition-transform duration-150 ${
+          active ? '' : 'group-hover:scale-110'
+        }`}
+      >
+        {icon}
+      </span>
       <span className="flex-1">{label}</span>
       {badge && (
         <span

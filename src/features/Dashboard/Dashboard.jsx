@@ -56,10 +56,10 @@ export const Dashboard = () => {
       <Sidebar />
       <main className="flex-1 p-4 md:p-10 max-w-7xl w-full">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
             Welcome back{firstName ? `, ${firstName}` : ''}
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-slate-500 mt-1.5">
             Here&apos;s how your week is shaping up.
           </p>
         </header>
@@ -97,17 +97,21 @@ export const Dashboard = () => {
 };
 
 const StatCard = ({ title, count }) => (
-  <div className="bg-white rounded-2xl border border-gray-200 p-5 hover:shadow-sm transition-shadow">
-    <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+  <div className="card-depth bg-white rounded-2xl border border-slate-200/80 p-5 hover:-translate-y-0.5 hover:border-emerald-200">
+    <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.08em]">
       {title}
     </div>
-    <div className="text-3xl font-bold text-gray-900 mt-1">{count}</div>
+    <div className="text-3xl md:text-4xl font-bold text-slate-900 mt-1.5 tnum tracking-tight">
+      {count}
+    </div>
   </div>
 );
 
 const DashboardCard = ({ title, children }) => (
-  <div className="bg-white p-6 rounded-2xl border border-gray-200">
-    <h2 className="text-base font-semibold text-gray-900 mb-4">{title}</h2>
+  <div className="card-depth bg-white p-6 rounded-2xl border border-slate-200/80">
+    <h2 className="text-base font-semibold text-slate-900 mb-4 tracking-tight">
+      {title}
+    </h2>
     {children}
   </div>
 );
