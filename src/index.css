@@ -3,6 +3,111 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ───── FocusFlow design tokens ───── */
+:root {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  --shadow-card-tint: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 2px 4px rgba(16, 185, 129, 0.06), 0 12px 28px rgba(15, 23, 42, 0.08);
+  --shadow-emerald-glow: 0 10px 24px -8px rgba(16, 185, 129, 0.45);
+}
+
+html {
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fafaf9;
+  color: #0f172a;
+}
+
+code, kbd, pre, samp {
+  font-family: var(--font-mono);
+}
+
+/* tabular numerics by default for stat numbers, dates, progress % */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* layered card depth utilities */
+.card-depth {
+  box-shadow: var(--shadow-card-tint);
+  transition: box-shadow 200ms ease, transform 200ms ease,
+    border-color 200ms ease;
+}
+.card-depth:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Subtle dot grid for landing hero */
+.dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(15, 23, 42, 0.06) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* Refined scrollbar (webkit) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.12);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 23, 42, 0.22);
+  background-clip: content-box;
+}
+
+/* Animated stripe shimmer for in-progress bars */
+@keyframes ff-stripes {
+  from { background-position: 0 0; }
+  to { background-position: 32px 0; }
+}
+.progress-shimmer {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.18) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.18) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 32px 32px;
+  animation: ff-stripes 1.4s linear infinite;
+}
+
+/* Soft entrance animation for modals + toasts */
+@keyframes ff-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: ff-fade-up 240ms ease-out both;
+}
+
 @theme inline {
 
   --radius-sm: calc(var(--radius) - 4px);

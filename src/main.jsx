@@ -12,7 +12,19 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Provider store={store}>
         <App />
-        <Toaster position="top-right" richColors closeButton />
+        <Toaster
+          position="top-right"
+          richColors
+          closeButton
+          toastOptions={{
+            style: {
+              fontFamily:
+                "'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+              borderRadius: '0.75rem',
+              fontSize: '0.875rem',
+            },
+          }}
+        />
       </Provider>
     </BrowserRouter>
   </StrictMode>
