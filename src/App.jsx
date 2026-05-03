@@ -6,7 +6,7 @@ import { Goals } from './features/goals/Goals';
 import { GoalDetail } from './features/goals/GoalDetail';
 import { Milestones } from './features/milestones/Milestones';
 import { Tasks } from './features/tasks/Tasks';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { AnonRoute } from './components/AnonRoute';
 import { Profile } from './features/profile/Profile';
@@ -17,8 +17,9 @@ import { Landing } from './features/landing/Landing';
 import { Coach } from './features/coach/Coach';
 
 function App() {
+  const location = useLocation();
   return (
-    <div>
+    <div key={location.pathname} className="fade-up">
       <Routes>
         <Route
           path="/"
