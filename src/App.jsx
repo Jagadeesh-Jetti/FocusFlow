@@ -8,6 +8,7 @@ import { Milestones } from './features/milestones/Milestones';
 import { Tasks } from './features/tasks/Tasks';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { AnonRoute } from './components/AnonRoute';
 import { Profile } from './features/profile/Profile';
 import { Feed } from './features/community/feed';
 import { PostDetailPage } from './features/community/PostDetailPage';
@@ -19,9 +20,30 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <AnonRoute>
+              <Landing />
+            </AnonRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <AnonRoute>
+              <Signup />
+            </AnonRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <AnonRoute>
+              <Login />
+            </AnonRoute>
+          }
+        />
         <Route
           path="/dashboard"
           element={
