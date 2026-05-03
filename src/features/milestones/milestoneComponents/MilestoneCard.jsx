@@ -1,33 +1,51 @@
-import { ActionButton } from '../../../components/ActionButton';
+import { Pencil, Trash2 } from 'lucide-react';
 
 export const MilestoneCard = ({ milestone, onEdit, onDelete }) => {
   return (
-    <div
-      key={milestone._id}
-      className="flex flex-col justify-between h-full m-3 rounded-md shadow-md "
-    >
-      <div className="">
-        <div className="text-sm  text-gray-600 p-3 bg-gray-50">
-          Goal: {milestone?.goal?.title}
+    <div className="bg-white rounded-2xl border border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition group">
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="min-w-0">
+          {milestone?.goal?.title && (
+            <div className="text-xs text-gray-500 mb-1 truncate">
+              {milestone.goal.title}
+            </div>
+          )}
+          <h3 className="font-semibold text-gray-900 break-words">
+            {milestone.title}
+          </h3>
         </div>
-        <div className="font-semibold text-xl p-3">{milestone.title}</div>
+        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition shrink-0">
+          <button
+            onClick={onEdit}
+            aria-label="Edit milestone"
+            className="p-1.5 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-md"
+          >
+            <Pencil className="w-4 h-4" />
+          </button>
+          <button
+            onClick={onDelete}
+            aria-label="Delete milestone"
+            className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </div>
       </div>
-      <div className="flex justify-between p-4 ">
-        <div className="">
-          <div className="text-sm text-gray-500">Due Date</div>
-          <div className="font-semibold  text-gray-500 text-opacity-100">
-            {new Date(milestone.targetDate).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            })}
-          </div>
+
+      {milestone?.description && (
+        <p className="text-sm text-gray-500 mb-3 break-words">
+          {milestone.description}
+        </p>
+      )}
+
+      {milestone?.targetDate && (
+        <div className="flex items-center gap-2 text-xs">
+          <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700">
+            Target{' '}
+            {new Date(milestone.targetDate).toLocaleDateString('en-GB')}
+          </span>
         </div>
-        <div className="flex m-2 gap-1">
-          <ActionButton title="EDIT" onClick={onEdit} color="blue" />
-          <ActionButton title="DELETE" onClick={onDelete} color="red" />
-        </div>
-      </div>
+      )}
     </div>
   );
 };

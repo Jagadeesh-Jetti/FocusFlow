@@ -104,12 +104,13 @@ export const Tasks = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
-      <div className="flex-1  w-full m-auto">
+      <div className="flex-1 p-6 md:p-10 max-w-7xl">
         <PageHeader
-          title="TASKS"
-          buttonLabel="ADD TASK"
+          title="Tasks"
+          subtitle="Today's actionable steps toward your goals."
+          buttonLabel="Add task"
           setShowModal={setShowModal}
         />
         <TaskFilters
@@ -124,7 +125,7 @@ export const Tasks = () => {
         <Modal
           isOpen={showModal}
           onClose={() => resetForm()}
-          title={isEditing ? 'EDIT TASK' : 'ADD NEW TASK'}
+          title={isEditing ? 'Edit task' : 'Add a task'}
         >
           <TaskForm
             form={form}
@@ -134,37 +135,57 @@ export const Tasks = () => {
             handleSubmit={handleSubmit}
           />
         </Modal>
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 m-4">
-          {tasks
-            .filter((task) => {
-              const matchesGoal =
-                selectedGoal === 'all' || task.goal?.title === selectedGoal;
-
-              const matchesMilestone =
-                selectedMilestone === 'all' ||
-                task.milestone?.title === selectedMilestone;
-
-              const matchesPriority =
-                selectedPriority === 'all' ||
-                task.priority?.toLowerCase() === selectedPriority.toLowerCase();
-
-              return (
-                task.status !== 'completed' &&
-                matchesGoal &&
-                matchesMilestone &&
-                matchesPriority
-              );
-            })
-            .map((task) => (
-              <TaskCard
-                key={task._id}
-                task={task}
-                onToggleComplete={() => toggleCompleteHandler(task)}
-                onEdit={() => editHandler(task._id, task)}
-                onDelete={() => deleteHandler(task._id)}
-              />
-            ))}
-        </div>
+        {(() => {
+          const visible = tasks.filter((task) => {
+            const matchesGoal =
+              selectedGoal === 'all' || task.goal?.title === selectedGoal;
+            const matchesMilestone =
+              selectedMilestone === 'all' ||
+              task.milestone?.title === selectedMilestone;
+            const matchesPriority =
+              selectedPriority === 'all' ||
+              task.priority?.toLowerCase() ===
+                selectedPriority.toLowerCase();
+            return (
+              task.status !== 'completed' &&
+              matchesGoal &&
+              matchesMilestone &&
+              matchesPriority
+            );
+          });
+          if (visible.length === 0) {
+            return (
+              <div className="border border-dashed border-gray-300 rounded-2xl p-10 text-center">
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                  No open tasks
+                </h3>
+                <p className="text-sm text-gray-500 mb-4">
+                  Either everything's done, or you haven't added any tasks
+                  matching the current filters yet.
+                </p>
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2 rounded-lg"
+                >
+                  + Add a task
+                </button>
+              </div>
+            );
+          }
+          return (
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              {visible.map((task) => (
+                <TaskCard
+                  key={task._id}
+                  task={task}
+                  onToggleComplete={() => toggleCompleteHandler(task)}
+                  onEdit={() => editHandler(task._id, task)}
+                  onDelete={() => deleteHandler(task._id)}
+                />
+              ))}
+            </div>
+          );
+        })()}
       </div>
     </div>
   );

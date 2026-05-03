@@ -1,3 +1,9 @@
+import { Sparkles } from 'lucide-react';
+
+const INPUT_CLASS =
+  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500';
+const LABEL_CLASS = 'block text-sm font-medium text-gray-700 mb-1';
+
 export const GoalForm = ({
   form,
   setForm,
@@ -7,108 +13,158 @@ export const GoalForm = ({
   aiPlan,
   generateWithAI,
   saveAIPlan,
+  hideAI = false,
 }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        type="text"
-        placeholder="Title"
-        value={form.title}
-        onChange={(e) => setForm({ ...form, title: e.target.value })}
-        className="w-full p-2 border rounded"
-        required
-      />
-      <textarea
-        placeholder="Description"
-        value={form.description}
-        onChange={(e) => setForm({ ...form, description: e.target.value })}
-        className="w-full p-2 border rounded"
-        rows={4}
-      />
-      <input
-        type="text"
-        placeholder="Category"
-        value={form.category}
-        onChange={(e) => setForm({ ...form, category: e.target.value })}
-        className="w-full p-2 border rounded"
-      />
+      <div>
+        <label htmlFor="goal-title" className={LABEL_CLASS}>
+          Title
+        </label>
+        <input
+          id="goal-title"
+          type="text"
+          placeholder="What's the goal?"
+          value={form.title}
+          onChange={(e) => setForm({ ...form, title: e.target.value })}
+          className={INPUT_CLASS}
+          required
+        />
+      </div>
 
-      <select
-        name="status"
-        className="w-full p-2 border rounded"
-        value={form?.status}
-        onChange={(e) => setForm({ ...form, status: e.target.value })}
-      >
-        <option value="Not Started">Not Started </option>
-        <option value="In Progress">In Progress </option>
-        <option value="Completed">Completed </option>
-      </select>
+      <div>
+        <label htmlFor="goal-description" className={LABEL_CLASS}>
+          Description
+        </label>
+        <textarea
+          id="goal-description"
+          placeholder="A bit more about why and what done looks like"
+          value={form.description}
+          onChange={(e) => setForm({ ...form, description: e.target.value })}
+          className={INPUT_CLASS}
+          rows={3}
+        />
+      </div>
 
-      <select
-        name="priority"
-        id=""
-        className="w-full p-2 border rounded"
-        value={form?.priority}
-        onChange={(e) => setForm({ ...form, priority: e.target.value })}
-      >
-        <option value="Low"> Low </option>
-        <option value="Medium"> Medium </option>
-        <option value="High"> High </option>
-      </select>
+      <div>
+        <label htmlFor="goal-category" className={LABEL_CLASS}>
+          Category
+        </label>
+        <input
+          id="goal-category"
+          type="text"
+          placeholder="Career, Health, Learning…"
+          value={form.category}
+          onChange={(e) => setForm({ ...form, category: e.target.value })}
+          className={INPUT_CLASS}
+        />
+      </div>
 
-      <input
-        type="date"
-        name="dueDate"
-        value={form?.dueDate?.split('T')[0] || ''}
-        className="w-full p-2 border rounded"
-        onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
-      />
+      <div className="grid grid-cols-2 gap-3">
+        <div>
+          <label htmlFor="goal-status" className={LABEL_CLASS}>
+            Status
+          </label>
+          <select
+            id="goal-status"
+            name="status"
+            className={INPUT_CLASS}
+            value={form?.status}
+            onChange={(e) => setForm({ ...form, status: e.target.value })}
+          >
+            <option value="Not Started">Not started</option>
+            <option value="In Progress">In progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
 
-      <div className="flex gap-2">
+        <div>
+          <label htmlFor="goal-priority" className={LABEL_CLASS}>
+            Priority
+          </label>
+          <select
+            id="goal-priority"
+            name="priority"
+            className={INPUT_CLASS}
+            value={form?.priority}
+            onChange={(e) => setForm({ ...form, priority: e.target.value })}
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="goal-due" className={LABEL_CLASS}>
+          Due date
+        </label>
+        <input
+          id="goal-due"
+          type="date"
+          name="dueDate"
+          value={form?.dueDate?.split('T')[0] || ''}
+          className={INPUT_CLASS}
+          onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
+        />
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-2 pt-2">
         <button
           type="submit"
           disabled={loading}
-          className="bg-green-600 text-white px-4 py-2 rounded-md"
+          className="flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold py-2.5 rounded-lg transition-colors"
         >
-          Save Goal
+          Save goal
         </button>
-        <button
-          type="button"
-          disabled={!form.title || loading}
-          onClick={generateWithAI}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md"
-        >
-          {loading ? 'Generating...' : 'Generate with AI'}
-        </button>
+        {!hideAI && (
+          <button
+            type="button"
+            disabled={!form.title || loading}
+            onClick={generateWithAI}
+            className="flex items-center justify-center gap-1.5 sm:flex-1 border border-indigo-200 text-indigo-700 hover:bg-indigo-50 disabled:opacity-50 disabled:cursor-not-allowed font-medium py-2.5 rounded-lg transition-colors"
+          >
+            <Sparkles className="w-4 h-4" />
+            {loading ? 'Generating…' : 'Generate with AI'}
+          </button>
+        )}
       </div>
 
-      {aiPlan && !isSaved && (
-        <div className="mt-6 border-t pt-4">
-          <h4 className="text-lg font-semibold mb-2 text-gray-800">
-            AI-Generated Plan
+      {!hideAI && aiPlan && !isSaved && (
+        <div className="mt-2 border-t border-gray-200 pt-4">
+          <h4 className="text-base font-semibold text-gray-900 mb-2">
+            AI-generated plan
           </h4>
-          <div className="bg-gray-100 p-3 rounded-md">
-            <h5 className="text-md font-bold">{aiPlan.goal}</h5>
-            {aiPlan?.milestones?.map((milestone, i) => (
-              <div key={i} className="mt-2">
-                <p className="font-medium text-gray-700">
-                  Milestone: {milestone.title}
-                </p>
-                <ul className="list-disc list-inside text-sm text-gray-600">
-                  {milestone.tasks.map((task, j) => (
-                    <li key={j}>{task}</li>
-                  ))}
-                </ul>
+          <div className="bg-gray-50 border border-gray-200 p-4 rounded-lg space-y-3">
+            <div>
+              <div className="text-xs text-gray-500 uppercase tracking-wide">
+                Goal
               </div>
-            ))}
+              <div className="font-medium text-gray-900">{aiPlan.goal}</div>
+            </div>
+            <div className="space-y-2">
+              {aiPlan?.milestones?.map((milestone, i) => (
+                <div key={i} className="bg-white border border-gray-200 rounded-md p-3">
+                  <div className="font-medium text-gray-900 mb-1">
+                    {milestone.title}
+                  </div>
+                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-0.5">
+                    {milestone.tasks.map((task, j) => (
+                      <li key={j}>{task}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
 
           <button
             type="button"
             onClick={saveAIPlan}
-            className="mt-4 bg-green-700 text-white px-4 py-2 rounded-md"
+            className="mt-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-lg"
           >
-            Confirm & Save AI Plan
+            Confirm & save AI plan
           </button>
         </div>
       )}

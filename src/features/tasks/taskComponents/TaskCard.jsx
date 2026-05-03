@@ -1,50 +1,81 @@
-import { ActionButton } from '../../../components/ActionButton';
+import { Check, Pencil, Trash2 } from 'lucide-react';
+
+const priorityColor = {
+  low: 'bg-green-100 text-green-700',
+  medium: 'bg-yellow-100 text-yellow-700',
+  high: 'bg-red-100 text-red-700',
+};
 
 export const TaskCard = ({ task, onToggleComplete, onEdit, onDelete }) => {
+  const isCompleted = task.status === 'completed';
+
   return (
-    <div
-      key={task._id}
-      className="bg-white shadow-md rounded-xl p-5 md:p-7 border border-gray-200 hover:shadow-lg transition duration-300"
-    >
-      <div className="flex items-start justify-between">
-        <div className="flex gap-3 items-start">
-          <input
-            type="checkbox"
-            checked={task.status === 'completed'}
-            onChange={onToggleComplete}
-            className="w-5 h-5 accent-green-600 mt-1"
-          />
-          <div className="flex-1">
-            <h3 className="text-xl font-semibold text-gray-800">
-              {task.title}
-            </h3>
-            <p className="text-sm text-gray-500 mt-1">{task.description}</p>
-            <div className="mt-3 text-sm text-gray-600">
-              <div>
-                <strong>Due:</strong>
-                {new Date(task.dueDate).toLocaleDateString()}
-              </div>
-              <div>
-                <strong>Priority:</strong>
-                <span
-                  className={`inline-block px-2 py-0.5 rounded-full text-white text-xs font-bold ${
-                    task.priority === 'high'
-                      ? 'bg-red-500'
-                      : task.priority === 'medium'
-                      ? 'bg-yellow-500'
-                      : 'bg-green-500'
-                  }`}
-                >
-                  {task.priority}
-                </span>
-              </div>
-            </div>
+    <div className="bg-white rounded-2xl border border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition group">
+      <div className="flex items-start gap-3">
+        <button
+          onClick={onToggleComplete}
+          aria-label={isCompleted ? 'Mark incomplete' : 'Mark complete'}
+          className={`mt-0.5 w-5 h-5 rounded border-2 flex items-center justify-center transition shrink-0 ${
+            isCompleted
+              ? 'bg-indigo-600 border-indigo-600 text-white'
+              : 'border-gray-300 hover:border-indigo-500'
+          }`}
+        >
+          {isCompleted && <Check className="w-3 h-3" />}
+        </button>
+
+        <div className="flex-1 min-w-0">
+          <h3
+            className={`font-semibold text-gray-900 break-words ${
+              isCompleted ? 'line-through text-gray-400' : ''
+            }`}
+          >
+            {task.title}
+          </h3>
+          {task.description && (
+            <p className="text-sm text-gray-500 mt-1 break-words">
+              {task.description}
+            </p>
+          )}
+
+          <div className="flex flex-wrap items-center gap-2 mt-3 text-xs">
+            {task.priority && (
+              <span
+                className={`px-2 py-0.5 rounded-full font-medium ${
+                  priorityColor[task.priority] || 'bg-gray-100 text-gray-700'
+                }`}
+              >
+                {task.priority}
+              </span>
+            )}
+            {task.dueDate && (
+              <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700">
+                Due {new Date(task.dueDate).toLocaleDateString('en-GB')}
+              </span>
+            )}
+            {task.goal?.title && (
+              <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700">
+                {task.goal.title}
+              </span>
+            )}
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <ActionButton title="EDIT" onClick={onEdit} color="blue" />
 
-          <ActionButton title="DELETE" onClick={onDelete} color="red" />
+        <div className="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition shrink-0">
+          <button
+            onClick={onEdit}
+            aria-label="Edit task"
+            className="p-1.5 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-md"
+          >
+            <Pencil className="w-4 h-4" />
+          </button>
+          <button
+            onClick={onDelete}
+            aria-label="Delete task"
+            className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </div>

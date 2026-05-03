@@ -87,55 +87,71 @@ export const Milestones = () => {
   }, [milestones]);
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
-      <div className="flex-1 m-2 w-screen ">
+      <div className="flex-1 p-6 md:p-10 max-w-7xl">
         <PageHeader
-          title="MILESTONES"
-          buttonLabel="ADD MILESTONE"
+          title="Milestones"
+          subtitle="Bite-size checkpoints between you and the goal."
+          buttonLabel="Add milestone"
           setShowModal={setShowModal}
         />
 
-        <div className="flex px-3 justify-center">
-          <MilestoneFilters
+        <MilestoneFilters
+          goals={goals}
+          filterMilestonesByGoals={filterMilestonesByGoals}
+        />
+
+        <Modal
+          isOpen={showModal}
+          onClose={resetForm}
+          title={isEditing ? 'Edit milestone' : 'Add a milestone'}
+        >
+          <MilestoneForm
+            form={form}
+            setForm={setForm}
+            handleSubmit={handleSubmit}
             goals={goals}
-            filterMilestonesByGoals={filterMilestonesByGoals}
           />
+        </Modal>
 
-          <Modal
-            isOpen={showModal}
-            onClose={resetForm}
-            title={isEditing ? 'Edit Milestone' : 'Add New Milestone'}
-          >
-            <MilestoneForm
-              form={form}
-              setForm={setForm}
-              handleSubmit={handleSubmit}
-              goals={goals}
-            />
-          </Modal>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 m-2">
-          {filteredMilestones.map((milestone) => (
-            <MilestoneCard
-              key={milestone._id}
-              milestone={milestone}
-              onEdit={() => {
-                setIsEditing(true);
-                setEditId(milestone._id);
-                setForm({
-                  title: milestone?.title,
-                  description: milestone?.description,
-                  targetDate: milestone?.targetDate?.split('T')[0],
-                  goal: milestone.goal?._id || '',
-                });
-                setShowModal(true);
-              }}
-              onDelete={() => deleteHandler(milestone._id)}
-            />
-          ))}
-        </div>
+        {filteredMilestones.length > 0 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            {filteredMilestones.map((milestone) => (
+              <MilestoneCard
+                key={milestone._id}
+                milestone={milestone}
+                onEdit={() => {
+                  setIsEditing(true);
+                  setEditId(milestone._id);
+                  setForm({
+                    title: milestone?.title,
+                    description: milestone?.description,
+                    targetDate: milestone?.targetDate?.split('T')[0],
+                    goal: milestone.goal?._id || '',
+                  });
+                  setShowModal(true);
+                }}
+                onDelete={() => deleteHandler(milestone._id)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="border border-dashed border-gray-300 rounded-2xl p-10 text-center">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              No milestones yet
+            </h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Milestones help you break a goal into manageable chunks.
+            </p>
+            <button
+              onClick={() => setShowModal(true)}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2 rounded-lg"
+            >
+              + Add a milestone
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

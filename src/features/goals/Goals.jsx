@@ -113,12 +113,13 @@ export const Goals = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
-      <div className="flex-1 m-2 w-screen">
+      <div className="flex-1 p-6 md:p-10 max-w-7xl">
         <PageHeader
-          title="GOALS"
-          buttonLabel="ADD GOAL"
+          title="Your goals"
+          subtitle="The big things you're working toward."
+          buttonLabel="Add goal"
           setShowModal={setShowModal}
         />
         <GoalFilters
@@ -130,7 +131,7 @@ export const Goals = () => {
         <Modal
           isOpen={showModal}
           onClose={resetForm}
-          title={isEditing ? 'Edit Goal' : 'Add New Goal'}
+          title={isEditing ? 'Edit goal' : 'Add a goal'}
         >
           <GoalForm
             handleSubmit={handleSubmit}
@@ -144,9 +145,9 @@ export const Goals = () => {
           />
         </Modal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 m-2">
-          {goals?.length > 0 ? (
-            goals
+        {goals?.length > 0 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            {goals
               .filter((goal) => {
                 const matchesPriority =
                   selectedPriority === 'all' ||
@@ -164,11 +165,25 @@ export const Goals = () => {
                   onEdit={() => editHandler(goal)}
                   onDelete={() => deleteHandler(goal._id)}
                 />
-              ))
-          ) : (
-            <div className="text-gray-500">No goals found.</div>
-          )}
-        </div>
+              ))}
+          </div>
+        ) : (
+          <div className="border border-dashed border-gray-300 rounded-2xl p-10 text-center">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              No goals yet
+            </h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Set your first goal and let AI break it into milestones and
+              tasks.
+            </p>
+            <button
+              onClick={() => setShowModal(true)}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2 rounded-lg"
+            >
+              + Add your first goal
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

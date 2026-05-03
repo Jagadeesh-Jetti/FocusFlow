@@ -1,3 +1,6 @@
+const SELECT_CLASS =
+  'px-3 py-2 rounded-lg border border-gray-200 bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500';
+
 export const TaskFilters = ({
   selectedGoal,
   goals,
@@ -9,17 +12,14 @@ export const TaskFilters = ({
   setSelectedPriority,
 }) => {
   return (
-    <div className="ml-4 flex justify-center gap-2">
+    <div className="flex flex-wrap gap-2 mb-4">
       <select
         value={selectedGoal}
-        onChange={(e) => {
-          console.log(e.target.value), setSelectedGoal(e.target.value);
-        }}
-        className="px-4 py-2 rounded border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200"
-        name=""
-        id=""
+        onChange={(e) => setSelectedGoal(e.target.value)}
+        className={SELECT_CLASS}
+        aria-label="Filter by goal"
       >
-        <option value="all"> All Goals </option>
+        <option value="all">All goals</option>
         {goals?.map((goal) => (
           <option key={goal._id} value={goal.title}>
             {goal?.title}
@@ -29,14 +29,11 @@ export const TaskFilters = ({
 
       <select
         value={selectedMilestone}
-        onChange={(e) => {
-          console.log(e.target.value), setSelectedMilestone(e.target.value);
-        }}
-        className="px-4 py-2 rounded border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        name=""
-        id=""
+        onChange={(e) => setSelectedMilestone(e.target.value)}
+        className={SELECT_CLASS}
+        aria-label="Filter by milestone"
       >
-        <option value="all">All Milestones</option>
+        <option value="all">All milestones</option>
         {milestones.map((milestone) => (
           <option key={milestone._id} value={milestone.title}>
             {milestone.title}
@@ -47,14 +44,13 @@ export const TaskFilters = ({
       <select
         value={selectedPriority}
         onChange={(e) => setSelectedPriority(e.target.value)}
-        className="px-4 py-2 rounded border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        name=""
-        id=""
+        className={SELECT_CLASS}
+        aria-label="Filter by priority"
       >
-        <option value="all"> All Priorities</option>
-        <option value="High"> High </option>
-        <option value="Medium"> Medium </option>
-        <option value="Low"> Low </option>
+        <option value="all">All priorities</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
       </select>
     </div>
   );

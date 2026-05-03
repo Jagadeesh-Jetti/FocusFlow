@@ -99,7 +99,7 @@ export const Feed = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-semibold py-2 px-4 rounded-full w-full shadow-sm"
+              className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-semibold py-2 px-4 rounded-full w-full shadow-sm"
             >
               {submitting ? 'Sharing…' : 'Share'}
             </button>
