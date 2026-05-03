@@ -4,7 +4,7 @@ import {
   Sparkles,
   BarChart3,
   Users,
-  CheckCircle,
+  MessageSquare,
   Smartphone,
   ArrowRight,
   Check,
@@ -19,8 +19,13 @@ const FEATURES = [
   },
   {
     icon: Sparkles,
-    title: 'AI does the planning',
-    body: 'Type a goal, get a structured plan in seconds. Edit it, save it, get to work.',
+    title: 'AI plans your goals',
+    body: 'Type a goal, get milestones and tasks in seconds. Edit, save, and get to work.',
+  },
+  {
+    icon: MessageSquare,
+    title: 'Coach chat — talk to your plan',
+    body: 'Stuck? Ask the AI coach what to work on, what is at risk, or to summarize your week.',
   },
   {
     icon: BarChart3,
@@ -31,11 +36,6 @@ const FEATURES = [
     icon: Users,
     title: 'Built-in accountability',
     body: 'Share progress on your community feed. Cheer each other on. Stay public, stay honest.',
-  },
-  {
-    icon: CheckCircle,
-    title: 'Daily focus, no friction',
-    body: 'See today’s open tasks the second you log in. No menu archaeology required.',
   },
   {
     icon: Smartphone,
@@ -108,10 +108,16 @@ export const Landing = () => {
         />
 
         <div className="relative max-w-5xl mx-auto px-4 md:px-8 py-20 md:py-32 text-center">
-          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            AI-powered productivity
-          </span>
+          <Link
+            to="/signup"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full mb-6 hover:bg-emerald-100 transition-colors"
+          >
+            <span className="bg-emerald-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+              NEW
+            </span>
+            AI Coach chat — talk to your plan
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
 
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.05]">
             Turn ambitious goals into{' '}
@@ -122,8 +128,8 @@ export const Landing = () => {
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-            FocusFlow breaks your big goals into milestones and tasks — with AI
-            doing the planning so you can focus on the work.
+            Set goals, get AI-generated plans, and chat with your personal coach
+            when you&apos;re stuck. FocusFlow keeps you moving.
           </p>
 
           <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
