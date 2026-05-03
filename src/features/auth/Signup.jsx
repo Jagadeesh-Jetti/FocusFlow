@@ -1,85 +1,135 @@
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { Target } from 'lucide-react';
 import { registerUser } from './authThunk';
 import { useState } from 'react';
 
 export const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [input, setInput] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const { loading } = useSelector((s) => s.auth);
 
-  const signupHandler = async () => {
+  const [input, setInput] = useState({ name: '', email: '', password: '' });
+
+  const signupHandler = async (e) => {
+    e?.preventDefault?.();
     const result = await dispatch(registerUser(input));
     if (registerUser.fulfilled.match(result)) {
-      setInput({
-        name: '',
-        email: '',
-        password: '',
-      });
+      setInput({ name: '', email: '', password: '' });
       navigate('/dashboard');
-    } else {
-      console.error(result.payload);
     }
   };
 
   return (
-    <div className="flex">
-      <div className="w-1/2 bg-gray-600 text-white h-screen font-serif text-left pl-40 text-7xl pt-54">
-        <div>Get</div>
-        <div> Into Your</div>
-        <div> Focus Flow state</div>
-      </div>
-      <div className=" b-3 pl-50 pt-20">
-        <div className=" text-5xl flex  p-10 font-serif">Sign up</div>
-        <div className="border-none">
-          <input
-            type="text"
-            value={input.name}
-            placeholder="Full Name"
-            className="bg-blue-50 p-2 m-2 w-80 border-none rounded-md outline-none"
-            onChange={(e) => setInput({ ...input, name: e.target.value })}
-          />
-        </div>
-        <div className="border-none">
-          <input
-            type="email"
-            value={input.email}
-            placeholder="Email"
-            className="bg-blue-50 p-2 m-2 w-80 border-none rounded-md outline-none"
-            onChange={(e) => setInput({ ...input, email: e.target.value })}
-          />
-        </div>
-        <div className="border-none ">
-          <input
-            type="password"
-            value={input.password}
-            placeholder="Password"
-            className="bg-blue-50 p-2 m-2 w-80 border-none rounded-md outline-none"
-            onChange={(e) => setInput({ ...input, password: e.target.value })}
-          />
+    <div className="flex min-h-screen">
+      <aside className="hidden md:flex w-1/2 bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-700 text-white p-12 flex-col justify-between">
+        <div className="flex items-center gap-2">
+          <span className="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center">
+            <Target className="w-6 h-6" />
+          </span>
+          <span className="text-xl font-bold tracking-tight">FocusFlow</span>
         </div>
         <div>
-          <button
-            className="bg-gray-600 text-white font-semibold  rounded-md p-3 m-2 w-80 cursor-pointer active:bg-amber-400"
-            onClick={signupHandler}
-          >
-            Signup
-          </button>
+          <h1 className="text-5xl font-extrabold leading-tight mb-4">
+            Get into your<br />
+            focus flow.
+          </h1>
+          <p className="text-lg text-indigo-100/90 max-w-md">
+            Set ambitious goals. Break them into milestones and tasks. Let AI
+            do the planning so you can do the work.
+          </p>
         </div>
-        <div>
-          Already Signed up?
-          <button
-            className="bg-gray-600 text-white font-semibold w-40 rounded-md p-3 m-2"
-            onClick={() => navigate('/login')}
-          >
-            Login
-          </button>
+        <div className="text-sm text-indigo-100/70">
+          Plan it. Break it down. Ship it.
         </div>
-      </div>
+      </aside>
+
+      <main className="flex w-full md:w-1/2 items-center justify-center p-6 md:p-12 bg-white">
+        <form onSubmit={signupHandler} className="w-full max-w-sm space-y-5">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900">Create account</h2>
+            <p className="text-sm text-gray-500 mt-1">
+              Start planning in under a minute.
+            </p>
+          </div>
+
+          <div className="space-y-1.5">
+            <label
+              htmlFor="signup-name"
+              className="text-sm font-medium text-gray-700"
+            >
+              Full name
+            </label>
+            <input
+              id="signup-name"
+              type="text"
+              autoComplete="name"
+              required
+              value={input.name}
+              onChange={(e) => setInput({ ...input, name: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Your name"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label
+              htmlFor="signup-email"
+              className="text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <input
+              id="signup-email"
+              type="email"
+              autoComplete="email"
+              required
+              value={input.email}
+              onChange={(e) => setInput({ ...input, email: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label
+              htmlFor="signup-password"
+              className="text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <input
+              id="signup-password"
+              type="password"
+              autoComplete="new-password"
+              required
+              minLength={6}
+              value={input.password}
+              onChange={(e) => setInput({ ...input, password: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="At least 6 characters"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold py-2.5 rounded-lg transition-colors"
+          >
+            {loading ? 'Creating account…' : 'Create account'}
+          </button>
+
+          <p className="text-sm text-gray-600 text-center">
+            Already have an account?{' '}
+            <Link
+              to="/login"
+              className="text-indigo-600 font-medium hover:underline"
+            >
+              Log in
+            </Link>
+          </p>
+        </form>
+      </main>
     </div>
   );
 };

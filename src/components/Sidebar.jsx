@@ -18,17 +18,17 @@ export const Sidebar = () => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
-    { href: '/goals', icon: <Target />, label: 'Goals' },
-    { href: '/milestones', icon: <MapPin />, label: 'Milestones' },
-    { href: '/tasks', icon: <CheckCircle />, label: 'Tasks' },
-    { href: '/feed', icon: <Users />, label: 'Community' },
+    { href: '/dashboard', icon: <Home className="w-5 h-5" />, label: 'Dashboard' },
+    { href: '/goals', icon: <Target className="w-5 h-5" />, label: 'Goals' },
+    { href: '/milestones', icon: <MapPin className="w-5 h-5" />, label: 'Milestones' },
+    { href: '/tasks', icon: <CheckCircle className="w-5 h-5" />, label: 'Tasks' },
+    { href: '/feed', icon: <Users className="w-5 h-5" />, label: 'Community' },
   ];
 
   const bottomItems = [
     user?._id && {
       href: `/profile/${user._id}`,
-      icon: <User />,
+      icon: <User className="w-5 h-5" />,
       label: 'Profile',
     },
   ].filter(Boolean);
@@ -38,44 +38,69 @@ export const Sidebar = () => {
     navigate('/login', { replace: true });
   };
 
-  return (
-    <aside className="hidden md:flex  flex-col justify-between h-screen w-64  text-black px-6 py-8 shadow-lg">
-      <div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-yellow-400 mb-10">
-          🎯 GoalDeck
-        </h1>
+  const isActive = (href) =>
+    href === '/dashboard'
+      ? pathname === href
+      : pathname === href || pathname.startsWith(href + '/');
 
-        <nav className="space-y-2 text-base font-medium">
+  return (
+    <aside className="hidden md:flex flex-col justify-between h-screen w-64 bg-white border-r border-gray-200 px-4 py-6">
+      <div>
+        <Link
+          to="/dashboard"
+          className="flex items-center gap-2 px-2 mb-8"
+          aria-label="FocusFlow home"
+        >
+          <span className="w-9 h-9 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
+            <Target className="w-5 h-5" />
+          </span>
+          <span className="text-xl font-bold tracking-tight text-gray-900">
+            FocusFlow
+          </span>
+        </Link>
+
+        <nav className="space-y-1 text-sm font-medium">
           {menuItems.map((item) => (
             <SidebarItem
               key={item.href}
               href={item.href}
               icon={item.icon}
               label={item.label}
-              active={pathname === item.href}
+              active={isActive(item.href)}
             />
           ))}
         </nav>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-1 border-t border-gray-100 pt-4">
+        {user && (
+          <div className="flex items-center gap-3 px-3 py-2 mb-2">
+            <div className="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-semibold">
+              {user.name?.[0]?.toUpperCase()}
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-sm font-medium text-gray-900 truncate">
+                {user.name}
+              </div>
+              <div className="text-xs text-gray-500 truncate">{user.email}</div>
+            </div>
+          </div>
+        )}
         {bottomItems.map((item) => (
           <SidebarItem
             key={item.href}
             href={item.href}
-            icon={item.icon}
+            Icon={item.icon}
             label={item.label}
-            active={pathname === item.href}
+            active={isActive(item.href)}
           />
         ))}
         {user && (
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-left text-gray-700 hover:bg-gray-800 hover:text-yellow-400 transition-all duration-200"
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
           >
-            <span className="w-5 h-5">
-              <LogOut />
-            </span>
+            <LogOut className="w-5 h-5" />
             <span>Logout</span>
           </button>
         )}
@@ -88,13 +113,13 @@ const SidebarItem = ({ href, icon, label, active }) => {
   return (
     <Link
       to={href}
-      className={`flex items-center gap-3 px-4 py-2 rounded-lg  transition-all duration-200  ${
+      className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
         active
-          ? 'bg-gray-800 text-yellow-400'
-          : 'hover:bg-gray-800 hover:text-yellow-400'
+          ? 'bg-indigo-50 text-indigo-700'
+          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
       }`}
     >
-      <span className="w-5 h-5">{icon}</span>
+      {icon}
       <span>{label}</span>
     </Link>
   );

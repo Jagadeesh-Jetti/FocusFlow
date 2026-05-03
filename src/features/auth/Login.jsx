@@ -1,69 +1,114 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Target } from 'lucide-react';
 import { loginUser } from './authThunk';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { loading } = useSelector((s) => s.auth);
 
-  const [input, setInput] = useState({
-    email: '',
-    password: '',
-  });
+  const [input, setInput] = useState({ email: '', password: '' });
 
-  const loginHandler = () => {
-    dispatch(loginUser(input));
-    setInput({
-      email: '',
-      password: '',
-    });
-    navigate('/dashboard');
+  const loginHandler = async (e) => {
+    e?.preventDefault?.();
+    const result = await dispatch(loginUser(input));
+    if (loginUser.fulfilled.match(result)) {
+      setInput({ email: '', password: '' });
+      navigate('/dashboard');
+    }
   };
 
   return (
-    <div className="flex ">
-      <div className="w-1/2 pl-50 pt-40">
-        <h1 className="text-5xl p-10 font-serif"> Login </h1>
-        {/* <p className="">Login to continue crush your goals</p> */}
-
-        <div className="">
-          <input
-            type="text"
-            placeholder="Email"
-            className="bg-blue-50 p-2 m-2 w-80 border-none rounded-md outline-none"
-            onChange={(e) => setInput({ ...input, email: e.target.value })}
-          />
+    <div className="flex min-h-screen">
+      <aside className="hidden md:flex w-1/2 bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-700 text-white p-12 flex-col justify-between">
+        <div className="flex items-center gap-2">
+          <span className="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center">
+            <Target className="w-6 h-6" />
+          </span>
+          <span className="text-xl font-bold tracking-tight">FocusFlow</span>
         </div>
-        <div className="">
-          <input
-            type="text"
-            placeholder="Password"
-            className="bg-blue-50 p-2 m-2 w-80 border-none rounded-md outline-none"
-            onChange={(e) => setInput({ ...input, password: e.target.value })}
-          />
-        </div>
-        <button
-          className="bg-gray-600 text-gray-50 font-semibold  rounded-md p-3 m-2 w-80"
-          onClick={loginHandler}
-        >
-          Login
-        </button>
         <div>
-          Dont have an account?
-          <button
-            className="bg-gray-600 text-gray-50 font-semibold w-40 rounded-md p-3 m-2"
-            onClick={() => navigate('/')}
-          >
-            Sign up
-          </button>
+          <h1 className="text-5xl font-extrabold leading-tight mb-4">
+            Welcome back.
+          </h1>
+          <p className="text-lg text-indigo-100/90 max-w-md">
+            Pick up where you left off. Your goals, milestones and daily focus —
+            all in one place.
+          </p>
         </div>
-      </div>
-      <div className="w-1/2 bg-gray-600 text-white h-screen font-serif text-left pl-40 text-7xl pt-48">
-        <div>Login </div>
-        <div> to the world </div>
-        <div> Planning and Productivity</div>
-      </div>
+        <div className="text-sm text-indigo-100/70">
+          Plan it. Break it down. Ship it.
+        </div>
+      </aside>
+
+      <main className="flex w-full md:w-1/2 items-center justify-center p-6 md:p-12 bg-white">
+        <form onSubmit={loginHandler} className="w-full max-w-sm space-y-5">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900">Log in</h2>
+            <p className="text-sm text-gray-500 mt-1">
+              Enter your details to continue.
+            </p>
+          </div>
+
+          <div className="space-y-1.5">
+            <label
+              htmlFor="login-email"
+              className="text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <input
+              id="login-email"
+              type="email"
+              autoComplete="email"
+              required
+              value={input.email}
+              onChange={(e) => setInput({ ...input, email: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label
+              htmlFor="login-password"
+              className="text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <input
+              id="login-password"
+              type="password"
+              autoComplete="current-password"
+              required
+              value={input.password}
+              onChange={(e) => setInput({ ...input, password: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold py-2.5 rounded-lg transition-colors"
+          >
+            {loading ? 'Signing in…' : 'Sign in'}
+          </button>
+
+          <p className="text-sm text-gray-600 text-center">
+            Don't have an account?{' '}
+            <Link
+              to="/"
+              className="text-indigo-600 font-medium hover:underline"
+            >
+              Sign up
+            </Link>
+          </p>
+        </form>
+      </main>
     </div>
   );
 };

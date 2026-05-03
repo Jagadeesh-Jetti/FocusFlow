@@ -1,19 +1,46 @@
+import { Link, useNavigate } from 'react-router-dom';
+
 export const UpcomingDeadlines = ({ deadlines }) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="bg-white rounded-2xl shadow p-6">
-      <h2 className="text-lg font-bold text-gray-800 mb-4">
-        {' '}
-        Upcoming Deadlines
+    <div className="bg-white rounded-2xl border border-gray-200 p-6">
+      <h2 className="text-base font-semibold text-gray-900 mb-4">
+        Upcoming deadlines
       </h2>
       {deadlines.length === 0 ? (
-        <p className="text-gray-400 italic"> No dealines</p>
+        <div className="text-sm text-gray-500">
+          <p className="mb-2">Nothing due in the next few days.</p>
+          <Link
+            to="/tasks"
+            className="text-indigo-600 hover:underline font-medium"
+          >
+            Add a task →
+          </Link>
+        </div>
       ) : (
-        <ul className="space-y-2 text-gray-700">
-          {deadlines.map((d, idx) => (
-            <li key={idx}>
-              <span className="text-gray-500"> {d.date} - </span> {d.title}
-            </li>
-          ))}
+        <ul className="space-y-2">
+          {deadlines.map((d, idx) => {
+            const canNavigate = Boolean(d.goalId);
+            return (
+              <li
+                key={idx}
+                onClick={
+                  canNavigate ? () => navigate(`/goals/${d.goalId}`) : undefined
+                }
+                className={`flex justify-between items-center text-sm py-1.5 ${
+                  canNavigate
+                    ? 'cursor-pointer hover:text-indigo-700 transition-colors'
+                    : ''
+                }`}
+              >
+                <span className="text-gray-700 truncate">{d.title}</span>
+                <span className="text-xs text-gray-500 shrink-0 ml-2">
+                  {d.date}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>

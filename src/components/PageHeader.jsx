@@ -1,10 +1,19 @@
 import { AddButton } from './AddButton';
 
-export const PageHeader = ({ title, buttonLabel, setShowModal }) => {
+export const PageHeader = ({ title, subtitle, buttonLabel, setShowModal }) => {
   return (
-    <div className="flex justify-between m-2">
-      <div className="text-3xl m-3 font-bold"> {title}</div>
-      <AddButton text={buttonLabel} setShowModal={setShowModal} />
+    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-6">
+      <div>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="text-sm text-gray-500 mt-1">{subtitle}</p>
+        )}
+      </div>
+      {buttonLabel && (
+        <AddButton text={buttonLabel} setShowModal={setShowModal} />
+      )}
     </div>
   );
 };

@@ -66,16 +66,36 @@ export const Profile = () => {
   if (!profile) return <div className="text-center mt-20">Loading user...</div>;
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
 
-      <main className="flex-1 px-6 py-10 border ">
-        <div className="bg-blue-100 h-40 w-[100%] relative">
-          <div className="bg-yellow-300 h-15 w-15 absolute  -bottom-4 left-2 rounded-lg">
-            <div className="m-1 h-13 w-13 bg-amber-950 rounded-lg"> </div>
+      <main className="flex-1">
+        <div className="relative">
+          {profile?.bannerPic ? (
+            <img
+              src={profile.bannerPic}
+              alt=""
+              className="h-44 w-full object-cover"
+            />
+          ) : (
+            <div className="h-44 w-full bg-gradient-to-r from-indigo-500 via-indigo-600 to-purple-600" />
+          )}
+          <div className="absolute -bottom-12 left-6 md:left-10">
+            {profile?.profilePic ? (
+              <img
+                src={profile.profilePic}
+                alt={profile.name}
+                className="w-24 h-24 rounded-full border-4 border-white shadow-md object-cover bg-white"
+              />
+            ) : (
+              <div className="w-24 h-24 rounded-full border-4 border-white shadow-md bg-indigo-100 text-indigo-700 flex items-center justify-center text-3xl font-bold">
+                {profile?.name?.[0]?.toUpperCase()}
+              </div>
+            )}
           </div>
         </div>
 
+        <div className="px-6 md:px-10 pt-16 pb-10">
         <ProfileHeroContent
           profile={profile}
           enableEditing={enableEditing}
@@ -93,18 +113,29 @@ export const Profile = () => {
 
         <ProfileMenuBar setDisplay={setDisplay} />
 
-        <div>
+        <div className="mt-4">
           {display === 'posts' ? (
             filteredPosts.length > 0 ? (
-              filteredPosts.map((post) => <PostCard post={post} />)
+              <div className="space-y-4">
+                {filteredPosts.map((post) => (
+                  <PostCard key={post._id} post={post} />
+                ))}
+              </div>
             ) : (
-              <div> NO post yet</div>
+              <div className="text-sm text-gray-400 italic">No posts yet.</div>
             )
           ) : display === 'goals' ? (
-            goals.map((goal) => <GoalCard goal={goal} />)
-          ) : (
-            <div> NO goals yet</div>
-          )}
+            goals.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {goals.map((goal) => (
+                  <GoalCard key={goal._id} goal={goal} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-sm text-gray-400 italic">No goals yet.</div>
+            )
+          ) : null}
+        </div>
         </div>
       </main>
 

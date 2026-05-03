@@ -1,26 +1,16 @@
-export const ActionButton = ({ title, onClick, color }) => {
-  const baseColor = {
-    blue: {
-      bg: 'bg-blue-100',
-      text: 'text-blue-800',
-      hover: 'hover:bg-blue-200',
-    },
-    red: {
-      bg: 'bg-red-100',
-      text: 'text-red-800',
-      hover: 'hover:bg-red-200',
-    },
-    gray: {
-      bg: 'bg-gray-100',
-      text: 'text-red-800',
-      hover: 'hover:bg-red-200',
-    },
-  }[color];
+const TONE = {
+  blue: 'text-gray-600 hover:text-indigo-700 hover:bg-indigo-50',
+  red: 'text-gray-600 hover:text-red-600 hover:bg-red-50',
+  gray: 'text-gray-600 hover:text-gray-900 hover:bg-gray-100',
+};
+
+export const ActionButton = ({ title, onClick, color = 'gray' }) => {
+  const tone = TONE[color] || TONE.gray;
 
   return (
     <button
-      className={`text-sm bg-blue-100 text-blue-800 font-medium  rounded px-3 py-1 hover:bg-blue-200 hover:cursor-pointer cover:scale-105 hover:shadow-lg transition ${baseColor.bg} ${baseColor.text} ${baseColor.hover}`}
       onClick={onClick}
+      className={`text-xs font-medium rounded-md px-2.5 py-1 transition-colors ${tone}`}
     >
       {title}
     </button>

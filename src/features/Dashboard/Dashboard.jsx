@@ -41,6 +41,7 @@ export const Dashboard = () => {
             day: 'numeric',
           }),
           title: d.title,
+          goalId: d.goal,
         }))
       );
     } catch (err) {
@@ -48,45 +49,47 @@ export const Dashboard = () => {
     }
   };
 
-  return (
-    <div className="flex min-h-screen bg-whitesmoke">
-      <Sidebar />
-      <main className="flex-1 p-2 md:p-10">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">
-          👋 Welcome, {user?.name}
-        </h1>
+  const firstName = user?.name?.split(' ')[0] || user?.name || '';
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <StatCard title="Total Goals" count={stats.totalGoals || 0} />
-          <StatCard title="Tasks Done" count={stats.completedTasks} />
-          <StatCard title="Tasks Pending" count={stats.pendingTasks} />
-          <StatCard title="Goals In Progress" count={stats.activeGoals} />
+  return (
+    <div className="flex min-h-screen bg-gray-50">
+      <Sidebar />
+      <main className="flex-1 p-6 md:p-10 max-w-7xl">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">
+            Welcome back{firstName ? `, ${firstName}` : ''}
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Here&apos;s how your week is shaping up.
+          </p>
+        </header>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <StatCard title="Total goals" count={stats.totalGoals ?? 0} />
+          <StatCard title="Tasks done" count={stats.completedTasks ?? 0} />
+          <StatCard title="Tasks pending" count={stats.pendingTasks ?? 0} />
+          <StatCard
+            title="Goals in progress"
+            count={stats.activeGoals ?? 0}
+          />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          <div className="bg-white p-6 rounded-2xl shadow-md">
-            <h2 className="text-lg font-bold text-gray-800 mb-4">
-              Weekly Task Completion
-            </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <DashboardCard title="Weekly task completion">
             <WeeklyBarChart data={weeklyData} />
-          </div>
+          </DashboardCard>
 
-          <div className="bg-white p-6 rounded-2xl shadow-md">
-            <h2 className="text-lg font-bold text-gray-800 mb-4">
-              Task Status
-            </h2>
+          <DashboardCard title="Task status">
             <TaskStatusPieChart
               completed={stats.completedTasks || 0}
               pending={stats.pendingTasks || 0}
               overdue={stats.overdueTasks || 0}
             />
-          </div>
-          <div>
-            <MilestonesProgress milestones={milestones} />
-          </div>
-          <div>
-            <UpcomingDeadlines deadlines={deadlines} />
-          </div>
+          </DashboardCard>
+
+          <MilestonesProgress milestones={milestones} />
+
+          <UpcomingDeadlines deadlines={deadlines} />
         </div>
       </main>
     </div>
@@ -94,8 +97,17 @@ export const Dashboard = () => {
 };
 
 const StatCard = ({ title, count }) => (
-  <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center hover:shadow-xl transition-all duration-300">
-    <h3 className="text-md font-semibold text-gray-500 mb-1">{title}</h3>
-    <p className="text-4xl font-extrabold text-indigo-600">{count}</p>
+  <div className="bg-white rounded-2xl border border-gray-200 p-5 hover:shadow-sm transition-shadow">
+    <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+      {title}
+    </div>
+    <div className="text-3xl font-bold text-gray-900 mt-1">{count}</div>
+  </div>
+);
+
+const DashboardCard = ({ title, children }) => (
+  <div className="bg-white p-6 rounded-2xl border border-gray-200">
+    <h2 className="text-base font-semibold text-gray-900 mb-4">{title}</h2>
+    {children}
   </div>
 );

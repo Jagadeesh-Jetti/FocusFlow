@@ -1,21 +1,39 @@
 import { AddButton } from '@/components/AddButton';
 
 export const ProfileHeroContent = ({ profile, enableEditing, setOpen }) => {
+  const followingCount = profile?.following?.length || 0;
+  const followersCount = profile?.followers?.length || 0;
+
   return (
-    <div className="flex pl-2 justify-between ">
+    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
       <div>
-        <div className="pt-8  text-2xl font-bold">{profile?.name}</div>
-        <div className="flex gap-3 opacity-70">
-          <div> {profile.bio} </div>
-          <div> {profile.location}</div>
-        </div>
-        <div className="flex gap-2">
-          <div> {profile?.following.length} following</div>
-          <div> {profile?.followers.length} followers </div>
+        <h1 className="text-2xl font-bold text-gray-900">{profile?.name}</h1>
+        {(profile?.bio || profile?.location) && (
+          <div className="flex flex-wrap gap-3 mt-1 text-sm text-gray-600">
+            {profile?.bio && <span>{profile.bio}</span>}
+            {profile?.location && (
+              <span className="text-gray-400">·</span>
+            )}
+            {profile?.location && <span>{profile.location}</span>}
+          </div>
+        )}
+        <div className="flex gap-4 mt-3 text-sm text-gray-600">
+          <span>
+            <span className="font-semibold text-gray-900">
+              {followingCount}
+            </span>{' '}
+            following
+          </span>
+          <span>
+            <span className="font-semibold text-gray-900">
+              {followersCount}
+            </span>{' '}
+            followers
+          </span>
         </div>
       </div>
       {enableEditing && (
-        <div className="mt-5" onClick={() => setOpen(true)}>
+        <div onClick={() => setOpen(true)}>
           <AddButton text="Edit Profile" />
         </div>
       )}
