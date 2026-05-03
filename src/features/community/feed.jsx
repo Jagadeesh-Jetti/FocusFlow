@@ -60,46 +60,66 @@ export const Feed = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
       <Sidebar />
-      <main className=" md:p-8 max-w-2xl mx-auto w-full">
-        <div className="flex justify-between items-center mb-8">
-          {/* <div></div> */}
-          <h1 className="text-3xl font-extrabold text-gray-800 tracking-tight">
-            ✨ Circles
-          </h1>
+      <main className="flex-1 p-4 md:p-10 max-w-3xl mx-auto w-full">
+        <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+              Community
+            </h1>
+            <p className="text-sm text-gray-500 mt-1">
+              Share progress. Cheer each other on.
+            </p>
+          </div>
           <button
             onClick={() => setShowModal(true)}
-            className="text-sm px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-full shadow-md transition-all"
+            className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-sm transition-colors"
           >
-            + Create Post
+            <span className="text-lg leading-none">+</span> New post
           </button>
-        </div>
+        </header>
 
-        <Modal isOpen={showModal} onClose={resetForm} title="Share Update">
+        <Modal isOpen={showModal} onClose={resetForm} title="Share an update">
           <form onSubmit={handleSubmit} className="space-y-4">
-            <textarea
-              className="w-full p-4 rounded-xl border bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
-              rows={4}
-              placeholder="What's on your mind?"
-              value={form.content}
-              onChange={(e) => setForm({ ...form, content: e.target.value })}
-              required
-            />
-
-            <input
-              type="file"
-              accept="image/*"
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-              onChange={(e) =>
-                setForm({ ...form, image: e.target.files[0] || null })
-              }
-            />
-
+            <div>
+              <label
+                htmlFor="post-content"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                What's on your mind?
+              </label>
+              <textarea
+                id="post-content"
+                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none text-sm"
+                rows={4}
+                placeholder="Share progress, an insight, or a question…"
+                value={form.content}
+                onChange={(e) => setForm({ ...form, content: e.target.value })}
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="post-image"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Image <span className="font-normal text-gray-400">(optional)</span>
+              </label>
+              <input
+                id="post-image"
+                type="file"
+                accept="image/*"
+                className="block w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                onChange={(e) =>
+                  setForm({ ...form, image: e.target.files[0] || null })
+                }
+              />
+            </div>
             <button
               type="submit"
               disabled={submitting}
-              className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-semibold py-2 px-4 rounded-full w-full shadow-sm"
+              className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold py-2.5 rounded-lg transition-colors"
             >
               {submitting ? 'Sharing…' : 'Share'}
             </button>
@@ -107,15 +127,45 @@ export const Feed = () => {
         </Modal>
 
         {error ? (
-          <p className="text-center text-red-500">{error}</p>
+          <div className="text-center text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg p-4">
+            {error}
+          </div>
         ) : loading && posts.length === 0 ? (
-          <p className="text-center text-gray-500 animate-pulse">Loading…</p>
+          <div className="space-y-4">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl border border-gray-200 p-5 animate-pulse"
+              >
+                <div className="flex gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-full bg-gray-200" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-3 bg-gray-200 rounded w-1/3" />
+                    <div className="h-2 bg-gray-100 rounded w-1/4" />
+                  </div>
+                </div>
+                <div className="h-3 bg-gray-100 rounded mb-2" />
+                <div className="h-3 bg-gray-100 rounded w-5/6" />
+              </div>
+            ))}
+          </div>
         ) : posts.length === 0 ? (
-          <p className="text-center text-gray-500 mt-10">
-            No posts yet. Be the first to share your progress!
-          </p>
+          <div className="border border-dashed border-gray-300 rounded-2xl p-10 text-center">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              The feed is quiet
+            </h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Be the first to share progress on your goals.
+            </p>
+            <button
+              onClick={() => setShowModal(true)}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2 rounded-lg"
+            >
+              + Share your first post
+            </button>
+          </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {posts.map((p) => (
               <PostCard key={p._id} post={p} />
             ))}

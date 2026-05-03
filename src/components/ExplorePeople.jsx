@@ -7,41 +7,55 @@ export const ExplorePeople = ({
   unfollowHandler,
 }) => {
   const navigate = useNavigate();
+
+  if (!filteredUsers?.length) return null;
+
   return (
-    <div className="w-[30%] p-10 ">
-      <div className="text-2xl font-bold m-2">Who to follow?</div>
-      {filteredUsers.map((user) => {
-        const isFollowing = user.followers.includes(currentUserId);
+    <aside className="hidden lg:block w-72 p-6 border-l border-gray-200 bg-white shrink-0">
+      <h2 className="text-base font-semibold text-gray-900 mb-4">
+        Who to follow
+      </h2>
+      <div className="space-y-2">
+        {filteredUsers.slice(0, 10).map((user) => {
+          const isFollowing = user.followers?.includes(currentUserId);
 
-        return (
-          <div className="flex gap-4 p-2 justify-between  border">
+          return (
             <div
-              className="flex gap-2 justify-center"
-              onClick={() => navigate(`/profile/${user._id}`)}
+              key={user._id}
+              className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50"
             >
-              <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold shadow-inner">
-                {user?.name?.[0]?.toUpperCase()}
-              </div>
-              <div>
-                <h2 className="text-center pt-1 font-semibold text-base md:text-lg text-gray-800">
+              <div
+                className="flex items-center gap-3 cursor-pointer flex-1 min-w-0"
+                onClick={() => navigate(`/profile/${user._id}`)}
+              >
+                <div className="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-semibold shrink-0">
+                  {user?.name?.[0]?.toUpperCase()}
+                </div>
+                <span className="text-sm font-medium text-gray-800 truncate">
                   {user?.name}
-                </h2>
+                </span>
               </div>
-            </div>
 
-            <div
-              onClick={() => {
-                isFollowing
-                  ? unfollowHandler(user._id)
-                  : followHandler(user._id);
-              }}
-              className="bg-gray-600 text-white flex content-center justify-center w-18 h-8 p-1 m-1 text-sm font-bold  mr-3 rounded-sm hover:cursor-pointer "
-            >
-              {user.followers.includes(currentUserId) ? 'UnFollow' : 'Follow'}
+              {followHandler && (
+                <button
+                  onClick={() =>
+                    isFollowing
+                      ? unfollowHandler?.(user._id)
+                      : followHandler(user._id)
+                  }
+                  className={`text-xs font-medium px-3 py-1 rounded-md transition-colors ${
+                    isFollowing
+                      ? 'border border-gray-300 text-gray-700 hover:bg-gray-100'
+                      : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                  }`}
+                >
+                  {isFollowing ? 'Following' : 'Follow'}
+                </button>
+              )}
             </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </aside>
   );
 };

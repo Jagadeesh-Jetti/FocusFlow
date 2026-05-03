@@ -23,7 +23,7 @@ export const PostDetailPage = () => {
 
   if (loading && !filteredPost) {
     return (
-      <div className="flex">
+      <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
         <Sidebar />
         <div className="m-10 text-gray-500">Loading post…</div>
       </div>
@@ -32,7 +32,7 @@ export const PostDetailPage = () => {
 
   if (!filteredPost) {
     return (
-      <div className="flex">
+      <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
         <Sidebar />
         <div className="m-10">
           <button
@@ -62,7 +62,7 @@ export const PostDetailPage = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
       <Sidebar />
       <div className="m-10">
         <div className="flex justify-around">

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from '../../components/Modal';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { Sidebar } from '../../components/Sidebar';
 import { useEffect, useState } from 'react';
 import {
@@ -26,6 +27,7 @@ export const Tasks = () => {
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -66,7 +68,14 @@ export const Tasks = () => {
     });
   };
 
-  const deleteHandler = async (id) => {
+  const deleteHandler = (id) => {
+    setConfirmDeleteId(id);
+  };
+
+  const confirmDelete = async () => {
+    if (!confirmDeleteId) return;
+    const id = confirmDeleteId;
+    setConfirmDeleteId(null);
     await dispatch(deleteTaskById(id));
     await dispatch(getTasks());
   };
@@ -104,9 +113,9 @@ export const Tasks = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
       <Sidebar />
-      <div className="flex-1 p-6 md:p-10 max-w-7xl">
+      <div className="flex-1 p-4 md:p-10 max-w-7xl w-full">
         <PageHeader
           title="Tasks"
           subtitle="Today's actionable steps toward your goals."
@@ -186,6 +195,16 @@ export const Tasks = () => {
             </div>
           );
         })()}
+
+        <ConfirmDialog
+          isOpen={!!confirmDeleteId}
+          title="Delete this task?"
+          message="This action cannot be undone."
+          confirmLabel="Delete task"
+          destructive
+          onConfirm={confirmDelete}
+          onCancel={() => setConfirmDeleteId(null)}
+        />
       </div>
     </div>
   );

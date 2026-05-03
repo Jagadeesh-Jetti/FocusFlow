@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Pencil, Trash2, Plus } from 'lucide-react';
 import { Sidebar } from '../../components/Sidebar';
 import { Modal } from '../../components/Modal';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
 import {
   deleteGoalById,
   getGoalFull,
@@ -48,6 +49,7 @@ export const GoalDetail = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [showAddMilestone, setShowAddMilestone] = useState(false);
   const [showAddOrphanTask, setShowAddOrphanTask] = useState(false);
+  const [confirm, setConfirm] = useState(null); // { title, message, onConfirm }
   const [editForm, setEditForm] = useState({
     title: '',
     description: '',
@@ -115,12 +117,19 @@ export const GoalDetail = () => {
     }
   };
 
-  const handleDeleteGoal = async () => {
-    if (!window.confirm('Delete this goal and all its milestones?')) return;
-    const res = await dispatch(deleteGoalById(id));
-    if (deleteGoalById.fulfilled.match(res)) {
-      navigate('/goals');
-    }
+  const handleDeleteGoal = () => {
+    setConfirm({
+      title: 'Delete this goal?',
+      message:
+        'This will permanently remove the goal. Its milestones and tasks will become unassigned.',
+      confirmLabel: 'Delete goal',
+      destructive: true,
+      onConfirm: async () => {
+        setConfirm(null);
+        const res = await dispatch(deleteGoalById(id));
+        if (deleteGoalById.fulfilled.match(res)) navigate('/goals');
+      },
+    });
   };
 
   const handleAddMilestone = async (e) => {
@@ -159,16 +168,18 @@ export const GoalDetail = () => {
     if (updateMilestoneById.fulfilled.match(res)) refresh();
   };
 
-  const handleDeleteMilestone = async (milestoneId) => {
-    if (
-      !window.confirm(
-        'Delete this milestone? Tasks under it will become unassigned.'
-      )
-    ) {
-      return;
-    }
-    const res = await dispatch(deleteMilestoneById(milestoneId));
-    if (deleteMilestoneById.fulfilled.match(res)) refresh();
+  const handleDeleteMilestone = (milestoneId) => {
+    setConfirm({
+      title: 'Delete this milestone?',
+      message: 'Tasks under it will become unassigned, not deleted.',
+      confirmLabel: 'Delete milestone',
+      destructive: true,
+      onConfirm: async () => {
+        setConfirm(null);
+        const res = await dispatch(deleteMilestoneById(milestoneId));
+        if (deleteMilestoneById.fulfilled.match(res)) refresh();
+      },
+    });
   };
 
   const handleAddTaskToMilestone = async (milestoneId, form) => {
@@ -239,10 +250,18 @@ export const GoalDetail = () => {
     }
   };
 
-  const handleDeleteTask = async (taskId) => {
-    if (!window.confirm('Delete this task?')) return;
-    const res = await dispatch(deleteTaskById(taskId));
-    if (deleteTaskById.fulfilled.match(res)) refresh();
+  const handleDeleteTask = (taskId) => {
+    setConfirm({
+      title: 'Delete this task?',
+      message: 'This action cannot be undone.',
+      confirmLabel: 'Delete task',
+      destructive: true,
+      onConfirm: async () => {
+        setConfirm(null);
+        const res = await dispatch(deleteTaskById(taskId));
+        if (deleteTaskById.fulfilled.match(res)) refresh();
+      },
+    });
   };
 
   const handleUpdateTask = async (taskId, updates) => {
@@ -254,7 +273,7 @@ export const GoalDetail = () => {
 
   if (detailLoading && !goalDetail) {
     return (
-      <div className="flex min-h-screen">
+      <div className="flex flex-col md:flex-row min-h-screen">
         <Sidebar />
         <main className="flex-1 p-8">
           <div className="text-gray-500">Loading goal…</div>
@@ -265,7 +284,7 @@ export const GoalDetail = () => {
 
   if (!goalDetail) {
     return (
-      <div className="flex min-h-screen">
+      <div className="flex flex-col md:flex-row min-h-screen">
         <Sidebar />
         <main className="flex-1 p-8">
           <button
@@ -285,7 +304,7 @@ export const GoalDetail = () => {
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex flex-col md:flex-row min-h-screen">
       <Sidebar />
       <main className="flex-1 p-4 md:p-8 max-w-4xl mx-auto w-full">
         <button
@@ -575,7 +594,7 @@ export const GoalDetail = () => {
         <Modal
           isOpen={showEdit}
           onClose={() => setShowEdit(false)}
-          title="Edit Goal"
+          title="Edit goal"
         >
           <GoalForm
             handleSubmit={submitEdit}
@@ -589,6 +608,16 @@ export const GoalDetail = () => {
             saveAIPlan={() => {}}
           />
         </Modal>
+
+        <ConfirmDialog
+          isOpen={!!confirm}
+          title={confirm?.title}
+          message={confirm?.message}
+          confirmLabel={confirm?.confirmLabel}
+          destructive={confirm?.destructive}
+          onConfirm={confirm?.onConfirm}
+          onCancel={() => setConfirm(null)}
+        />
       </main>
     </div>
   );

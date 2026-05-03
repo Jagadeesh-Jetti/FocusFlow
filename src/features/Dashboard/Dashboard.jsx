@@ -52,9 +52,9 @@ export const Dashboard = () => {
   const firstName = user?.name?.split(' ')[0] || user?.name || '';
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
       <Sidebar />
-      <main className="flex-1 p-6 md:p-10 max-w-7xl">
+      <main className="flex-1 p-4 md:p-10 max-w-7xl w-full">
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
             Welcome back{firstName ? `, ${firstName}` : ''}

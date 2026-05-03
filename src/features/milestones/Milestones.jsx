@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Sidebar } from '../../components/Sidebar';
 import { Modal } from '../../components/Modal';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { useEffect, useState } from 'react';
 import {
   createMilestone,
@@ -26,6 +27,7 @@ export const Milestones = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -72,7 +74,14 @@ export const Milestones = () => {
     resetForm();
   };
 
-  const deleteHandler = async (id) => {
+  const deleteHandler = (id) => {
+    setConfirmDeleteId(id);
+  };
+
+  const confirmDelete = async () => {
+    if (!confirmDeleteId) return;
+    const id = confirmDeleteId;
+    setConfirmDeleteId(null);
     await dispatch(deleteMilestoneById(id));
     await dispatch(getMilestones());
   };
@@ -87,9 +96,9 @@ export const Milestones = () => {
   }, [milestones]);
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
       <Sidebar />
-      <div className="flex-1 p-6 md:p-10 max-w-7xl">
+      <div className="flex-1 p-4 md:p-10 max-w-7xl w-full">
         <PageHeader
           title="Milestones"
           subtitle="Bite-size checkpoints between you and the goal."
@@ -152,6 +161,16 @@ export const Milestones = () => {
             </button>
           </div>
         )}
+
+        <ConfirmDialog
+          isOpen={!!confirmDeleteId}
+          title="Delete this milestone?"
+          message="Tasks under it will become unassigned, not deleted."
+          confirmLabel="Delete milestone"
+          destructive
+          onConfirm={confirmDelete}
+          onCancel={() => setConfirmDeleteId(null)}
+        />
       </div>
     </div>
   );
