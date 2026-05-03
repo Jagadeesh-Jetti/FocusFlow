@@ -1,13 +1,9 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { Modal } from '@/components/Modal';
+
+const INPUT_CLASS =
+  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500';
+const LABEL_CLASS = 'block text-sm font-medium text-gray-700 mb-1';
 
 export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
   const [formData, setFormData] = useState({
@@ -15,7 +11,7 @@ export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
     bio: user.bio || '',
     location: user.location || '',
     profilePic: user.profilePic || '',
-    bannerPic: user.bannerPic || '', // optional, if added to schema
+    bannerPic: user.bannerPic || '',
   });
 
   const handleChange = (e) => {
@@ -30,78 +26,113 @@ export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-xl w-full p-6">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-semibold">
-            Edit Profile
-          </DialogTitle>
-        </DialogHeader>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Banner image preview */}
-          {formData.bannerPic && (
-            <img
-              src={formData.bannerPic}
-              alt="Banner"
-              className="w-full h-32 object-cover rounded-lg"
-            />
-          )}
-          <Input
+    <Modal isOpen={isOpen} onClose={onClose} title="Edit profile">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="profile-name" className={LABEL_CLASS}>
+            Name
+          </label>
+          <input
+            id="profile-name"
             type="text"
-            name="bannerPic"
-            placeholder="Banner image URL"
-            value={formData.bannerPic}
+            name="name"
+            value={formData.name}
             onChange={handleChange}
+            className={INPUT_CLASS}
+            placeholder="Your full name"
           />
+        </div>
 
-          {/* Profile pic preview */}
+        <div>
+          <label htmlFor="profile-bio" className={LABEL_CLASS}>
+            Bio
+          </label>
+          <textarea
+            id="profile-bio"
+            name="bio"
+            value={formData.bio}
+            onChange={handleChange}
+            rows={3}
+            className={INPUT_CLASS}
+            placeholder="A short intro"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="profile-location" className={LABEL_CLASS}>
+            Location
+          </label>
+          <input
+            id="profile-location"
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            className={INPUT_CLASS}
+            placeholder="City, country"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="profile-pic" className={LABEL_CLASS}>
+            Profile picture URL
+          </label>
+          <input
+            id="profile-pic"
+            type="url"
+            name="profilePic"
+            value={formData.profilePic}
+            onChange={handleChange}
+            className={INPUT_CLASS}
+            placeholder="https://…"
+          />
           {formData.profilePic && (
             <img
               src={formData.profilePic}
-              alt="Profile"
-              className="w-16 h-16 rounded-full mx-auto"
+              alt=""
+              className="w-16 h-16 rounded-full mt-2 object-cover border border-gray-200"
             />
           )}
-          <Input
-            type="text"
-            name="profilePic"
-            placeholder="Profile image URL"
-            value={formData.profilePic}
-            onChange={handleChange}
-          />
+        </div>
 
-          <Input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={formData.name}
+        <div>
+          <label htmlFor="banner-pic" className={LABEL_CLASS}>
+            Banner image URL
+          </label>
+          <input
+            id="banner-pic"
+            type="url"
+            name="bannerPic"
+            value={formData.bannerPic}
             onChange={handleChange}
+            className={INPUT_CLASS}
+            placeholder="https://…"
           />
+          {formData.bannerPic && (
+            <img
+              src={formData.bannerPic}
+              alt=""
+              className="w-full h-24 object-cover rounded-lg mt-2 border border-gray-200"
+            />
+          )}
+        </div>
 
-          <Textarea
-            name="bio"
-            placeholder="Your bio"
-            value={formData.bio}
-            onChange={handleChange}
-          />
-
-          <Input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={formData.location}
-            onChange={handleChange}
-          />
-
-          <div className="flex justify-end gap-2">
-            <Button type="button" variant="outline" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button type="submit">Save</Button>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+        <div className="flex justify-end gap-2 pt-2">
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
+          >
+            Save changes
+          </button>
+        </div>
+      </form>
+    </Modal>
   );
 };

@@ -1,22 +1,39 @@
-export const ProfileMenuBar = ({ setDisplay }) => {
-  return (
-    <div className="flex mt-3  justify-between">
-      <div className="flex ">
-        <div className="p-3 font-bold" onClick={() => setDisplay('posts')}>
-          Posts
-        </div>
-        <div className="p-3 font-bold" onClick={() => setDisplay('goals')}>
-          Goals
-        </div>
-      </div>
+import { useState } from 'react';
 
-      <div className="flex justify-center align-middle text-center">
-        <div className="flex justify-center  font-bold p-2">Sort by:</div>
-        <select className="p-1">
-          <option value="">All</option>
-          <option value="">Most Popular</option>
-        </select>
-      </div>
-    </div>
+export const ProfileMenuBar = ({ setDisplay }) => {
+  const [active, setActive] = useState('posts');
+
+  const tabs = [
+    { key: 'posts', label: 'Posts' },
+    { key: 'goals', label: 'Goals' },
+  ];
+
+  const select = (key) => {
+    setActive(key);
+    setDisplay(key);
+  };
+
+  return (
+    <nav
+      className="flex border-b border-gray-200 mt-6"
+      role="tablist"
+      aria-label="Profile content"
+    >
+      {tabs.map((t) => (
+        <button
+          key={t.key}
+          role="tab"
+          aria-selected={active === t.key}
+          onClick={() => select(t.key)}
+          className={`px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
+            active === t.key
+              ? 'border-indigo-600 text-indigo-700'
+              : 'border-transparent text-gray-600 hover:text-gray-900'
+          }`}
+        >
+          {t.label}
+        </button>
+      ))}
+    </nav>
   );
 };
