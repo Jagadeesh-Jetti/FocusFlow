@@ -36,7 +36,7 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
     <div
       key={goal._id}
       onClick={() => navigate(`/goals/${goal._id}`)}
-      className="p-4 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer bg-white border border-gray-200"
+      className="card-depth group p-5 rounded-2xl cursor-pointer bg-white border border-slate-200/80 hover:border-emerald-200 hover:-translate-y-0.5"
     >
       <div className="text-xl font-semibold mb-1">{goal.title}</div>
       {goal.category && (
@@ -76,24 +76,24 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
 
       {total > 0 && (
         <div className="mb-3">
-          <div className="flex justify-between text-xs text-gray-600 mb-1">
+          <div className="flex justify-between text-xs text-slate-600 mb-1.5 tnum">
             <span>
               {completed} / {total} tasks
             </span>
-            <span>{pct}%</span>
+            <span className="font-medium text-slate-700">{pct}%</span>
           </div>
-          <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+          <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
             <div
-              className="bg-emerald-600 h-full rounded-full transition-all"
+              className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-[width] duration-500 ease-out"
               style={{ width: `${pct}%` }}
             />
           </div>
         </div>
       )}
 
-      <div className="flex mt-4 gap-2">
-        <ActionButton title="EDIT" onClick={stopAnd(onEdit)} color="blue" />
-        <ActionButton title="DELETE" onClick={stopAnd(onDelete)} color="red" />
+      <div className="flex mt-4 gap-1">
+        <ActionButton title="Edit" onClick={stopAnd(onEdit)} color="blue" />
+        <ActionButton title="Delete" onClick={stopAnd(onDelete)} color="red" />
       </div>
     </div>
   );

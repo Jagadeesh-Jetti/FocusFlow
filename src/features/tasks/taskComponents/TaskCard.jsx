@@ -10,7 +10,7 @@ export const TaskCard = ({ task, onToggleComplete, onEdit, onDelete }) => {
   const isCompleted = task.status === 'completed';
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition group">
+    <div className="card-depth bg-white rounded-2xl border border-slate-200/80 p-5 hover:border-emerald-200 hover:-translate-y-0.5 group">
       <div className="flex items-start gap-3">
         <button
           onClick={onToggleComplete}

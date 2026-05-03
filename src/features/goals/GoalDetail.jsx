@@ -304,10 +304,10 @@ export const GoalDetail = () => {
           <ArrowLeft className="w-4 h-4" /> Back to goals
         </button>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="card-depth bg-white rounded-2xl border border-slate-200/80 p-6 mb-6">
           <div className="flex items-start justify-between gap-4 mb-3">
             <div className="flex-1 min-w-0">
-              <h1 className="text-2xl font-bold text-gray-900 break-words">
+              <h1 className="text-2xl md:text-3xl font-bold text-slate-900 break-words tracking-tight">
                 {goalDetail.title}
               </h1>
               {goalDetail.category && (
@@ -368,15 +368,15 @@ export const GoalDetail = () => {
           </div>
 
           <div>
-            <div className="flex justify-between text-sm text-gray-600 mb-1">
+            <div className="flex justify-between text-sm text-slate-600 mb-1.5 tnum">
               <span>Progress</span>
-              <span>
+              <span className="font-medium text-slate-700">
                 {progress.completed} / {progress.total} tasks · {progress.pct}%
               </span>
             </div>
-            <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
               <div
-                className="bg-emerald-600 h-full rounded-full transition-all"
+                className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-[width] duration-500 ease-out"
                 style={{ width: `${progress.pct}%` }}
               />
             </div>
