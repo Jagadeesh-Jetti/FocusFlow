@@ -28,6 +28,7 @@ export const Tasks = () => {
   const [editId, setEditId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [showCompleted, setShowCompleted] = useState(false);
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -122,15 +123,26 @@ export const Tasks = () => {
           buttonLabel="Add task"
           setShowModal={setShowModal}
         />
-        <TaskFilters
-          goals={goals}
-          milestones={milestones}
-          selectedGoal={selectedGoal}
-          selectedMilestone={selectedMilestone}
-          setSelectedGoal={setSelectedGoal}
-          setSelectedMilestone={setSelectedMilestone}
-          setSelectedPriority={setSelectedPriority}
-        />
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <TaskFilters
+            goals={goals}
+            milestones={milestones}
+            selectedGoal={selectedGoal}
+            selectedMilestone={selectedMilestone}
+            setSelectedGoal={setSelectedGoal}
+            setSelectedMilestone={setSelectedMilestone}
+            setSelectedPriority={setSelectedPriority}
+          />
+          <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer select-none px-3 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">
+            <input
+              type="checkbox"
+              checked={showCompleted}
+              onChange={(e) => setShowCompleted(e.target.checked)}
+              className="w-4 h-4 accent-emerald-600"
+            />
+            Show completed
+          </label>
+        </div>
         <Modal
           isOpen={showModal}
           onClose={() => resetForm()}
@@ -155,8 +167,10 @@ export const Tasks = () => {
               selectedPriority === 'all' ||
               task.priority?.toLowerCase() ===
                 selectedPriority.toLowerCase();
+            const matchesStatus =
+              showCompleted || task.status !== 'completed';
             return (
-              task.status !== 'completed' &&
+              matchesStatus &&
               matchesGoal &&
               matchesMilestone &&
               matchesPriority
@@ -166,11 +180,12 @@ export const Tasks = () => {
             return (
               <div className="border border-dashed border-gray-300 rounded-2xl p-10 text-center">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  No open tasks
+                  {showCompleted ? 'No tasks match' : 'No open tasks'}
                 </h3>
                 <p className="text-sm text-gray-500 mb-4">
-                  Either everything's done, or you haven't added any tasks
-                  matching the current filters yet.
+                  {showCompleted
+                    ? 'Try clearing the filters above.'
+                    : "Either everything's done, or you haven't added any tasks matching the current filters yet."}
                 </p>
                 <button
                   onClick={() => setShowModal(true)}
