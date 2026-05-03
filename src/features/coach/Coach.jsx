@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Sparkles, Send, RotateCcw, Bot, Wand2 } from 'lucide-react';
+import { Sparkles, Send, RotateCcw, Bot, Wand2, Loader2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Sidebar } from '../../components/Sidebar';
@@ -211,7 +211,11 @@ export const Coach = () => {
                 aria-label="Send message"
                 className="bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white p-2 rounded-xl transition-colors shrink-0"
               >
-                <Send className="w-4 h-4" />
+                {loading ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Send className="w-4 h-4" />
+                )}
               </button>
             </div>
             <p className="text-xs text-gray-400 mt-2 text-center">
