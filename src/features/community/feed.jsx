@@ -147,7 +147,7 @@ export const Feed = () => {
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="bg-white rounded-2xl border border-gray-200 dark:border-slate-700 p-5 animate-pulse"
+                className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 p-5 animate-pulse"
               >
                 <div className="flex gap-3 mb-3">
                   <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-slate-700" />

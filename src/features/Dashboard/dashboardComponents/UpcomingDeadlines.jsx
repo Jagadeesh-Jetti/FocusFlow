@@ -4,7 +4,7 @@ export const UpcomingDeadlines = ({ deadlines }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 dark:border-slate-700 p-6">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 p-6">
       <h2 className="text-base font-semibold text-gray-900 dark:text-slate-100 mb-4">
         Upcoming deadlines
       </h2>

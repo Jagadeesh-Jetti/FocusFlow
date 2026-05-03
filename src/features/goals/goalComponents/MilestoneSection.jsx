@@ -55,7 +55,7 @@ export const MilestoneSection = ({
   };
 
   return (
-    <div className="border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden bg-white">
+    <div className="border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden bg-white dark:bg-slate-900">
       <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-slate-950">
         <button
           onClick={() => setIsExpanded((v) => !v)}

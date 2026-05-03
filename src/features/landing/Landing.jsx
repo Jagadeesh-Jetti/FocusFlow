@@ -64,7 +64,7 @@ const STEPS = [
 
 export const Landing = () => {
   return (
-    <div className="min-h-screen bg-white text-gray-900 dark:text-slate-100">
+    <div className="min-h-screen bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100">
       {/* Top nav */}
       <header className="sticky top-0 z-30 backdrop-blur-xl bg-white/70 border-b border-slate-200/60">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
@@ -187,7 +187,7 @@ export const Landing = () => {
               return (
                 <div
                   key={f.title}
-                  className="bg-white rounded-2xl border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md hover:border-emerald-200 transition"
+                  className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md hover:border-emerald-200 transition"
                 >
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5" />
@@ -289,7 +289,7 @@ export const Landing = () => {
 
 const ProductMockup = () => {
   return (
-    <div className="rounded-2xl bg-white border border-gray-200 dark:border-slate-700 shadow-2xl shadow-emerald-900/10 overflow-hidden">
+    <div className="rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 shadow-2xl shadow-emerald-900/10 overflow-hidden">
       {/* Browser chrome */}
       <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-slate-950">
         <div className="flex gap-1.5">
@@ -298,7 +298,7 @@ const ProductMockup = () => {
           <span className="w-3 h-3 rounded-full bg-emerald-300" />
         </div>
         <div className="flex-1 flex justify-center">
-          <span className="text-xs text-gray-400 dark:text-slate-600 bg-white border border-gray-200 dark:border-slate-700 rounded-md px-3 py-1">
+          <span className="text-xs text-gray-400 dark:text-slate-600 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-md px-3 py-1">
             focusflow.app/goals/run-marathon
           </span>
         </div>

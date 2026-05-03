@@ -12,7 +12,7 @@ export const ExplorePeople = ({
   if (!filteredUsers?.length) return null;
 
   return (
-    <aside className="hidden lg:block w-72 p-6 border-l border-gray-200 dark:border-slate-700 bg-white shrink-0">
+    <aside className="hidden lg:block w-72 p-6 border-l border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 shrink-0">
       <h2 className="text-base font-semibold text-gray-900 dark:text-slate-100 mb-4">
         Who to follow
       </h2>

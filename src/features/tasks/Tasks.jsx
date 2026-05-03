@@ -137,7 +137,7 @@ export const Tasks = () => {
             setSelectedMilestone={setSelectedMilestone}
             setSelectedPriority={setSelectedPriority}
           />
-          <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300 cursor-pointer select-none px-3 py-2 bg-white border border-gray-200 dark:border-slate-700 rounded-lg shadow-sm">
+          <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300 cursor-pointer select-none px-3 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg shadow-sm">
             <input
               type="checkbox"
               checked={showCompleted}

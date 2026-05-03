@@ -139,7 +139,7 @@ export const Coach = () => {
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-slate-950">
       <Sidebar />
       <main className="flex-1 flex flex-col h-screen">
-        <header className="flex items-center justify-between px-4 md:px-8 py-4 border-b border-gray-200 dark:border-slate-700 bg-white shrink-0">
+        <header className="flex items-center justify-between px-4 md:px-8 py-4 border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 shrink-0">
           <div className="flex items-center gap-3">
             <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center shadow-sm shadow-emerald-500/30">
               <Sparkles className="w-5 h-5" />
@@ -190,7 +190,7 @@ export const Coach = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-200 dark:border-slate-700 bg-white px-4 md:px-8 py-4 shrink-0">
+        <div className="border-t border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 md:px-8 py-4 shrink-0">
           <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
             <div className="flex items-end gap-2 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 rounded-2xl p-2 focus-within:border-emerald-400 focus-within:ring-2 focus-within:ring-emerald-100 transition">
               <textarea
@@ -247,7 +247,7 @@ const EmptyState = ({ userName, onPick }) => (
         <button
           key={s.title}
           onClick={() => onPick(s.prompt)}
-          className="bg-white border border-gray-200 dark:border-slate-700 rounded-xl p-4 hover:border-emerald-300 hover:shadow-sm transition group"
+          className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl p-4 hover:border-emerald-300 hover:shadow-sm transition group"
         >
           <div className="text-2xl mb-2">{s.icon}</div>
           <div className="font-medium text-gray-900 dark:text-slate-100 group-hover:text-emerald-700 transition-colors">
@@ -276,7 +276,7 @@ const Message = ({ message, user }) => {
       <span className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center shrink-0">
         <Bot className="w-4 h-4" />
       </span>
-      <div className="bg-white border border-gray-200 dark:border-slate-700 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%] text-gray-800 dark:text-slate-200 leading-relaxed text-sm">
+      <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%] text-gray-800 dark:text-slate-200 leading-relaxed text-sm">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={MARKDOWN_COMPONENTS}
@@ -293,7 +293,7 @@ const ThinkingBubble = () => (
     <span className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center shrink-0">
       <Bot className="w-4 h-4" />
     </span>
-    <div className="bg-white border border-gray-200 dark:border-slate-700 rounded-2xl rounded-tl-md px-4 py-3">
+    <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-2xl rounded-tl-md px-4 py-3">
       <div className="flex items-center gap-1.5">
         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-bounce" />
         <span

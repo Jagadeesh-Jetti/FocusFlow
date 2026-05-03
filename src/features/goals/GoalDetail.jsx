@@ -587,7 +587,7 @@ export const GoalDetail = () => {
           )}
 
           {unassignedTasks.length ? (
-            <div className="bg-white rounded-xl border border-gray-200 dark:border-slate-700 p-3 space-y-1">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-700 p-3 space-y-1">
               {unassignedTasks.map((task) => (
                 <TaskRow
                   key={task._id}

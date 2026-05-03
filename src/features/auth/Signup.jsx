@@ -44,7 +44,7 @@ export const Signup = () => {
         </div>
       </aside>
 
-      <main className="flex w-full md:w-1/2 items-center justify-center p-6 md:p-12 bg-white">
+      <main className="flex w-full md:w-1/2 items-center justify-center p-6 md:p-12 bg-white dark:bg-slate-900">
         <form onSubmit={signupHandler} className="w-full max-w-sm space-y-5">
           <div>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100">Create account</h2>

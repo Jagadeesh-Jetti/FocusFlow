@@ -149,7 +149,7 @@ export const GoalForm = ({
             </div>
             <div className="space-y-2">
               {aiPlan?.milestones?.map((milestone, i) => (
-                <div key={i} className="bg-white border border-gray-200 dark:border-slate-700 rounded-md p-3">
+                <div key={i} className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-md p-3">
                   <div className="font-medium text-gray-900 dark:text-slate-100 mb-1">
                     {milestone.title}
                   </div>
