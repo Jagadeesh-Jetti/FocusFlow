@@ -1,0 +1,19 @@
+{
+  "name": "FocusFlow",
+  "short_name": "FocusFlow",
+  "description": "Your AI productivity coach. Set goals, get plans, ship.",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fafaf9",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

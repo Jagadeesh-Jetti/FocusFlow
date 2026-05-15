@@ -16,6 +16,8 @@ import { NotFound } from './components/NotFound';
 import { Landing } from './features/landing/Landing';
 import { Coach } from './features/coach/Coach';
 import { CommandPalette } from './components/CommandPalette';
+import { Settings } from './features/settings/Settings';
+import { Privacy, Terms } from './features/legal/Legal';
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -121,6 +123,16 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

@@ -79,7 +79,7 @@ export const Landing = () => {
           <nav className="flex items-center gap-2 sm:gap-3">
             <Link
               to="/login"
-              className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-slate-100 px-3 py-2 transition-colors"
+              className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 px-3 py-2 transition-colors"
             >
               Sign in
             </Link>
@@ -149,7 +149,7 @@ export const Landing = () => {
             </Link>
             <Link
               to="/login"
-              className="inline-flex items-center gap-1 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-slate-100 font-medium px-6 py-3 transition-colors"
+              className="inline-flex items-center gap-1 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-medium px-6 py-3 transition-colors"
             >
               Sign in
             </Link>
@@ -270,6 +270,12 @@ export const Landing = () => {
             <span className="font-semibold text-gray-900 dark:text-slate-100">FocusFlow</span>
           </Link>
           <div className="flex items-center gap-5">
+            <Link to="/privacy" className="hover:text-slate-900 dark:hover:text-slate-100">
+              Privacy
+            </Link>
+            <Link to="/terms" className="hover:text-slate-900 dark:hover:text-slate-100">
+              Terms
+            </Link>
             <a
               href="https://github.com/Jagadeesh-Jetti/FocusFlow"
               target="_blank"

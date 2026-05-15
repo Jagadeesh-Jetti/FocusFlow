@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /$
+Allow: /login
+Allow: /signup
+Allow: /privacy
+Allow: /terms
+Disallow: /dashboard
+Disallow: /goals
+Disallow: /tasks
+Disallow: /milestones
+Disallow: /coach
+Disallow: /feed
+Disallow: /profile
+Disallow: /settings
+
+Sitemap: https://focus-flow-theta-henna.vercel.app/sitemap.xml

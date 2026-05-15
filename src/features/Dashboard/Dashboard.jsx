@@ -7,22 +7,32 @@ import { WeeklyBarChart } from './dashboardComponents/WeeklyBarChart';
 import { TaskStatusPieChart } from './dashboardComponents/TaskStatusPieChart';
 import { MilestonesProgress } from './dashboardComponents/MilestonesProgress';
 import { UpcomingDeadlines } from './dashboardComponents/UpcomingDeadlines';
+import { Onboarding, isOnboarded } from '../onboarding/Onboarding';
 import axiosInstance from '@/utils/api';
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const goalsList = useSelector((state) => state.goal.goalsList);
 
   const [stats, setStats] = useState({});
   const [weeklyData, setWeeklyData] = useState([]);
   const [milestones, setMilestones] = useState([]);
   const [deadlines, setDeadlines] = useState([]);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
     dispatch(getTasks());
     dispatch(getGoals());
     fetchDashboardData();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (Array.isArray(goalsList) && goalsList.length === 0 && !isOnboarded()) {
+      const t = setTimeout(() => setShowOnboarding(true), 400);
+      return () => clearTimeout(t);
+    }
+  }, [goalsList]);
 
   const fetchDashboardData = async () => {
     try {
@@ -107,6 +117,12 @@ export const Dashboard = () => {
           <UpcomingDeadlines deadlines={deadlines} />
         </div>
       </main>
+
+      <Onboarding
+        open={showOnboarding}
+        onDismiss={() => setShowOnboarding(false)}
+        userName={firstName}
+      />
     </div>
   );
 };

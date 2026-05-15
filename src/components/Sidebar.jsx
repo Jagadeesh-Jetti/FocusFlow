@@ -11,6 +11,7 @@ import {
   Sparkles,
   Sun,
   Moon,
+  Settings as SettingsIcon,
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -77,6 +78,11 @@ export const Sidebar = () => {
       href: `/profile/${user._id}`,
       icon: <User className="w-5 h-5" />,
       label: 'Profile',
+    },
+    {
+      href: '/settings',
+      icon: <SettingsIcon className="w-5 h-5" />,
+      label: 'Settings',
     },
   ].filter(Boolean);
 
