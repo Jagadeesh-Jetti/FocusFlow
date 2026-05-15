@@ -115,6 +115,23 @@ export const Sidebar = () => {
           </button>
         </div>
 
+        <button
+          onClick={() => {
+            const evt = new KeyboardEvent('keydown', {
+              key: 'k',
+              metaKey: true,
+              ctrlKey: true,
+            });
+            window.dispatchEvent(evt);
+          }}
+          className="w-full flex items-center gap-2 px-3 py-2 mb-4 rounded-lg text-sm text-slate-500 dark:text-slate-400 bg-slate-100/60 dark:bg-slate-800/60 hover:bg-slate-200/60 dark:hover:bg-slate-700/60 transition-colors"
+        >
+          <span className="opacity-70">Search…</span>
+          <kbd className="ml-auto inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+            ⌘K
+          </kbd>
+        </button>
+
         <nav className="space-y-1 text-sm font-medium">
           {menuItems.map((item) => (
             <SidebarItem

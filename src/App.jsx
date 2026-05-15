@@ -15,11 +15,15 @@ import { PostDetailPage } from './features/community/PostDetailPage';
 import { NotFound } from './components/NotFound';
 import { Landing } from './features/landing/Landing';
 import { Coach } from './features/coach/Coach';
+import { CommandPalette } from './components/CommandPalette';
+import { useSelector } from 'react-redux';
 
 function App() {
   const location = useLocation();
+  const { isAuthenticated } = useSelector((s) => s.auth);
   return (
     <div key={location.pathname} className="fade-up">
+      {isAuthenticated && <CommandPalette />}
       <Routes>
         <Route
           path="/"
