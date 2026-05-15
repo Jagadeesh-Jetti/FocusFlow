@@ -156,7 +156,7 @@ export const Coach = () => {
           {!isEmpty && (
             <button
               onClick={handleClear}
-              className="inline-flex items-center gap-1.5 text-sm text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800 px-3 py-1.5 rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 hover:bg-gray-100 dark:hover:bg-slate-800 px-3 py-1.5 rounded-lg transition-colors"
             >
               <RotateCcw className="w-4 h-4" />
               <span className="hidden sm:inline">New conversation</span>
@@ -200,7 +200,7 @@ export const Coach = () => {
                 onKeyDown={handleKeyDown}
                 rows={1}
                 placeholder="Ask anything about your goals, tasks, or progress…"
-                className="flex-1 bg-transparent resize-none px-2 py-2 text-sm focus:outline-none placeholder:text-gray-400 dark:text-slate-600 max-h-40"
+                className="flex-1 bg-transparent resize-none px-2 py-2 text-sm focus:outline-none placeholder:text-gray-400 dark:placeholder:text-slate-500 max-h-40"
                 style={{ minHeight: '2.25rem' }}
                 disabled={loading}
                 autoFocus

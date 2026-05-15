@@ -340,14 +340,14 @@ export const GoalDetail = () => {
               <button
                 onClick={openEdit}
                 aria-label="Edit goal"
-                className="p-2 text-gray-600 dark:text-slate-400 hover:text-emerald-600 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800"
+                className="p-2 text-gray-600 dark:text-slate-400 hover:text-emerald-600 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800"
               >
                 <Pencil className="w-4 h-4" />
               </button>
               <button
                 onClick={handleDeleteGoal}
                 aria-label="Delete goal"
-                className="p-2 text-gray-600 dark:text-slate-400 hover:text-red-600 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800"
+                className="p-2 text-gray-600 dark:text-slate-400 hover:text-red-600 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800"
               >
                 <Trash2 className="w-4 h-4" />
               </button>

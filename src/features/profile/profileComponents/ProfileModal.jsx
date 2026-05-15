@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Modal } from '@/components/Modal';
 
 const INPUT_CLASS =
-  'w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500';
+  'w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder:text-gray-400 dark:placeholder:text-slate-500';
 const LABEL_CLASS = 'block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1';
 
 export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
@@ -121,7 +121,7 @@ export const EditProfileModal = ({ user, isOpen, onClose, onSave }) => {
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800 transition-colors"
+            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
           >
             Cancel
           </button>

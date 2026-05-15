@@ -70,7 +70,7 @@ export const TaskRow = ({ task, onToggle, onDelete, onUpdate }) => {
           </button>
           <button
             onClick={() => setIsEditing(false)}
-            className="bg-gray-200 dark:bg-slate-700 px-3 py-1 rounded text-sm hover:bg-gray-300 dark:hover:bg-slate-600 dark:bg-slate-600"
+            className="bg-gray-200 dark:bg-slate-700 px-3 py-1 rounded text-sm hover:bg-gray-300 dark:hover:bg-slate-600"
           >
             Cancel
           </button>
@@ -80,7 +80,7 @@ export const TaskRow = ({ task, onToggle, onDelete, onUpdate }) => {
   }
 
   return (
-    <div className="flex items-start gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 dark:bg-slate-950 group">
+    <div className="flex items-start gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 group">
       <button
         onClick={() => onToggle(task)}
         aria-label={isCompleted ? 'Mark incomplete' : 'Mark complete'}

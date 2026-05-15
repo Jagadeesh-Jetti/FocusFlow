@@ -23,7 +23,7 @@ export const ExplorePeople = ({
           return (
             <div
               key={user._id}
-              className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:bg-slate-950"
+              className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800"
             >
               <div
                 className="flex items-center gap-3 cursor-pointer flex-1 min-w-0"
@@ -44,7 +44,7 @@ export const ExplorePeople = ({
                   }
                   className={`text-xs font-medium px-3 py-1 rounded-md transition-colors ${
                     isFollowing
-                      ? 'border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 dark:bg-slate-800'
+                      ? 'border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800'
                       : 'bg-emerald-600 text-white hover:bg-emerald-700'
                   }`}
                 >
