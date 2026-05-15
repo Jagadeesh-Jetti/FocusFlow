@@ -7,7 +7,8 @@ import { WeeklyBarChart } from './dashboardComponents/WeeklyBarChart';
 import { TaskStatusPieChart } from './dashboardComponents/TaskStatusPieChart';
 import { MilestonesProgress } from './dashboardComponents/MilestonesProgress';
 import { UpcomingDeadlines } from './dashboardComponents/UpcomingDeadlines';
-import { Onboarding, isOnboarded } from '../onboarding/Onboarding';
+import { Onboarding } from '../onboarding/Onboarding';
+import { isOnboarded } from '../onboarding/onboardingStorage';
 import axiosInstance from '@/utils/api';
 
 export const Dashboard = () => {

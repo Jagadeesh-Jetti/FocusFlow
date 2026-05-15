@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Sparkles, ArrowRight, Loader2, Target, X } from 'lucide-react';
 import axiosInstance from '../../utils/api';
 import { toast } from 'sonner';
+import { markOnboarded } from './onboardingStorage';
 
 const TEMPLATES = [
   {
@@ -28,24 +29,6 @@ const TEMPLATES = [
       'Reach working proficiency in one new tool within 12 weeks.',
   },
 ];
-
-const STORAGE_KEY = 'focusflow.onboarded';
-
-export const markOnboarded = () => {
-  try {
-    localStorage.setItem(STORAGE_KEY, '1');
-  } catch {
-    // ignore
-  }
-};
-
-export const isOnboarded = () => {
-  try {
-    return localStorage.getItem(STORAGE_KEY) === '1';
-  } catch {
-    return false;
-  }
-};
 
 export const Onboarding = ({ open, onDismiss, userName }) => {
   const navigate = useNavigate();
