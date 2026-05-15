@@ -15,9 +15,11 @@ import { MilestoneCard } from './milestoneComponents/MilestoneCard';
 import { MilestoneForm } from './milestoneComponents/MilestoneForm';
 import { PageHeader } from '../../components/PageHeader';
 import { MilestoneFilters } from './milestoneComponents/MilestoneFilters';
+import { SkeletonGrid } from '../../components/Skeleton';
 
 export const Milestones = () => {
   const milestones = useSelector((state) => state.milestone.milestoneList);
+  const milestonesLoading = useSelector((state) => state.milestone.loading);
   const goals = useSelector((state) => state.goal.goalsList);
   const dispatch = useDispatch();
 
@@ -124,7 +126,9 @@ export const Milestones = () => {
           />
         </Modal>
 
-        {filteredMilestones.length > 0 ? (
+        {milestonesLoading && filteredMilestones.length === 0 ? (
+          <SkeletonGrid count={6} />
+        ) : filteredMilestones.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {filteredMilestones.map((milestone) => (
               <MilestoneCard

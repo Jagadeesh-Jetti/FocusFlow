@@ -324,7 +324,7 @@ export const GoalDetail = () => {
           <ArrowLeft className="w-4 h-4" /> Back to goals
         </button>
 
-        <div className="card-depth bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-6 mb-6">
+        <div className="card-depth card-hover-ring bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-6 mb-6">
           <div className="flex items-start justify-between gap-4 mb-3">
             <div className="flex-1 min-w-0">
               <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 break-words tracking-tight">

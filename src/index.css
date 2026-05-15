@@ -153,6 +153,95 @@ code, kbd, pre, samp {
   animation: ff-sparkle-pulse 1.6s ease-in-out infinite;
 }
 
+/* Spring easing — use for hovers/presses that should feel alive */
+.spring {
+  transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Gradient hover ring for cards. Use with `.card-depth.card-hover-ring`. */
+.card-hover-ring {
+  position: relative;
+}
+.card-hover-ring::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #10b981, #14b8a6, #06b6d4);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+.card-hover-ring:hover::before {
+  opacity: 1;
+}
+
+/* Skeleton shimmer */
+@keyframes ff-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.06) 0%,
+    rgba(15, 23, 42, 0.12) 50%,
+    rgba(15, 23, 42, 0.06) 100%
+  );
+  background-size: 800px 100%;
+  animation: ff-shimmer 1.4s linear infinite;
+  border-radius: 6px;
+}
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(241, 245, 249, 0.05) 0%,
+    rgba(241, 245, 249, 0.12) 50%,
+    rgba(241, 245, 249, 0.05) 100%
+  );
+  background-size: 800px 100%;
+}
+
+/* Tooltip via group-hover */
+.tooltip-wrap {
+  position: relative;
+}
+.tooltip-content {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(2px);
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #0f172a;
+  color: #f1f5f9;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease, transform 150ms ease;
+  box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.25);
+  z-index: 60;
+}
+.dark .tooltip-content {
+  background: #f8fafc;
+  color: #0f172a;
+}
+.tooltip-wrap:hover .tooltip-content,
+.tooltip-wrap:focus-within .tooltip-content {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 @theme inline {
 
   --radius-sm: calc(var(--radius) - 4px);

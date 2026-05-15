@@ -36,7 +36,7 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
     <div
       key={goal._id}
       onClick={() => navigate(`/goals/${goal._id}`)}
-      className="card-depth group p-5 rounded-2xl cursor-pointer bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-200 hover:-translate-y-0.5"
+      className="card-depth card-hover-ring group p-5 rounded-2xl cursor-pointer bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-200 hover:-translate-y-0.5"
     >
       <div className="text-xl font-semibold mb-1">{goal.title}</div>
       {goal.category && (

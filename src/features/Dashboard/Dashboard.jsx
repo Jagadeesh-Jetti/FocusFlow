@@ -97,7 +97,7 @@ export const Dashboard = () => {
 };
 
 const StatCard = ({ title, count }) => (
-  <div className="card-depth bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 hover:-translate-y-0.5 hover:border-emerald-200">
+  <div className="card-depth card-hover-ring bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 hover:-translate-y-0.5 hover:border-emerald-200">
     <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.08em]">
       {title}
     </div>
@@ -108,7 +108,7 @@ const StatCard = ({ title, count }) => (
 );
 
 const DashboardCard = ({ title, children }) => (
-  <div className="card-depth bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80">
+  <div className="card-depth card-hover-ring bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80">
     <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100 mb-4 tracking-tight">
       {title}
     </h2>

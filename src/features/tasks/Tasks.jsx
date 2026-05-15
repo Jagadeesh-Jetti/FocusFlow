@@ -15,10 +15,12 @@ import { TaskForm } from './taskComponents/TaskForm';
 import { TaskCard } from './taskComponents/TaskCard';
 import { getGoals } from '../goals/goalThunk';
 import { TaskFilters } from './taskComponents/TaskFilters';
+import { SkeletonGrid } from '../../components/Skeleton';
 import { celebrate } from '../../utils/celebrate';
 
 export const Tasks = () => {
   const tasks = useSelector((state) => state.task.taskList);
+  const tasksLoading = useSelector((state) => state.task.loading);
   const goals = useSelector((state) => state.goal.goalsList);
   const milestones = useSelector((state) => state.milestone.milestoneList);
   const dispatch = useDispatch();
@@ -160,7 +162,9 @@ export const Tasks = () => {
             handleSubmit={handleSubmit}
           />
         </Modal>
-        {(() => {
+        {tasksLoading && tasks.length === 0 ? (
+          <SkeletonGrid count={6} />
+        ) : (() => {
           const visible = tasks.filter((task) => {
             const matchesGoal =
               selectedGoal === 'all' || task.goal?.title === selectedGoal;

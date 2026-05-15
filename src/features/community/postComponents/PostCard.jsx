@@ -60,7 +60,7 @@ export const PostCard = ({ post }) => {
   return (
     <article
       onClick={() => navigate(`/feed/${_id}`)}
-      className="card-depth bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 hover:border-emerald-200 hover:-translate-y-0.5 cursor-pointer"
+      className="card-depth card-hover-ring bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 hover:border-emerald-200 hover:-translate-y-0.5 cursor-pointer"
     >
       <header className="flex items-center gap-3 mb-3">
         <Avatar user={user} size="md" />

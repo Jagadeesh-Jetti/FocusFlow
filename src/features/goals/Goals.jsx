@@ -9,6 +9,7 @@ import {
 } from './goalThunk';
 import { Modal } from '../../components/Modal';
 import { ConfirmDialog } from '../../components/ConfirmDialog';
+import { SkeletonGrid } from '../../components/Skeleton';
 import axiosInstance from '../../utils/api';
 
 import { PageHeader } from '../../components/PageHeader';
@@ -18,6 +19,7 @@ import { GoalFilters } from './goalComponents/GoalFilters';
 
 export const Goals = () => {
   const goals = useSelector((state) => state.goal.goalsList);
+  const goalsLoading = useSelector((state) => state.goal.loading);
   const dispatch = useDispatch();
   const [selectedPriority, setSelectedPriority] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -154,7 +156,9 @@ export const Goals = () => {
           />
         </Modal>
 
-        {goals?.length > 0 ? (
+        {goalsLoading && (!goals || goals.length === 0) ? (
+          <SkeletonGrid count={6} />
+        ) : goals?.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {goals
               .filter((goal) => {
