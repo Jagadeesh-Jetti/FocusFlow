@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { ActionButton } from '../../../components/ActionButton';
+import { goalHealth, healthToneClass } from '../../../utils/goalHealth';
 
 const priorityColor = {
   Low: 'bg-green-100 text-green-700',
@@ -26,6 +27,7 @@ const progressFor = (goal) => {
 export const GoalCard = ({ goal, onEdit, onDelete }) => {
   const navigate = useNavigate();
   const { completed, total, pct } = progressFor(goal);
+  const health = goalHealth(goal);
 
   const stopAnd = (handler) => (e) => {
     e.stopPropagation();
@@ -49,6 +51,23 @@ export const GoalCard = ({ goal, onEdit, onDelete }) => {
       )}
 
       <div className="flex flex-wrap items-center gap-2 mb-3 text-xs">
+        <span
+          title={health.reason}
+          className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-medium ${healthToneClass(health.tone)}`}
+        >
+          <span
+            className={`inline-block w-1.5 h-1.5 rounded-full ${
+              health.tone === 'emerald'
+                ? 'bg-emerald-500'
+                : health.tone === 'amber'
+                ? 'bg-amber-500'
+                : health.tone === 'red'
+                ? 'bg-red-500'
+                : 'bg-slate-400'
+            } ${health.tone === 'amber' || health.tone === 'red' ? 'animate-pulse' : ''}`}
+          />
+          {health.label}
+        </span>
         {goal.status && (
           <span
             className={`px-2 py-0.5 rounded-full font-medium ${

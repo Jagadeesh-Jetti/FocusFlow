@@ -55,13 +55,28 @@ export const Dashboard = () => {
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-slate-950">
       <Sidebar />
       <main className="flex-1 p-4 md:p-10 max-w-7xl w-full">
-        <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
-            Welcome back{firstName ? `, ${firstName}` : ''}
-          </h1>
-          <p className="text-sm text-slate-500 mt-1.5">
-            Here&apos;s how your week is shaping up.
-          </p>
+        <header className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+              Welcome back{firstName ? `, ${firstName}` : ''}
+            </h1>
+            <p className="text-sm text-slate-500 mt-1.5">
+              Here&apos;s how your week is shaping up.
+            </p>
+          </div>
+          {stats.streakCount > 0 && (
+            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/40 ring-1 ring-amber-200/60 dark:ring-amber-800/60">
+              <span className="text-xl">🔥</span>
+              <div className="text-sm">
+                <div className="font-semibold text-amber-700 dark:text-amber-300 tnum">
+                  {stats.streakCount} day{stats.streakCount === 1 ? '' : 's'}
+                </div>
+                <div className="text-xs text-amber-600/80 dark:text-amber-400/80">
+                  Don&apos;t break it.
+                </div>
+              </div>
+            </div>
+          )}
         </header>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
